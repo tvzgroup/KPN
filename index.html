@@ -321,75 +321,187 @@
             </div>
             <nav>
                 <ul>
-                    <li><a href="o-nas.html">O NAS</a></li>
-                    <li><a href="program.html">PROGRAM</a></li>
-                    <li><a href="aktualnosci.html">AKTUALNOŚCI</a></li>
-                    <li><a href="kontakt.html">KONTAKT</a></li>
+                    <li><a href="o-nas.html" data-i18n="nav-about">O NAS</a></li>
+                    <li><a href="program.html" data-i18n="nav-program">PROGRAM</a></li>
+                    <li><a href="aktualnosci.html" data-i18n="nav-news">AKTUALNOŚCI</a></li>
+                    <li><a href="kontakt.html" data-i18n="nav-contact">KONTAKT</a></li>
                 </ul>
             </nav>
         </div>
         <div class="nav-right">
-            <div class="lang-dropdown" id="langDropdown">
+            <div class="lang-dropdown" id="langDropdown" onmouseenter="openLangMenu()" onmouseleave="closeLangMenu()">
                 <button class="lang-btn" onclick="toggleLangMenu()">
                     PL ▾
                 </button>
                 <div class="lang-content">
-                    <a href="#" onclick="changeLang('PL')">Polski</a>
-                    <a href="#" onclick="changeLang('EN')">English</a>
-                    <a href="#" onclick="changeLang('DE')">Deutsch</a>
+                    <a href="#" onclick="changeLang('PL'); return false;">Polski</a>
+                    <a href="#" onclick="changeLang('EN'); return false;">English</a>
+                    <a href="#" onclick="changeLang('DE'); return false;">Deutsch</a>
+                    <a href="#" onclick="changeLang('RU'); return false;">Русский</a>
                 </div>
             </div>
-            <a href="https://discord.gg/zBUDWjycWx" target="_blank" class="cta-btn">DOŁĄCZ DO NAS</a>
+            <a href="https://discord.gg/zBUDWjycWx" target="_blank" class="cta-btn" data-i18n="cta-join">DOŁĄCZ DO NAS</a>
         </div>
     </header>
 
     <!-- Sekcja Hero -->
     <section class="hero">
-        <h1>Niepodległość, Wolność, <span>Suwerenność</span></h1>
-        <p>Kontynuujemy walkę o silną, niezależną Polskę opartą na wartościach narodowych, wolności gospodarczej i podmiotowości obywatelskiej.</p>
+        <h1 data-i18n="hero-title">Niepodległość, Wolność, <span>Suwerenność</span></h1>
+        <p data-i18n="hero-desc">Kontynuujemy walkę o silną, niezależną Polskę opartą na wartościach narodowych, wolności gospodarczej i podmiotowości obywatelskiej.</p>
         <div class="hero-buttons">
-            <a href="program.html" class="btn-primary">POZNAJ PROGRAM</a>
-            <a href="https://discord.gg/zBUDWjycWx" target="_blank" class="btn-secondary">WSTĄP W NASZE SZEREGI</a>
+            <a href="program.html" class="btn-primary" data-i18n="btn-explore">POZNAJ PROGRAM</a>
+            <a href="https://discord.gg/zBUDWjycWx" target="_blank" class="btn-secondary" data-i18n="btn-ranks">WSTĄP W NASZE SZEREGI</a>
         </div>
     </section>
 
     <!-- Sekcja Filarów Programowych -->
     <section class="pillars" id="program">
-        <h2 class="section-title">Nasze Główne <span>Filar</span></h2>
+        <h2 class="section-title"><span data-i18n="pillars-title-1">Nasze Główne</span> <span data-i18n="pillars-title-2">Filar</span></h2>
         <div class="pillars-grid">
             <div class="pillar-card">
-                <h3>01. Niepodległość Państwa</h3>
-                <p>Absolutna suwerenność Rzeczypospolitej w sprawach krajowych i międzynarodowych. Odrzucenie wszelkich form zależności zewnętrznej.</p>
+                <h3 data-i18n="pillar-1-title">01. Niepodległość Państwa</h3>
+                <p data-i18n="pillar-1-desc">Absolutna suwerenność Rzeczypospolitej w sprawach krajowych i międzynarodowych. Odrzucenie wszelkich form zależności zewnętrznej.</p>
             </div>
             <div class="pillar-card">
-                <h3>02. Wolność Gospodarcza</h3>
-                <p>Niskie, przejrzyste podatki, uwolnienie polskiej przedsiębiorczości od biurokracji i obrona własności prywatnej każdego obywatela.</p>
+                <h3 data-i18n="pillar-2-title">02. Wolność Gospodarcza</h3>
+                <p data-i18n="pillar-2-desc">Niskie, przejrzyste podatki, uwolnienie polskiej przedsiębiorczości od biurokracji i obrona własności prywatnej każdego obywatela.</p>
             </div>
             <div class="pillar-card">
-                <h3>03. Obywatelska Rzeczpospolita</h3>
-                <p>Silne społeczeństwo oparte na tradycyjnych wartościach, samorządności oraz realnym wpływie obywateli na stanowione prawo.</p>
+                <h3 data-i18n="pillar-3-title">03. Obywatelska Rzeczpospolita</h3>
+                <p data-i18n="pillar-3-desc">Silne społeczeństwo oparte na tradycyjnych wartościach, samorządności oraz realnym wpływie obywateli na stanowione prawo.</p>
             </div>
         </div>
     </section>
 
     <!-- Stopka -->
     <footer>
-        <p>&copy; 2026 Konfederacja Polski Niepodległej (KPN). Wszelkie prawa zastrzeżone.</p>
+        <p data-i18n="footer-rights">&copy; 2026 Konfederacja Polski Niepodległej (KPN). Wszelkie prawa zastrzeżone.</p>
     </footer>
 
     <script>
+        const translations = {
+            PL: {
+                "nav-about": "O NAS",
+                "nav-program": "PROGRAM",
+                "nav-news": "AKTUALNOŚCI",
+                "nav-contact": "KONTAKT",
+                "cta-join": "DOŁĄCZ DO NAS",
+                "hero-title": "Niepodległość, Wolność, <span>Suwerenność</span>",
+                "hero-desc": "Kontynuujemy walkę o silną, niezależną Polskę opartą na wartościach narodowych, wolności gospodarczej i podmiotowości obywatelskiej.",
+                "btn-explore": "POZNAJ PROGRAM",
+                "btn-ranks": "WSTĄP W NASZE SZEREGI",
+                "pillars-title-1": "Nasze Główne",
+                "pillars-title-2": "Filar",
+                "pillar-1-title": "01. Niepodległość Państwa",
+                "pillar-1-desc": "Absolutna suwerenność Rzeczypospolitej w sprawach krajowych i międzynarodowych. Odrzucenie wszelkich form zależności zewnętrznej.",
+                "pillar-2-title": "02. Wolność Gospodarcza",
+                "pillar-2-desc": "Niskie, przejrzyste podatki, uwolnienie polskiej przedsiębiorczości od biurokracji i obrona własności prywatnej każdego obywatela.",
+                "pillar-3-title": "03. Obywatelska Rzeczpospolita",
+                "pillar-3-desc": "Silne społeczeństwo oparte na tradycyjnych wartościach, samorządności oraz realnym wpływie obywateli na stanowione prawo.",
+                "footer-rights": "&copy; 2026 Konfederacja Polski Niepodległej (KPN). Wszelkie prawa zastrzeżone."
+            },
+            EN: {
+                "nav-about": "ABOUT US",
+                "nav-program": "PROGRAM",
+                "nav-news": "NEWS",
+                "nav-contact": "CONTACT",
+                "cta-join": "JOIN US",
+                "hero-title": "Independence, Freedom, <span>Sovereignty</span>",
+                "hero-desc": "We continue the fight for a strong, independent Poland based on national values, economic freedom, and civic agency.",
+                "btn-explore": "EXPLORE PROGRAM",
+                "btn-ranks": "JOIN OUR RANKS",
+                "pillars-title-1": "Our Main",
+                "pillars-title-2": "Pillars",
+                "pillar-1-title": "01. State Independence",
+                "pillar-1-desc": "Absolute sovereignty of the Republic in domestic and international affairs. Rejection of all forms of external dependence.",
+                "pillar-2-title": "02. Economic Freedom",
+                "pillar-2-desc": "Low, transparent taxes, liberation of Polish entrepreneurship from bureaucracy, and defense of every citizen's private property.",
+                "pillar-3-title": "03. Civic Republic",
+                "pillar-3-desc": "A strong society based on traditional values, self-governance, and real citizen influence on established law.",
+                "footer-rights": "&copy; 2026 Confederation of Independent Poland (KPN). All rights reserved."
+            },
+            DE: {
+                "nav-about": "ÜBER UNS",
+                "nav-program": "PROGRAMM",
+                "nav-news": "NACHRICHTEN",
+                "nav-contact": "KONTAKT",
+                "cta-join": "MACH MIT",
+                "hero-title": "Unabhängigkeit, Freiheit, <span>Souveränität</span>",
+                "hero-desc": "Wir setzen den Kampf für ein starkes, unabhängiges Polen fort, das auf nationalen Werten, wirtschaftlicher Freiheit und bürgerlicher Mitbestimmung basiert.",
+                "btn-explore": "PROGRAMM KENNENLERNEN",
+                "btn-ranks": "TRETEN SIE UNSEREN REIHEN BEI",
+                "pillars-title-1": "Unsere Haupt",
+                "pillars-title-2": "Säulen",
+                "pillar-1-title": "01. Staatliche Unabhängigkeit",
+                "pillar-1-desc": "Absolute Souveränität der Republik in inneren und internationalen Angelegenheiten. Ablehnung jeglicher Form von äußerster Abhängigkeit.",
+                "pillar-2-title": "02. Wirtschaftsfreiheit",
+                "pillar-2-desc": "Niedrige, transparente Steuern, Befreiung des polnischen Unternehmertums von Bürokratie und Verteidigung des Privateigentums jedes Bürgers.",
+                "pillar-3-title": "03. Bürgerliche Republik",
+                "pillar-3-desc": "Eine starke Gesellschaft, die auf traditionellen Werten, Selbstverwaltung und echtem Bürgereinfluss auf das geltende Recht basiert.",
+                "footer-rights": "&copy; 2026 Konföderation des Unabhängigen Polen (KPN). Alle Rechte vorbehalten."
+            },
+            RU: {
+                "nav-about": "О НАС",
+                "nav-program": "ПРОГРАММА",
+                "nav-news": "НОВОСТИ",
+                "nav-contact": "КОНТАКТ",
+                "cta-join": "ПРИСОЕДИНИТЬСЯ",
+                "hero-title": "Независимость, Свобода, <span>Суверенитет</span>",
+                "hero-desc": "Мы продолжаем борьбу за сильную, независимую Польшу, основанную на национальных ценностях, экономической свободе и гражданской субъектности.",
+                "btn-explore": "УЗНАТЬ ПРОГРАММУ",
+                "btn-ranks": "ВСТУПИТЬ В НАШИ РЯДЫ",
+                "pillars-title-1": "Наши Главные",
+                "pillars-title-2": "Столпы",
+                "pillar-1-title": "01. Независимость Государства",
+                "pillar-1-desc": "Абсолютный суверенитет Республики в внутренних и международных делах. Отречение от любых форм внешней зависимости.",
+                "pillar-2-title": "02. Экономическая Свобода",
+                "pillar-2-desc": "Низкие, прозрачные налоги, освобождение польского предпринимательства от бюрократии и защита частной собственности каждого гражданина.",
+                "pillar-3-title": "03. Гражданская Республика",
+                "pillar-3-desc": "Сильное общество, основанное на традиционных ценностях, самоуправлении и реальном влиянии граждан на принимаемые законы.",
+                "footer-rights": "&copy; 2026 Конфедерация Польской Независимости (KPN). Все права защищены."
+            }
+        };
+
+        let hoverTimeout;
+
+        function openLangMenu() {
+            clearTimeout(hoverTimeout);
+            document.getElementById('langDropdown').classList.add('active');
+        }
+
+        function closeLangMenu() {
+            hoverTimeout = setTimeout(() => {
+                document.getElementById('langDropdown').classList.remove('active');
+            }, 400);
+        }
+
         function toggleLangMenu() {
-            document.getElementById('langDropdown').classList.toggle('active');
+            const dropdown = document.getElementById('langDropdown');
+            if (dropdown.classList.contains('active')) {
+                dropdown.classList.remove('active');
+            } else {
+                openLangMenu();
+            }
         }
 
         function changeLang(lang) {
             const btn = document.querySelector('.lang-btn');
             btn.innerHTML = lang + ' ▾';
             document.getElementById('langDropdown').classList.remove('active');
+
+            const langData = translations[lang];
+            if (langData) {
+                document.querySelectorAll('[data-i18n]').forEach(el => {
+                    const key = el.getAttribute('data-i18n');
+                    if (langData[key]) {
+                        el.innerHTML = langData[key];
+                    }
+                });
+            }
         }
 
         window.onclick = function(event) {
-            if (!event.target.matches('.lang-btn') && !event.target.closest('.lang-btn')) {
+            if (!event.target.matches('.lang-btn') && !event.target.closest('.lang-btn') && !event.target.closest('.lang-content')) {
                 const dropdowns = document.getElementsByClassName('lang-dropdown');
                 for (let i = 0; i < dropdowns.length; i++) {
                     let openDropdown = dropdowns[i];
