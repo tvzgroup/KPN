@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Program | Konfederacja Polski Niepodległej | KPN</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #080808;
+            color: #f0f0f0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navbar */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background: rgba(10, 10, 10, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            z-index: 1000;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-container img {
+            height: 40px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #b0b0b0;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover, nav a.active {
+            color: #ffffff;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        /* Mobile Menu Toggle Button */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 6px;
+            z-index: 1001;
+            padding: 5px;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 28px;
+            height: 2px;
+            background-color: #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        /* Custom Dropdown Language Menu */
+        .lang-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #b0b0b0;
+            padding: 8px 14px;
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+
+        .lang-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background: rgba(15, 15, 15, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            min-width: 120px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 4px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.4);
+            z-index: 1;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+
+        .lang-content a {
+            color: #b0b0b0;
+            padding: 10px 15px;
+            text-decoration: none;
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .lang-content a:hover {
+            background: rgba(217, 20, 20, 0.2);
+            color: #ffffff;
+        }
+
+        .lang-dropdown.active .lang-content {
+            display: block;
+        }
+
+        .cta-btn {
+            background: #d91414;
+            color: #ffffff !important;
+            padding: 10px 22px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            background: #b51010;
+        }
+
+        /* Page Header / Hero */
+        .page-header {
+            padding: 160px 20px 80px;
+            text-align: center;
+            background: radial-gradient(circle at center, rgba(217, 20, 20, 0.12) 0%, rgba(8, 8, 8, 1) 75%);
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            margin-bottom: 15px;
+        }
+
+        .page-header h1 span {
+            color: #d91414;
+        }
+
+        .page-header p {
+            font-size: 1.1rem;
+            color: #a0a0a0;
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        /* Content Section / Program Grid */
+        .content-section {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px 100px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .program-card {
+            background: rgba(20, 20, 20, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 8px;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .program-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(217, 20, 20, 0.4);
+        }
+
+        .program-card h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            color: #ffffff;
+        }
+
+        .program-card h3 span {
+            color: #d91414;
+        }
+
+        .program-card p {
+            color: #a0a0a0;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* Footer */
+        footer {
+            background: #050505;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 40px 50px;
+            text-align: center;
+            color: #707070;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 900px) {
+            header {
+                padding: 15px 20px;
+            }
+            .nav-left {
+                gap: 20px;
+            }
+            .menu-toggle {
+                display: flex;
+            }
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(10, 10, 10, 0.98);
+                backdrop-filter: blur(15px);
+                -webkit-backdrop-filter: blur(15px);
+                flex-direction: column;
+                padding: 25px 0;
+                gap: 20px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+                box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+                text-align: center;
+            }
+            nav ul.active {
+                display: flex;
+            }
+            .nav-right .cta-btn {
+                display: none;
+            }
+            .page-header {
+                padding: 130px 20px 60px;
+            }
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+            .content-section {
+                padding: 20px 20px 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Nagłówek -->
+    <header>
+        <div class="nav-left">
+            <div class="logo-container">
+                <a href="index.html"><img src="image-removebg-preview.png" alt="KPN Logo"></a>
+            </div>
+            <nav>
+                <ul id="navMenu">
+                    <li><a href="o-nas.html" data-i18n="nav-about">O NAS</a></li>
+                    <li><a href="program.html" class="active" data-i18n="nav-program">PROGRAM</a></li>
+                    <li><a href="aktualnosci.html" data-i18n="nav-news">AKTUALNOŚCI</a></li>
+                    <li><a href="kontakt.html" data-i18n="nav-contact">KONTAKT</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="nav-right">
+            <div class="lang-dropdown" id="langDropdown" onmouseenter="openLangMenu()" onmouseleave="closeLangMenu()">
+                <button class="lang-btn" onclick="toggleLangMenu()">
+                    PL ▾
+                </button>
+                <div class="lang-content">
+                    <a href="#" onclick="changeLang('PL'); return false;">Polski</a>
+                    <a href="#" onclick="changeLang('EN'); return false;">English</a>
+                    <a href="#" onclick="changeLang('DE'); return false;">Deutsch</a>
+                    <a href="#" onclick="changeLang('RU'); return false;">Русский</a>
+                </div>
+            </div>
+            <a href="https://discord.gg/zBUDWjycWx" target="_blank" class="cta-btn" data-i18n="cta-join">DOŁĄCZ DO NAS</a>
+            <button class="menu-toggle" id="menuToggle" onclick="toggleMobileMenu()" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Nagłówek Podstrony -->
+    <section class="page-header">
+        <h1 data-i18n="program-header-title">Nasz <span>Program Polityczny</span></h1>
+        <p data-i18n="program-header-desc">Filary, na których opieramy naszą wizję silnej, suwerennej i dostatniej Rzeczypospolitej.</p>
+    </section>
+
+    <!-- Główna Treść / Kafelki Programowe -->
+    <section class="content-section">
+        <div class="program-card">
+            <h3 data-i18n="prog-1-title">Suwerenność i <span>Bezpieczeństwo</span></h3>
+            <p data-i18n="prog-1-desc">Absolutna niezależność państwa w polityce międzynarodowej, silna armia oparta na nowoczesnych technologiach oraz zdecydowana obrona polskich interesów narodowych bez zewnętrznych nacisków.</p>
+        </div>
+
+        <div class="program-card">
+            <h3 data-i18n="prog-2-title">Wolny Rynek i <span>Niskie Podatki</span></h3>
+            <p data-i18n="prog-2-desc">Drastyczne uproszczenie systemu podatkowego, likwidacja zbędnych biurokratycznych ograniczeń dla przedsiębiorców oraz uwolnienie potencjału polskiej gospodarki.</p>
+        </div>
+
+        <div class="program-card">
+            <h3 data-i18n="prog-3-title">Odbudowa <span>Państwowości</span></h3>
+            <p data-i18n="prog-3-desc">Przywrócenie podmiotowości obywatelom we własnym państwie, reforma wymiaru sprawiedliwości oraz przejrzystość w działaniu instytucji publicznych.</p>
+        </div>
+
+        <div class="program-card">
+            <h3 data-i18n="prog-4-title">Edukacja i <span>Tradycja</span></h3>
+            <p data-i18n="prog-4-desc">Kształcenie oparte na fundamentach polskiej historii, kultury i wartości rodzinnych, przygotowujące młodego człowieka do świadomego i aktywnego życia w społeczeństwie.</p>
+        </div>
+    </section>
+
+    <!-- Stopka -->
+    <footer>
+        <p data-i18n="footer-rights">&copy; 2026 Konfederacja Polski Niepodległej (KPN). Wszelkie prawa zastrzeżone.</p>
+    </footer>
+
+    <script>
+        const translations = {
+            PL: {
+                "nav-about": "O NAS",
+                "nav-program": "PROGRAM",
+                "nav-news": "AKTUALNOŚCI",
+                "nav-contact": "KONTAKT",
+                "cta-join": "DOŁĄCZ DO NAS",
+                "program-header-title": "Nasz <span>Program Polityczny</span>",
+                "program-header-desc": "Filary, na których opieramy naszą wizję silnej, suwerennej i dostatniej Rzeczypospolitej.",
+                "prog-1-title": "Suwerenność i <span>Bezpieczeństwo</span>",
+                "prog-1-desc": "Absolutna niezależność państwa w polityce międzynarodowej, silna armia oparta na nowoczesnych technologiach oraz zdecydowana obrona polskich interesów narodowych bez zewnętrznych nacisków.",
+                "prog-2-title": "Wolny Rynek i <span>Niskie Podatki</span>",
+                "prog-2-desc": "Drastyczne uproszczenie systemu podatkowego, likwidacja zbędnych biurokratycznych ograniczeń dla przedsiębiorców oraz uwolnienie potencjału polskiej gospodarki.",
+                "prog-3-title": "Odbudowa <span>Państwowości</span>",
+                "prog-3-desc": "Przywrócenie podmiotowości obywatelom we własnym państwie, reforma wymiaru sprawiedliwości oraz przejrzystość w działaniu instytucji publicznych.",
+                "prog-4-title": "Edukacja i <span>Tradycja</span>",
+                "prog-4-desc": "Kształcenie oparte na fundamentach polskiej historii, kultury i wartości rodzinnych, przygotowujące młodego człowieka do świadomego i aktywnego życia w społeczeństwie.",
+                "footer-rights": "&copy; 2026 Konfederacja Polski Niepodległej (KPN). Wszelkie prawa zastrzeżone."
+            },
+            EN: {
+                "nav-about": "ABOUT US",
+                "nav-program": "PROGRAM",
+                "nav-news": "NEWS",
+                "nav-contact": "CONTACT",
+                "cta-join": "JOIN US",
+                "program-header-title": "Our <span>Political Program</span>",
+                "program-header-desc": "The pillars upon which we base our vision of a strong, sovereign, and prosperous Republic.",
+                "prog-1-title": "Sovereignty and <span>Security</span>",
+                "prog-1-desc": "Absolute state independence in international politics, a strong army based on modern technologies, and the decisive defense of Polish national interests without external pressure.",
+                "prog-2-title": "Free Market and <span>Low Taxes</span>",
+                "prog-2-desc": "Drastic simplification of the tax system, elimination of unnecessary bureaucratic restrictions for entrepreneurs, and unleashing the potential of the Polish economy.",
+                "prog-3-title": "Rebuilding <span>Statehood</span>",
+                "prog-3-desc": "Restoring agency to citizens within their own state, reform of the judiciary, and transparency in the operation of public institutions.",
+                "prog-4-title": "Education and <span>Tradition</span>",
+                "prog-4-desc": "Education based on the foundations of Polish history, culture, and family values, preparing young people for conscious and active life in society.",
+                "footer-rights": "&copy; 2026 Confederation of Independent Poland (KPN). All rights reserved."
+            },
+            DE: {
+                "nav-about": "ÜBER UNS",
+                "nav-program": "PROGRAMM",
+                "nav-news": "NACHRICHTEN",
+                "nav-contact": "KONTAKT",
+                "cta-join": "MACH MIT",
+                "program-header-title": "Unser <span>Politisches Programm</span>",
+                "program-header-desc": "Die Säulen, auf denen wir unsere Vision einer starken, souveränen und wohlhabenden Republik aufbauen.",
+                "prog-1-title": "Souveränität und <span>Sicherheit</span>",
+                "prog-1-desc": "Absolute staatliche Unabhängigkeit in der internationalen Politik, eine starke Armee auf Basis moderner Technologien und die entschlossene Verteidigung polnischer nationaler Interessen ohne externen Druck.",
+                "prog-2-title": "Freier Markt und <span>Niedrige Steuern</span>",
+                "prog-2-desc": "Drastische Vereinfachung des Steuersystems, Beseitigung unnötiger bürokratischer Auflagen für Unternehmer und Entfesselung des Potenzials der polnischen Wirtschaft.",
+                "prog-3-title": "Wiederaufbau der <span>Staatlichkeit</span>",
+                "prog-3-desc": "Wiederherstellung der Handlungsfähigkeit der Bürger in ihrem eigenen Staat, Justizreform und Transparenz im Handeln öffentlicher Institutionen.",
+                "prog-4-title": "Bildung und <span>Tradition</span>",
+                "prog-4-desc": "Ausbildung auf Basis der Grundlagen polnischer Geschichte, Kultur und Familienwerte, die junge Menschen auf ein bewusstes und aktives Leben in der Gesellschaft vorbereitet.",
+                "footer-rights": "&copy; 2026 Konföderation des Unabhängigen Polen (KPN). Alle Rechte vorbehalten."
+            },
+            RU: {
+                "nav-about": "О НАС",
+                "nav-program": "ПРОГРАММА",
+                "nav-news": "НОВОСТИ",
+                "nav-contact": "КОНТАКТ",
+                "cta-join": "ПРИСОЕДИНИТЬСЯ",
+                "program-header-title": "Наша <span>Политическая Программа</span>",
+                "program-header-desc": "Столпы, на которых мы строим наше видение сильной, суверенной и процветающей Республики.",
+                "prog-1-title": "Суверенитет и <span>Безопасность</span>",
+                "prog-1-desc": "Абсолютная независимость государства в международной политике, сильная армия на основе современных технологий и решительная защита польских национальных интересов без внешнего давления.",
+                "prog-2-title": "Свободный Рынок и <span>Низкие Налоги</span>",
+                "prog-2-desc": "Радикальное упрощение налоговой системы, ликвидация лишних бюрократических ограничений для предпринимателей и высвобождение потенциала польской экономики.",
+                "prog-3-title": "Восстановление <span>Государственности</span>",
+                "prog-3-desc": "Возвращение субъектности гражданам в собственном государстве, реформа судебной системы и прозрачность в работе общественных институтов.",
+                "prog-4-title": "Образование и <span>Традиция</span>",
+                "prog-4-desc": "Воспитание на фундаменте польской истории, культуры и семейных ценностей, готовящее молодежь к осознанной и активной жизни в обществе.",
+                "footer-rights": "&copy; 2026 Конфедерация Польской Независимости (KPN). Все права защищены."
+            }
+        };
+
+        let hoverTimeout;
+
+        function openLangMenu() {
+            clearTimeout(hoverTimeout);
+            document.getElementById('langDropdown').classList.add('active');
+        }
+
+        function closeLangMenu() {
+            hoverTimeout = setTimeout(() => {
+                document.getElementById('langDropdown').classList.remove('active');
+            }, 400);
+        }
+
+        function toggleLangMenu() {
+            const dropdown = document.getElementById('langDropdown');
+            if (dropdown.classList.contains('active')) {
+                dropdown.classList.remove('active');
+            } else {
+                openLangMenu();
+            }
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('navMenu');
+            menu.classList.toggle('active');
+        }
+
+        function changeLang(lang) {
+            const btn = document.querySelector('.lang-btn');
+            btn.innerHTML = lang + ' ▾';
+            document.getElementById('langDropdown').classList.remove('active');
+
+            const langData = translations[lang];
+            if (langData) {
+                document.querySelectorAll('[data-i18n]').forEach(el => {
+                    const key = el.getAttribute('data-i18n');
+                    if (langData[key]) {
+                        el.innerHTML = langData[key];
+                    }
+                });
+            }
+        }
+
+        window.onclick = function(event) {
+            if (!event.target.matches('.lang-btn') && !event.target.closest('.lang-btn') && !event.target.closest('.lang-content')) {
+                const dropdowns = document.getElementsByClassName('lang-dropdown');
+                for (let i = 0; i < dropdowns.length; i++) {
+                    let openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('active')) {
+                        openDropdown.classList.remove('active');
+                    }
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
