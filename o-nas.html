@@ -80,6 +80,26 @@
             gap: 20px;
         }
 
+        /* Mobile Menu Toggle Button */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 6px;
+            z-index: 1001;
+            padding: 5px;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 28px;
+            height: 2px;
+            background-color: #ffffff;
+            transition: all 0.3s ease;
+        }
+
         /* Custom Dropdown Language Menu */
         .lang-dropdown {
             position: relative;
@@ -242,8 +262,30 @@
             .nav-left {
                 gap: 20px;
             }
+            .menu-toggle {
+                display: flex;
+            }
             nav ul {
                 display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(10, 10, 10, 0.98);
+                backdrop-filter: blur(15px);
+                -webkit-backdrop-filter: blur(15px);
+                flex-direction: column;
+                padding: 25px 0;
+                gap: 20px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+                box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+                text-align: center;
+            }
+            nav ul.active {
+                display: flex;
+            }
+            .nav-right .cta-btn {
+                display: none; /* Ukryto przycisk w prawym rogu na mobile, można go dodać do menu rozwijanego w razie potrzeby */
             }
             .page-header {
                 padding: 130px 20px 60px;
@@ -266,7 +308,7 @@
                 <a href="index.html"><img src="image-removebg-preview.png" alt="KPN Logo"></a>
             </div>
             <nav>
-                <ul>
+                <ul id="navMenu">
                     <li><a href="o-nas.html" class="active" data-i18n="nav-about">O NAS</a></li>
                     <li><a href="program.html" data-i18n="nav-program">PROGRAM</a></li>
                     <li><a href="aktualnosci.html" data-i18n="nav-news">AKTUALNOŚCI</a></li>
@@ -287,6 +329,11 @@
                 </div>
             </div>
             <a href="https://discord.gg/zBUDWjycWx" target="_blank" class="cta-btn" data-i18n="cta-join">DOŁĄCZ DO NAS</a>
+            <button class="menu-toggle" id="menuToggle" onclick="toggleMobileMenu()" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </header>
 
@@ -404,6 +451,11 @@
             } else {
                 openLangMenu();
             }
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('navMenu');
+            menu.classList.toggle('active');
         }
 
         function changeLang(lang) {
