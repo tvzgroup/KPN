@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konfederacja Polski Niepodległej | KPN</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #080808;
+            color: #f0f0f0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navbar */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background: rgba(10, 10, 10, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            z-index: 1000;
+        }
+
+        .logo {
+            font-weight: 900;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            color: #ffffff;
+        }
+
+        .logo span {
+            color: #d91414;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #b0b0b0;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #ffffff;
+        }
+
+        .cta-btn {
+            background: #d91414;
+            color: #ffffff !important;
+            padding: 10px 22px;
+            border-radius: 4px;
+            transition: background 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            background: #b51010;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            background: radial-gradient(circle at center, rgba(217, 20, 20, 0.12) 0%, rgba(8, 8, 8, 1) 75%);
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            max-width: 900px;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 span {
+            color: #d91414;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: #a0a0a0;
+            max-width: 650px;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn-primary, .btn-secondary {
+            padding: 14px 32px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border-radius: 4px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: #d91414;
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background: #b51010;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Pillars Section */
+        .pillars {
+            padding: 100px 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 60px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-title span {
+            color: #d91414;
+        }
+
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .pillar-card {
+            background: rgba(20, 20, 20, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(10px);
+            padding: 40px 30px;
+            border-radius: 8px;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .pillar-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(217, 20, 20, 0.4);
+        }
+
+        .pillar-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        .pillar-card p {
+            color: #909090;
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #050505;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 40px 50px;
+            text-align: center;
+            color: #707070;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 20px;
+            }
+            nav ul {
+                display: none;
+            }
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+            .hero-buttons {
+                flex-direction: column;
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Nagłówek -->
+    <header>
+        <div class="logo">KPN<span>.</span></div>
+        <nav>
+            <ul>
+                <li><a href="#o-nas">O nas</a></li>
+                <li><a href="#program">Program</a></li>
+                <li><a href="#aktualnosci">Aktualności</a></li>
+                <li><a href="#kontakt">Kontakt</a></li>
+                <li><a href="#dolacz" class="cta-btn">Dołącz do nas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Sekcja Hero -->
+    <section class="hero">
+        <h1>Niepodległość, Wolność, <span>Suwerenność</span></h1>
+        <p>Kontynuujemy walkę o silną, niezależną Polskę opartą na wartościach narodowych, wolności gospodarczej i podmiotowości obywatelskiej.</p>
+        <div class="hero-buttons">
+            <a href="#program" class="btn-primary">Poznaj Program</a>
+            <a href="#dolacz" class="btn-secondary">Wstąp w Nasze Szeregi</a>
+        </div>
+    </section>
+
+    <!-- Sekcja Filarów Programowych -->
+    <section class="pillars" id="program">
+        <h2 class="section-title">Nasze Główne <span>Filar</span></h2>
+        <div class="pillars-grid">
+            <div class="pillar-card">
+                <h3>01. Niepodległość Państwa</h3>
+                <p>A<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konfederacja Polski Niepodległej | KPN</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #080808;
+            color: #f0f0f0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navbar */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background: rgba(10, 10, 10, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            z-index: 1000;
+        }
+
+        .logo {
+            font-weight: 900;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            color: #ffffff;
+        }
+
+        .logo span {
+            color: #d91414;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #b0b0b0;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #ffffff;
+        }
+
+        .cta-btn {
+            background: #d91414;
+            color: #ffffff !important;
+            padding: 10px 22px;
+            border-radius: 4px;
+            transition: background 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            background: #b51010;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            background: radial-gradient(circle at center, rgba(217, 20, 20, 0.12) 0%, rgba(8, 8, 8, 1) 75%);
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            max-width: 900px;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 span {
+            color: #d91414;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: #a0a0a0;
+            max-width: 650px;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn-primary, .btn-secondary {
+            padding: 14px 32px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border-radius: 4px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: #d91414;
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background: #b51010;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Pillars Section */
+        .pillars {
+            padding: 100px 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 60px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-title span {
+            color: #d91414;
+        }
+
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .pillar-card {
+            background: rgba(20, 20, 20, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(10px);
+            padding: 40px 30px;
+            border-radius: 8px;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .pillar-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(217, 20, 20, 0.4);
+        }
+
+        .pillar-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        .pillar-card p {
+            color: #909090;
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #050505;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 40px 50px;
+            text-align: center;
+            color: #707070;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 20px;
+            }
+            nav ul {
+                display: none;
+            }
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+            .hero-buttons {
+                flex-direction: column;
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Nagłówek -->
+    <header>
+        <div class="logo">KPN<span>.</span></div>
+        <nav>
+            <ul>
+                <li><a href="#o-nas">O nas</a></li>
+                <li><a href="#program">Program</a></li>
+                <li><a href="#aktualnosci">Aktualności</a></li>
+                <li><a href="#kontakt">Kontakt</a></li>
+                <li><a href="#dolacz" class="cta-btn">Dołącz do nas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Sekcja Hero -->
+    <section class="hero">
+        <h1>Niepodległość, Wolność, <span>Suwerenność</span></h1>
+        <p>Kontynuujemy walkę o silną, niezależną Polskę opartą na wartościach narodowych, wolności gospodarczej i podmiotowości obywatelskiej.</p>
+        <div class="hero-buttons">
+            <a href="#program" class="btn-primary">Poznaj Program</a>
+            <a href="#dolacz" class="btn-secondary">Wstąp w Nasze Szeregi</a>
+        </div>
+    </section>
+
+    <!-- Sekcja Filarów Programowych -->
+    <section class="pillars" id="program">
+        <h2 class="section-title">Nasze Główne <span>Filar</span></h2>
+        <div class="pillars-grid">
+            <div class="pillar-card">
+                <h3>01. Niepodległość Państwa</h3>
+                <p>Absolutna suwerenność Rzeczypospolitej w sprawach krajowych i międzynarodowych. Odrzucenie wszelkich form zależności zewnętrznej.</p>
+            </div>
+            <div class="pillar-card">
+                <h3>02. Wolność Gospodarcza</h3>
+                <p>Niskie, przejrzyste podatki, uwolnienie polskiej przedsiębiorczości od biurokracji i obrona własności prywatnej każdego obywatela.</p>
+            </div>
+            <div class="pillar-card">
+                <h3>03. Obywatelska Rzeczpospolita</h3>
+                <p>Silne społeczeństwo oparte na tradycyjnych wartościach, samorządności oraz realnym wpływie obywateli na stanowione prawo.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stopka -->
+    <footer>
+        <p>&copy; 2026 Konfederacja Polski Niepodległej (KPN). Wszelkie prawa zastrzeżone.</p>
+    </footer>
+
+</body>
+</html>bsolutna suwerenność Rzeczypospolitej w sprawach krajowych i międzynarodowych. Odrzucenie wszelkich form zależności zewnętrznej.</p>
+            </div>
+            <div class="pillar-card">
+                <h3>02. Wolność Gospodarcza</h3>
+                <p>Niskie, przejrzyste podatki, uwolnienie polskiej przedsiębiorczości od biurokracji i obrona własności prywatnej każdego obywatela.</p>
+            </div>
+            <div class="pillar-card">
+                <h3>03. Obywatelska Rzeczpospolita</h3>
+                <p>Silne społeczeństwo oparte na tradycyjnych wartościach, samorządności oraz realnym wpływie obywateli na stanowione prawo.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stopka -->
+    <footer>
+        <p>&copy; 2026 Konfederacja Polski Niepodległej (KPN). Wszelkie prawa zastrzeżone.</p>
+    </footer>
+
+</body>
+</html>
