@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O nas | Konfederacja Polski Niepodległej | KPN</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #080808;
+            color: #f0f0f0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navbar */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background: rgba(10, 10, 10, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            z-index: 1000;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-container img {
+            height: 40px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #b0b0b0;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover, nav a.active {
+            color: #ffffff;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        /* Custom Dropdown Language Menu */
+        .lang-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #b0b0b0;
+            padding: 8px 14px;
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+
+        .lang-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background: rgba(15, 15, 15, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            min-width: 120px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 4px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.4);
+            z-index: 1;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+
+        .lang-content a {
+            color: #b0b0b0;
+            padding: 10px 15px;
+            text-decoration: none;
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .lang-content a:hover {
+            background: rgba(217, 20, 20, 0.2);
+            color: #ffffff;
+        }
+
+        .lang-dropdown.active .lang-content {
+            display: block;
+        }
+
+        .cta-btn {
+            background: #d91414;
+            color: #ffffff !important;
+            padding: 10px 22px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            background: #b51010;
+        }
+
+        /* Page Header / Hero */
+        .page-header {
+            padding: 160px 20px 80px;
+            text-align: center;
+            background: radial-gradient(circle at center, rgba(217, 20, 20, 0.12) 0%, rgba(8, 8, 8, 1) 75%);
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            margin-bottom: 15px;
+        }
+
+        .page-header h1 span {
+            color: #d91414;
+        }
+
+        .page-header p {
+            font-size: 1.1rem;
+            color: #a0a0a0;
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        /* Content Section */
+        .content-section {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px 100px;
+        }
+
+        .about-card {
+            background: rgba(20, 20, 20, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(10px);
+            padding: 50px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+        }
+
+        .about-card h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            color: #ffffff;
+        }
+
+        .about-card h2 span {
+            color: #d91414;
+        }
+
+        .about-card p {
+            color: #a0a0a0;
+            font-size: 1.05rem;
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .about-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Footer */
+        footer {
+            background: #050505;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 40px 50px;
+            text-align: center;
+            color: #707070;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 900px) {
+            header {
+                padding: 15px 20px;
+            }
+            .nav-left {
+                gap: 20px;
+            }
+            nav ul {
+                display: none;
+            }
+            .page-header {
+                padding: 130px 20px 60px;
+            }
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+            .about-card {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Nagłówek -->
+    <header>
+        <div class="nav-left">
+            <div class="logo-container">
+                <a href="index.html"><img src="image-removebg-preview.png" alt="KPN Logo"></a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="o-nas.html" class="active" data-i18n="nav-about">O NAS</a></li>
+                    <li><a href="program.html" data-i18n="nav-program">PROGRAM</a></li>
+                    <li><a href="aktualnosci.html" data-i18n="nav-news">AKTUALNOŚCI</a></li>
+                    <li><a href="kontakt.html" data-i18n="nav-contact">KONTAKT</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="nav-right">
+            <div class="lang-dropdown" id="langDropdown" onmouseenter="openLangMenu()" onmouseleave="closeLangMenu()">
+                <button class="lang-btn" onclick="toggleLangMenu()">
+                    PL ▾
+                </button>
+                <div class="lang-content">
+                    <a href="#" onclick="changeLang('PL'); return false;">Polski</a>
+                    <a href="#" onclick="changeLang('EN'); return false;">English</a>
+                    <a href="#" onclick="changeLang('DE'); return false;">Deutsch</a>
+                    <a href="#" onclick="changeLang('RU'); return false;">Русский</a>
+                </div>
+            </div>
+            <a href="https://discord.gg/zBUDWjycWx" target="_blank" class="cta-btn" data-i18n="cta-join">DOŁĄCZ DO NAS</a>
+        </div>
+    </header>
+
+    <!-- Nagłówek Podstrony -->
+    <section class="page-header">
+        <h1 data-i18n="about-header-title">Poznaj Naszą <span>Historię i Misję</span></h1>
+        <p data-i18n="about-header-desc">Dowiedz się, kim jesteśmy, skąd czerpiemy inspirację i o jaką Polskę walczymy.</p>
+    </section>
+
+    <!-- Główna Treść -->
+    <section class="content-section">
+        <div class="about-card">
+            <h2 data-i18n="about-card-1-title">Kim <span>Jesteśmy</span></h2>
+            <p data-i18n="about-card-1-p1">Konfederacja Polski Niepodległej (KPN) to środowisko skupiające ludzi wolnych, dla których dobro Rzeczypospolitej oraz jej absolutna suwerenność stanowią najwyższy priorytet. Kontynuujemy tradycje niepodległościowe, sprzeciwiając się wszelkim przejawom degradacji państwowości, nadmiernej biurokracji oraz ograniczeniom wolności obywatelskich.</p>
+            <p data-i18n="about-card-1-p2">Wierzymy, że silne państwo buduje się na fundamencie silnej, przedsiębiorczej jednostki, świadomej swojej historii i odpowiedzialnej za wspólną przyszłość.</p>
+        </div>
+
+        <div class="about-card">
+            <h2 data-i18n="about-card-2-title">Nasze <span>Cele</span></h2>
+            <p data-i18n="about-card-2-p1">Naszym głównym zadaniem jest obrona polskiej suwerenności na każdym szczeblu – od polityki międzynarodowej, przez gospodarkę, aż po codzienne życie obywateli. Dążymy do uproszczenia prawa, drastycznego ograniczenia obciążeń fiskalnych oraz odbudowy podmiotowości Polaków we własnym państwie.</p>
+            <p data-i18n="about-card-2-p2">Tworzymy społeczność otwartą na każdego, kto chce aktywnie współtworzyć alternatywę dla obecnej sceny politycznej.</p>
+        </div>
+    </section>
+
+    <!-- Stopka -->
+    <footer>
+        <p data-i18n="footer-rights">&copy; 2026 Konfederacja Polski Niepodległej (KPN). Wszelkie prawa zastrzeżone.</p>
+    </footer>
+
+    <script>
+        const translations = {
+            PL: {
+                "nav-about": "O NAS",
+                "nav-program": "PROGRAM",
+                "nav-news": "AKTUALNOŚCI",
+                "nav-contact": "KONTAKT",
+                "cta-join": "DOŁĄCZ DO NAS",
+                "about-header-title": "Poznaj Naszą <span>Historię i Misję</span>",
+                "about-header-desc": "Dowiedz się, kim jesteśmy, skąd czerpiemy inspirację i o jaką Polskę walczymy.",
+                "about-card-1-title": "Kim <span>Jesteśmy</span>",
+                "about-card-1-p1": "Konfederacja Polski Niepodległej (KPN) to środowisko skupiające ludzi wolnych, dla których dobro Rzeczypospolitej oraz jej absolutna suwerenność stanowią najwyższy priorytet. Kontynuujemy tradycje niepodległościowe, sprzeciwiając się wszelkim przejawom degradacji państwowości, nadmiernej biurokracji oraz ograniczeniom wolności obywatelskich.",
+                "about-card-1-p2": "Wierzymy, że silne państwo buduje się na fundamencie silnej, przedsiębiorczej jednostki, świadomej swojej historii i odpowiedzialnej za wspólną przyszłość.",
+                "about-card-2-title": "Nasze <span>Cele</span>",
+                "about-card-2-p1": "Naszym głównym zadaniem jest obrona polskiej suwerenności na każdym szczeblu – od polityki międzynarodowej, przez gospodarkę, aż po codzienne życie obywateli. Dążymy do uproszczenia prawa, drastycznego ograniczenia obciążeń fiskalnych oraz odbudowy podmiotowości Polaków we własnym państwie.",
+                "about-card-2-p2": "Tworzymy społeczność otwartą na każdego, kto chce aktywnie współtworzyć alternatywę dla obecnej sceny politycznej.",
+                "footer-rights": "&copy; 2026 Konfederacja Polski Niepodległej (KPN). Wszelkie prawa zastrzeżone."
+            },
+            EN: {
+                "nav-about": "ABOUT US",
+                "nav-program": "PROGRAM",
+                "nav-news": "NEWS",
+                "nav-contact": "CONTACT",
+                "cta-join": "JOIN US",
+                "about-header-title": "Discover Our <span>History and Mission</span>",
+                "about-header-desc": "Learn who we are, where we draw our inspiration from, and what kind of Poland we fight for.",
+                "about-card-1-title": "Who We <span>Are</span>",
+                "about-card-1-p1": "The Confederation of Independent Poland (KPN) is an environment bringing together free people for whom the good of the Republic and its absolute sovereignty are the highest priority. We continue independence traditions, opposing all forms of state degradation, excessive bureaucracy, and restrictions on civil liberties.",
+                "about-card-1-p2": "We believe that a strong state is built on the foundation of a strong, enterprising individual, aware of their history and responsible for a shared future.",
+                "about-card-2-title": "Our <span>Goals</span>",
+                "about-card-2-p1": "Our main task is to defend Polish sovereignty at every level – from international politics and the economy to the daily lives of citizens. We strive for the simplification of law, a drastic reduction of fiscal burdens, and the restoration of Poles' agency in their own state.",
+                "about-card-2-p2": "We are building a community open to anyone who wants to actively co-create an alternative to the current political scene.",
+                "footer-rights": "&copy; 2026 Confederation of Independent Poland (KPN). All rights reserved."
+            },
+            DE: {
+                "nav-about": "ÜBER UNS",
+                "nav-program": "PROGRAMM",
+                "nav-news": "NACHRICHTEN",
+                "nav-contact": "KONTAKT",
+                "cta-join": "MACH MIT",
+                "about-header-title": "Entdecken Sie Unsere <span>Geschichte und Mission</span>",
+                "about-header-desc": "Erfahren Sie, wer wir sind, woher wir unsere Inspiration nehmen und für was für ein Polen wir kämpfen.",
+                "about-card-1-title": "Wer Wir <span>Sind</span>",
+                "about-card-1-p1": "Die Konföderation des Unabhängigen Polen (KPN) ist ein Umfeld freier Menschen, für die das Wohl der Republik und ihre absolute Souveränität oberste Priorität haben. Wir führen die Unabhängigkeitstraditionen fort und widersetzen uns jeder Form von staatlicher Degeneration, übermäßiger Bürokratie und Einschränkungen der Bürgerrechte.",
+                "about-card-1-p2": "Wir glauben, dass ein starker Staat auf dem Fundament eines starken, unternehmungslustigen Individuums aufbaut, das sich seiner Geschichte bewusst und für eine gemeinsame Zukunft verantwortlich ist.",
+                "about-card-2-title": "Unsere <span>Ziele</span>",
+                "about-card-2-p1": "Unsere Hauptaufgabe ist die Verteidigung der polnischen Souveränität auf allen Ebenen – von der internationalen Politik und der Wirtschaft bis hin zum täglichen Leben der Bürger. Wir streben nach einer Vereinfachung des Rechts, einer drastischen Senkung der steuerlichen Belastung und der Wiederherstellung der Handlungsfähigkeit der Polen in ihrem eigenen Staat.",
+                "about-card-2-p2": "Wir schaffen eine Gemeinschaft, die für jeden offen ist, der aktiv an einer Alternative zur aktuellen politischen Szene mitwirken möchte.",
+                "footer-rights": "&copy; 2026 Konföderation des Unabhängigen Polen (KPN). Alle Rechte vorbehalten."
+            },
+            RU: {
+                "nav-about": "О НАС",
+                "nav-program": "ПРОГРАММА",
+                "nav-news": "НОВОСТИ",
+                "nav-contact": "КОНТАКТ",
+                "cta-join": "ПРИСОЕДИНИТЬСЯ",
+                "about-header-title": "Узнайте Нашу <span>Историю и Миссию</span>",
+                "about-header-desc": "Узнайте, кто мы, откуда черпаем вдохновение и за какую Польшу мы боремся.",
+                "about-card-1-title": "Кто Мы <span>Такие</span>",
+                "about-card-1-p1": "Конфедерация Польской Независимости (KPN) — это объединение свободных людей, для которых благо Республики и ее абсолютный суверенитет являются высшим приоритетом. Мы продолжаем традиции независимости, выступая против любых проявлений деградации государственности, чрезмерной бюрократии и ограничений гражданских свобод.",
+                "about-card-1-p2": "Мы верим, что сильное государство строится на фундаменте сильной, предприимчивой личности, помнящей свою историю и несущей ответственность за общее будущее.",
+                "about-card-2-title": "Наши <span>Цели</span>",
+                "about-card-2-p1": "Наша главная задача — защита польского суверенитета на любом уровне: от международной политики и экономики до повседневной жизни граждан. Мы стремимся к упрощению законодательства, резкому снижению налогового бремени и восстановлению субъектности поляков в собственном государстве.",
+                "about-card-2-p2": "Мы создаем сообщество, открытое для каждого, кто хочет активно участвовать в создании альтернативы текущей политической сцене.",
+                "footer-rights": "&copy; 2026 Конфедерация Польской Независимости (KPN). Все права защищены."
+            }
+        };
+
+        let hoverTimeout;
+
+        function openLangMenu() {
+            clearTimeout(hoverTimeout);
+            document.getElementById('langDropdown').classList.add('active');
+        }
+
+        function closeLangMenu() {
+            hoverTimeout = setTimeout(() => {
+                document.getElementById('langDropdown').classList.remove('active');
+            }, 400);
+        }
+
+        function toggleLangMenu() {
+            const dropdown = document.getElementById('langDropdown');
+            if (dropdown.classList.contains('active')) {
+                dropdown.classList.remove('active');
+            } else {
+                openLangMenu();
+            }
+        }
+
+        function changeLang(lang) {
+            const btn = document.querySelector('.lang-btn');
+            btn.innerHTML = lang + ' ▾';
+            document.getElementById('langDropdown').classList.remove('active');
+
+            const langData = translations[lang];
+            if (langData) {
+                document.querySelectorAll('[data-i18n]').forEach(el => {
+                    const key = el.getAttribute('data-i18n');
+                    if (langData[key]) {
+                        el.innerHTML = langData[key];
+                    }
+                });
+            }
+        }
+
+        window.onclick = function(event) {
+            if (!event.target.matches('.lang-btn') && !event.target.closest('.lang-btn') && !event.target.closest('.lang-content')) {
+                const dropdowns = document.getElementsByClassName('lang-dropdown');
+                for (let i = 0; i < dropdowns.length; i++) {
+                    let openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('active')) {
+                        openDropdown.classList.remove('active');
+                    }
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
