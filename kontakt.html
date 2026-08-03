@@ -206,118 +206,65 @@
 
         /* Content Section / Contact Layout */
         .content-section {
-            max-width: 1100px;
+            max-width: 700px;
             margin: 0 auto;
-            padding: 40px 20px 100px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
+            padding: 20px 20px 100px;
         }
 
-        .contact-info-box, .contact-form-box {
+        .contact-info-box {
             background: rgba(20, 20, 20, 0.6);
             border: 1px solid rgba(255, 255, 255, 0.06);
             backdrop-filter: blur(10px);
-            padding: 40px;
+            padding: 50px;
             border-radius: 8px;
+            text-align: center;
         }
 
-        .contact-info-box h3, .contact-form-box h3 {
-            font-size: 1.4rem;
+        .contact-info-box h3 {
+            font-size: 1.6rem;
             font-weight: 700;
             margin-bottom: 20px;
             text-transform: uppercase;
             color: #ffffff;
         }
 
-        .contact-info-box h3 span, .contact-form-box h3 span {
+        .contact-info-box h3 span {
             color: #d91414;
         }
 
         .contact-info-box p {
             color: #a0a0a0;
-            font-size: 0.95rem;
+            font-size: 1rem;
             line-height: 1.7;
-            margin-bottom: 25px;
+            margin-bottom: 35px;
         }
 
         .contact-methods {
             display: flex;
-            flex-direction: column;
-            gap: 15px;
+            justify-content: center;
         }
 
         .contact-method-item {
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 15px;
             color: #fff;
-            font-size: 0.95rem;
+            font-size: 1.1rem;
             text-decoration: none;
             background: rgba(255, 255, 255, 0.03);
-            padding: 15px 20px;
+            padding: 20px 35px;
             border-radius: 6px;
             border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: background 0.3s, border-color 0.3s;
+            transition: background 0.3s, border-color 0.3s, transform 0.3s;
+            width: 100%;
+            max-width: 450px;
         }
 
         .contact-method-item:hover {
             background: rgba(217, 20, 20, 0.1);
             border-color: rgba(217, 20, 20, 0.3);
-        }
-
-        /* Formularz */
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 0.85rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            color: #b0b0b0;
-            margin-bottom: 8px;
-        }
-
-        .form-group input, .form-group textarea {
-            width: 100%;
-            background: rgba(10, 10, 10, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
-            padding: 12px 15px;
-            color: #fff;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.95rem;
-            transition: border-color 0.3s;
-        }
-
-        .form-group input:focus, .form-group textarea:focus {
-            outline: none;
-            border-color: #d91414;
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            height: 130px;
-        }
-
-        .submit-btn {
-            background: #d91414;
-            color: #ffffff;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 4px;
-            text-transform: uppercase;
-            font-weight: 700;
-            font-size: 0.85rem;
-            cursor: pointer;
-            width: 100%;
-            transition: background 0.3s ease;
-        }
-
-        .submit-btn:hover {
-            background: #b51010;
+            transform: translateY(-3px);
         }
 
         /* Footer */
@@ -369,8 +316,10 @@
                 font-size: 2.2rem;
             }
             .content-section {
-                grid-template-columns: 1fr;
                 padding: 20px 20px 80px;
+            }
+            .contact-info-box {
+                padding: 30px 20px;
             }
         }
     </style>
@@ -416,52 +365,24 @@
     <!-- Nagłówek Podstrony -->
     <section class="page-header">
         <h1 data-i18n="contact-header-title">Skontaktuj się <span>z Nami</span></h1>
-        <p data-i18n="contact-header-desc">Masz pytania, chcesz dołączyć do struktur lub podjąć współpracę? Jesteśmy do Twojej dyspozycji.</p>
+        <p data-i18n="contact-header-desc">Masz pytania, chcesz dołączyć do struktur lub podjąć współpracę? Dołącz do naszej społeczności.</p>
     </section>
 
     <!-- Główna Treść / Sekcja Kontaktu -->
     <section class="content-section">
-        <!-- Informacje kontaktowe -->
         <div class="contact-info-box">
-            <h3 data-i18n="info-box-title">Kanały <span>Łączności</span></h3>
-            <p data-i18n="info-box-desc">Możesz skontaktować się z nami bezpośrednio przez oficjalne kanały społecznościowe lub platformę Discord.</p>
+            <h3 data-i18n="info-box-title">Oficjalny <span>Discord</span></h3>
+            <p data-i18n="info-box-desc">Jedynym oficjalnym miejscem kontaktu oraz wymiany zdań z naszym środowiskiem jest serwer Discord. Dołącz już teraz!</p>
             
             <div class="contact-methods">
                 <a href="https://discord.gg/zBUDWjycWx" target="_blank" class="contact-method-item">
-                    <span>💬</span>
-                    <div>
-                        <strong data-i18n="method-discord-title">Oficjalny Discord KPN</strong><br>
-                        <span style="font-size: 0.8rem; color: #888;">discord.gg/zBUDWjycWx</span>
-                    </div>
-                </a>
-                <a href="mailto:kontakt@kpn.org.pl" class="contact-method-item">
-                    <span>✉️</span>
-                    <div>
-                        <strong data-i18n="method-email-title">Adres E-mail</strong><br>
-                        <span style="font-size: 0.8rem; color: #888;">kontakt@kpn.org.pl</span>
+                    <span style="font-size: 1.5rem;">💬</span>
+                    <div style="text-align: left;">
+                        <strong data-i18n="method-discord-title">Wejdź na Discorda</strong><br>
+                        <span style="font-size: 0.85rem; color: #888;">discord.gg/zBUDWjycWx</span>
                     </div>
                 </a>
             </div>
-        </div>
-
-        <!-- Formularz kontaktowy -->
-        <div class="contact-form-box">
-            <h3 data-i18n="form-box-title">Napisz do <span>Nas</span></h3>
-            <form onsubmit="handleFormSubmit(event)">
-                <div class="form-group">
-                    <label for="name" data-i18n="form-label-name">Twoje Imię</label>
-                    <input type="text" id="name" required placeholder="Wpisz swoje imię...">
-                </div>
-                <div class="form-group">
-                    <label for="email" data-i18n="form-label-email">Adres E-mail</label>
-                    <input type="email" id="email" required placeholder="Wpisz swój e-mail...">
-                </div>
-                <div class="form-group">
-                    <label for="message" data-i18n="form-label-msg">Treść Wiadomości</label>
-                    <textarea id="message" required placeholder="Wpisz treść wiadomości..."></textarea>
-                </div>
-                <button type="submit" class="submit-btn" data-i18n="form-btn-submit">Wyślij Wiadomość</button>
-            </form>
         </div>
     </section>
 
@@ -479,16 +400,10 @@
                 "nav-contact": "KONTAKT",
                 "cta-join": "DOŁĄCZ DO NAS",
                 "contact-header-title": "Skontaktuj się <span>z Nami</span>",
-                "contact-header-desc": "Masz pytania, chcesz dołączyć do struktur lub podjąć współpracę? Jesteśmy do Twojej dyspozycji.",
-                "info-box-title": "Kanały <span>Łączności</span>",
-                "info-box-desc": "Możesz skontaktować się z nami bezpośrednio przez oficjalne kanały społecznościowe lub platformę Discord.",
-                "method-discord-title": "Oficjalny Discord KPN",
-                "method-email-title": "Adres E-mail",
-                "form-box-title": "Napisz do <span>Nas</span>",
-                "form-label-name": "Twoje Imię",
-                "form-label-email": "Adres E-mail",
-                "form-label-msg": "Treść Wiadomości",
-                "form-btn-submit": "Wyślij Wiadomość",
+                "contact-header-desc": "Masz pytania, chcesz dołączyć do struktur lub podjąć współpracę? Dołącz do naszej społeczności.",
+                "info-box-title": "Oficjalny <span>Discord</span>",
+                "info-box-desc": "Jedynym oficjalnym miejscem kontaktu oraz wymiany zdań z naszym środowiskiem jest serwer Discord. Dołącz już teraz!",
+                "method-discord-title": "Wejdź na Discorda",
                 "footer-rights": "&copy; 2026 Konfederacja Polski Niepodległej (KPN). Wszelkie prawa zastrzeżone."
             },
             EN: {
@@ -498,54 +413,36 @@
                 "nav-contact": "CONTACT",
                 "cta-join": "JOIN US",
                 "contact-header-title": "Get in Touch <span>with Us</span>",
-                "contact-header-desc": "Have questions, want to join the structures or cooperate? We are at your disposal.",
-                "info-box-title": "Communication <span>Channels</span>",
-                "info-box-desc": "You can contact us directly through our official social channels or the Discord platform.",
-                "method-discord-title": "Official KPN Discord",
-                "method-email-title": "E-mail Address",
-                "form-box-title": "Write to <span>Us</span>",
-                "form-label-name": "Your Name",
-                "form-label-email": "E-mail Address",
-                "form-label-msg": "Message",
-                "form-btn-submit": "Send Message",
+                "contact-header-desc": "Have questions, want to join structures, or cooperate? Join our community.",
+                "info-box-title": "Official <span>Discord</span>",
+                "info-box-desc": "The only official place of contact and discussion with our community is our Discord server. Join now!",
+                "method-discord-title": "Join Discord",
                 "footer-rights": "&copy; 2026 Confederation of Independent Poland (KPN). All rights reserved."
             },
             DE: {
                 "nav-about": "ÜBER UNS",
                 "nav-program": "PROGRAMM",
                 "nav-news": "NACHRICHTEN",
-                "nav-contact": "KONTAKT",
+                "nav-kontakt": "KONTAKT",
                 "cta-join": "MACH MIT",
                 "contact-header-title": "Kontaktieren Sie <span>Uns</span>",
-                "contact-header-desc": "Haben Sie Fragen, möchten Sie den Strukturen beitreten oder kooperieren? Wir stehen Ihnen zur Verfügung.",
-                "info-box-title": "Kommunikations-<span>Kanäle</span>",
-                "info-box-desc": "Sie können uns direkt über unsere offiziellen Social-Kanäle oder die Discord-Plattform kontaktieren.",
-                "method-discord-title": "Offizieller KPN Discord",
-                "method-email-title": "E-Mail-Adresse",
-                "form-box-title": "Schreiben Sie <span>Uns</span>",
-                "form-label-name": "Ihr Name",
-                "form-label-email": "E-Mail-Adresse",
-                "form-label-msg": "Nachricht",
-                "form-btn-submit": "Nachricht Senden",
+                "contact-header-desc": "Haben Sie Fragen, möchten Sie den Strukturen beitreten oder kooperieren? Treten Sie unserer Gemeinschaft bei.",
+                "info-box-title": "Offizieller <span>Discord</span>",
+                "info-box-desc": "Der einzige offizielle Ort für den Kontakt und Austausch mit unserem Umfeld ist der Discord-Server. Treten Sie jetzt bei!",
+                "method-discord-title": "Discord beitreten",
                 "footer-rights": "&copy; 2026 Konföderation des Unabhängigen Polen (KPN). Alle Rechte vorbehalten."
             },
             RU: {
                 "nav-about": "О НАС",
                 "nav-program": "ПРОГРАММА",
                 "nav-news": "НОВОСТИ",
-                "nav-contact": "КОНТАКТ",
+                "nav-kontakt": "КОНТАКТ",
                 "cta-join": "ПРИСОЕДИНИТЬСЯ",
                 "contact-header-title": "Свяжитесь <span>с Нами</span>",
-                "contact-header-desc": "У вас есть вопросы, вы хотите присоединиться к структурам или сотрудничать? Мы к вашим услугам.",
-                "info-box-title": "Каналы <span>Связи</span>",
-                "info-box-desc": "Вы можете связаться с нами напрямую через официальные социальные каналы или платформу Discord.",
-                "method-discord-title": "Официальный Discord KPN",
-                "method-email-title": "Электронная почта",
-                "form-box-title": "Напишите <span>Нам</span>",
-                "form-label-name": "Ваше Имя",
-                "form-label-email": "Электронная почта",
-                "form-label-msg": "Текст Сообщения",
-                "form-btn-submit": "Отправить Сообщение",
+                "contact-header-desc": "У вас есть вопросы, хотите присоединиться к структурам или сотрудничать? Присоединяйтесь к нашему сообществу.",
+                "info-box-title": "Официальный <span>Discord</span>",
+                "info-box-desc": "Единственным официальным местом для связи и общения с нашим движением является сервер Discord. Присоединяйтесь прямо сейчас!",
+                "method-discord-title": "Перейти в Discord",
                 "footer-rights": "&copy; 2026 Конфедерация Польской Независимости (KPN). Все права защищены."
             }
         };
@@ -598,12 +495,6 @@
                     }
                 }
             }
-        }
-
-        function handleFormSubmit(event) {
-            event.preventDefault();
-            alert('Wiadomość została wysłana pomyślnie!');
-            event.target.reset();
         }
     </script>
 
