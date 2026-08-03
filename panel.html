@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Administracyjny | KPN</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #080808;
+            color: #f0f0f0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navbar */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background: rgba(10, 10, 10, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            z-index: 1000;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-container img {
+            height: 40px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #b0b0b0;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover, nav a.active {
+            color: #ffffff;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .cta-btn {
+            background: #d91414;
+            color: #ffffff !important;
+            padding: 10px 22px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            background: #b51010;
+        }
+
+        /* Page Header / Hero */
+        .page-header {
+            padding: 160px 20px 40px;
+            text-align: center;
+            background: radial-gradient(circle at center, rgba(217, 20, 20, 0.12) 0%, rgba(8, 8, 8, 1) 75%);
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            margin-bottom: 10px;
+        }
+
+        .page-header h1 span {
+            color: #d91414;
+        }
+
+        .page-header p {
+            font-size: 1rem;
+            color: #a0a0a0;
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        /* Content Section / Panel Layout */
+        .content-section {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px 20px 100px;
+        }
+
+        .panel-card {
+            background: rgba(20, 20, 20, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .panel-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            color: #ffffff;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 10px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: #b0b0b0;
+            margin-bottom: 8px;
+        }
+
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            background: rgba(10, 10, 10, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            padding: 12px 15px;
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            outline: none;
+            border-color: #d91414;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            height: 120px;
+        }
+
+        .action-btn {
+            background: #d91414;
+            color: #ffffff;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .action-btn:hover {
+            background: #b51010;
+        }
+
+        .action-btn.secondary {
+            background: rgba(255, 255, 255, 0.1);
+            margin-left: 10px;
+        }
+
+        .action-btn.secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .articles-list-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 15px 20px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+
+        .articles-list-item div strong {
+            color: #fff;
+            font-size: 0.95rem;
+        }
+
+        .articles-list-item div span {
+            color: #888;
+            font-size: 0.8rem;
+            display: block;
+        }
+
+        .item-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 0.75rem;
+        }
+
+        .btn-danger {
+            background: rgba(217, 20, 20, 0.2);
+            border: 1px solid rgba(217, 20, 20, 0.4);
+            color: #ff4d4d;
+        }
+
+        .btn-danger:hover {
+            background: rgba(217, 20, 20, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            background: #050505;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 40px 50px;
+            text-align: center;
+            color: #707070;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 900px) {
+            header {
+                padding: 15px 20px;
+            }
+            .nav-left {
+                gap: 20px;
+            }
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            .form-group.full-width {
+                grid-column: span 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Nagłówek -->
+    <header>
+        <div class="nav-left">
+            <div class="logo-container">
+                <a href="index.html"><img src="image-removebg-preview.png" alt="KPN Logo"></a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="o-nas.html">O NAS</a></li>
+                    <li><a href="program.html">PROGRAM</a></li>
+                    <li><a href="aktualnosci.html">AKTUALNOŚCI</a></li>
+                    <li><a href="kontakt.html">KONTAKT</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="nav-right">
+            <a href="https://discord.gg/zBUDWjycWx" target="_blank" class="cta-btn">DOŁĄCZ DO NAS</a>
+        </div>
+    </header>
+
+    <!-- Nagłówek Podstrony -->
+    <section class="page-header">
+        <h1>Panel <span>Administratora</span></h1>
+        <p>Zarządzaj treścią i ogłoszeniami w serwisie KPN.</p>
+    </section>
+
+    <!-- Główna Treść / Panel -->
+    <section class="content-section">
+        
+        <!-- Dodawanie / Edycja Artykułu -->
+        <div class="panel-card">
+            <h3 id="formPanelTitle">Dodaj Nowy Artykuł</h3>
+            <form id="articleForm" onsubmit="saveArticle(event)">
+                <input type="hidden" id="editIndex" value="-1">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="artTitle">Tytuł Artykułu</label>
+                        <input type="text" id="artTitle" required placeholder="Wpisz tytuł...">
+                    </div>
+                    <div class="form-group">
+                        <label for="artTag">Tag / Kategoria</label>
+                        <input type="text" id="artTag" required placeholder="np. Ogłoszenie, Polityka">
+                    </div>
+                    <div class="form-group">
+                        <label for="artDate">Data</label>
+                        <input type="date" id="artDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="artTime">Godzina</label>
+                        <input type="time" id="artTime" required value="12:00">
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="artContent">Treść (każdy akapit w nowej linii)</label>
+                        <textarea id="artContent" required placeholder="Wpisz treść artykułu. Poszczególne akapity oddziel nową linią..."></textarea>
+                    </div>
+                </div>
+                <button type="submit" class="action-btn" id="submitBtn">Opublikuj Artykuł</button>
+                <button type="button" class="action-btn secondary" id="cancelBtn" style="display: none;" onclick="resetForm()">Anuluj</button>
+            </form>
+        </div>
+
+        <!-- Lista Istniejących Artykułów do Zarządzania -->
+        <div class="panel-card">
+            <h3>Zarządzaj Aktualnościami</h3>
+            <div id="adminArticlesList">
+                <!-- Generowane dynamicznie -->
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Stopka -->
+    <footer>
+        <p>&copy; 2026 Konfederacja Polski Niepodległej (KPN). Wszelkie prawa zastrzeżone.</p>
+    </footer>
+
+    <script>
+        // Pobieranie danych z localStorage lub domyślne
+        let articlesData = JSON.parse(localStorage.getItem('kpn_articles')) || [
+            {
+                id: 1,
+                title: "Witaj w Oficjalnej Społeczności KPN",
+                tag: "Ogłoszenie",
+                date: "2026-07-20",
+                time: "12:00",
+                displayDate: "20 lipiec 2026",
+                content: [
+                    "Witamy w oficjalnej społeczności Konfederacji Polski Niepodległej!",
+                    "Będziemy publikować tutaj aktualizacje oraz ogłoszenia z każdego działu, oznaczane odpowiednimi tagami.",
+                    "Podczas dyskusji i komentowania, prosimy o przestrzeganie <a href='program.html'>zasad naszej społeczności</a> oraz zachowanie merytorycznego tonu.",
+                    "Znalazłeś błąd lub masz sugestię? Zgłoś ją w odpowiednim kanale, abyśmy mogli stale ulepszać nasz portal!",
+                    "Dziękujemy, że jesteś z nami – widzimy się w społeczności!"
+                ]
+            },
+            {
+                id: 2,
+                title: "Rozbudowa Struktur i Nowy Program Polityczny",
+                tag: "Polityka",
+                date: "2026-07-25",
+                time: "15:30",
+                displayDate: "25 lipiec 2026",
+                content: [
+                    "Rozpoczęliśmy wdrażanie kolejnego etapu rozwoju struktur regionalnych w całym kraju.",
+                    "Nasz program opiera się na absolutnej suwerenności, wolnym rynku oraz obronie interesów polskich obywateli.",
+                    "Zachęcamy do zapoznania się ze szczegółami w zakładce Program oraz do aktywnego włączania się w nasze inicjatywy społeczno-polityczne."
+                ]
+            }
+        ];
+
+        // Ustawienie domyślnej daty dzisiejszej w formularzu
+        document.getElementById('artDate').valueAsDate = new Date();
+
+        function renderAdminList() {
+            const container = document.getElementById('adminArticlesList');
+            container.innerHTML = '';
+
+            if (articlesData.length === 0) {
+                container.innerHTML = '<p style="color: #888; text-align: center; padding: 20px;">Brak artykułów w bazie.</p>';
+                return;
+            }
+
+            articlesData.forEach((art, index) => {
+                const item = document.createElement('div');
+                item.className = 'articles-list-item';
+                item.innerHTML = `
+                    <div>
+                        <strong>${art.title}</strong>
+                        <span>${art.tag} | ${art.date} ${art.time || ''}</span>
+                    </div>
+                    <div class="item-actions">
+                        <button class="action-btn btn-sm secondary" onclick="editArticle(${index})">Edytuj</button>
+                        <button class="action-btn btn-sm btn-danger" onclick="deleteArticle(${index})">Usuń</button>
+                    </div>
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        function saveArticle(event) {
+            event.preventDefault();
+            const editIndex = parseInt(document.getElementById('editIndex').value);
+            const title = document.getElementById('artTitle').value;
+            const tag = document.getElementById('artTag').value;
+            const date = document.getElementById('artDate').value;
+            const time = document.getElementById('artTime').value;
+            const rawContent = document.getElementById('artContent').value;
+            
+            // Konwersja akapitów (rozdzielenie nowymi liniami)
+            const contentParagraphs = rawContent.split('\n').filter(p => p.trim() !== '');
+
+            // Formatowanie wyświetlanej daty (np. 20 lipiec 2026)
+            const dateObj = new Date(date);
+            const months = ["styczeń", "luty", "marzec", "kwiecień", "maj", "czerwiec", "lipiec", "sierpień", "wrzesień", "październik", "listopad", "grudzień"];
+            const displayDate = `${dateObj.getDate()} ${months[dateObj.getMonth()]} ${dateObj.getFullYear()}`;
+
+            if (editIndex === -1) {
+                // Dodawanie nowego
+                const newId = articlesData.length > 0 ? Math.max(...articlesData.map(a => a.id)) + 1 : 1;
+                articlesData.push({
+                    id: newId,
+                    title,
+                    tag,
+                    date,
+                    time,
+                    displayDate,
+                    content: contentParagraphs
+                });
+            } else {
+                // Edycja istniejącego
+                articlesData[editIndex] = {
+                    ...articlesData[editIndex],
+                    title,
+                    tag,
+                    date,
+                    time,
+                    displayDate,
+                    content: contentParagraphs
+                };
+            }
+
+            localStorage.setItem('kpn_articles', JSON.stringify(articlesData));
+            resetForm();
+            renderAdminList();
+            alert('Zmiany zostały zapisane pomyślnie!');
+        }
+
+        function editArticle(index) {
+            const art = articlesData[index];
+            document.getElementById('editIndex').value = index;
+            document.getElementById('artTitle').value = art.title;
+            document.getElementById('artTag').value = art.tag;
+            document.getElementById('artDate').value = art.date;
+            document.getElementById('artTime').value = art.time || '12:00';
+            document.getElementById('artContent').value = art.content.join('\n');
+
+            document.getElementById('formPanelTitle').innerText = 'Edytuj Artykuł';
+            document.getElementById('submitBtn').innerText = 'Zapisz Zmiany';
+            document.getElementById('cancelBtn').style.display = 'inline-block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function deleteArticle(index) {
+            if (confirm('Czy na pewno chcesz usunąć ten artykuł?')) {
+                articlesData.splice(index, 1);
+                localStorage.setItem('kpn_articles', JSON.stringify(articlesData));
+                renderAdminList();
+            }
+        }
+
+        function resetForm() {
+            document.getElementById('articleForm').reset();
+            document.getElementById('editIndex').value = -1;
+            document.getElementById('artDate').valueAsDate = new Date();
+            document.getElementById('formPanelTitle').innerText = 'Dodaj Nowy Artykuł';
+            document.getElementById('submitBtn').innerText = 'Opublikuj Artykuł';
+            document.getElementById('cancelBtn').style.display = 'none';
+        }
+
+        window.onload = function() {
+            renderAdminList();
+        };
+    </script>
+
+</body>
+</html>
