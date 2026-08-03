@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel Administratora | KPN</title>
+    <title>Aktualności | Konfederacja Polski Niepodległej | KPN</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <style>
         * {
@@ -17,35 +17,149 @@
             background-color: #080808;
             color: #f0f0f0;
             line-height: 1.6;
-            padding: 40px 20px;
+            overflow-x: hidden;
         }
 
-        .admin-panel-section {
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .admin-box {
-            background: #121215;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            padding: 35px;
-        }
-
-        .admin-header-row {
+        /* Navbar */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
+            padding: 20px 50px;
+            background: rgba(10, 10, 10, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            padding-bottom: 20px;
-            flex-wrap: wrap;
-            gap: 15px;
+            z-index: 1000;
         }
 
-        .admin-header-row h2 {
-            font-size: 1.8rem;
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-container img {
+            height: 40px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #b0b0b0;
+            font-weight: 600;
+            font-size: 0.85rem;
             text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover, nav a.active {
+            color: #ffffff;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 6px;
+            z-index: 1001;
+            padding: 5px;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 28px;
+            height: 2px;
+            background-color: #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        .lang-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #b0b0b0;
+            padding: 8px 14px;
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+
+        .lang-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background: rgba(15, 15, 15, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            min-width: 120px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 4px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.4);
+            z-index: 1;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+
+        .lang-content a {
+            color: #b0b0b0;
+            padding: 10px 15px;
+            text-decoration: none;
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .lang-content a:hover {
+            background: rgba(217, 20, 20, 0.2);
+            color: #ffffff;
+        }
+
+        .lang-dropdown.active .lang-content {
+            display: block;
         }
 
         .cta-btn {
@@ -57,52 +171,77 @@
             font-size: 0.85rem;
             text-decoration: none;
             transition: background 0.3s ease;
-            border: none;
-            cursor: pointer;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
         }
 
         .cta-btn:hover {
             background: #b51010;
         }
 
-        .admin-trigger-btn {
-            background: rgba(255, 255, 255, 0.1);
-            color: #fff;
-            padding: 10px 16px;
-            border-radius: 4px;
+        /* Page Header / Hero */
+        .page-header {
+            padding: 160px 20px 80px;
+            text-align: center;
+            background: radial-gradient(circle at center, rgba(217, 20, 20, 0.12) 0%, rgba(8, 8, 8, 1) 75%);
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 900;
             text-transform: uppercase;
-            font-size: 0.8rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            letter-spacing: -1px;
+            margin-bottom: 15px;
+        }
+
+        .page-header h1 span {
+            color: #d91414;
+        }
+
+        .page-header p {
+            font-size: 1.1rem;
+            color: #a0a0a0;
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        /* Content Section / News Grid */
+        .content-section {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px 100px;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .news-card {
+            background: rgba(20, 20, 20, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 8px;
             cursor: pointer;
-            font-weight: 600;
-            transition: background 0.3s;
-            font-family: 'Montserrat', sans-serif;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
-        .admin-trigger-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
+        .news-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(217, 20, 20, 0.4);
         }
 
-        .admin-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        .admin-table th, .admin-table td {
-            padding: 14px;
-            text-align: left;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-            font-size: 0.9rem;
-        }
-
-        .admin-table th {
+        .news-meta-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 0.8rem;
             color: #888;
-            text-transform: uppercase;
-            font-size: 0.75rem;
-            letter-spacing: 1px;
         }
 
         .news-tag {
@@ -116,33 +255,29 @@
             border: 1px solid rgba(217, 20, 20, 0.3);
         }
 
-        .btn-action {
-            padding: 6px 12px;
-            border-radius: 4px;
-            border: none;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            margin-right: 5px;
-            font-family: 'Montserrat', sans-serif;
+        .news-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #ffffff;
+            line-height: 1.4;
         }
 
-        .btn-edit {
-            background: #3b82f6;
-            color: #fff;
+        .news-card p {
+            color: #a0a0a0;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
         }
 
-        .btn-edit:hover { background: #2563eb; }
-
-        .btn-del {
-            background: #d91414;
-            color: #fff;
+        .news-footer-info {
+            font-size: 0.85rem;
+            color: #777;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 15px;
         }
 
-        .btn-del:hover { background: #b91c1c; }
-
-        /* Modal Formularza */
+        /* Modal / Article View Style */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -167,7 +302,7 @@
             background: #121214;
             border: 1px solid rgba(255, 255, 255, 0.1);
             width: 100%;
-            max-width: 650px;
+            max-width: 800px;
             max-height: 90vh;
             border-radius: 12px;
             overflow-y: auto;
@@ -179,8 +314,8 @@
             position: absolute;
             top: 20px;
             right: 20px;
-            background: rgba(0, 0, 0, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
             color: #fff;
             width: 36px;
             height: 36px;
@@ -199,403 +334,565 @@
         }
 
         .modal-hero {
-            padding: 30px 40px 20px;
+            padding: 50px 40px 30px;
             background: linear-gradient(135deg, rgba(217, 20, 20, 0.2) 0%, rgba(18, 18, 20, 1) 80%);
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .modal-hero h2 {
-            font-size: 1.8rem;
+            font-size: 2.2rem;
             font-weight: 900;
             text-transform: uppercase;
             color: #fff;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+
+        .modal-subinfo {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.9rem;
+            color: #aaa;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .modal-subinfo a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+
+        .modal-subinfo a:hover {
+            text-decoration: underline;
         }
 
         .modal-body {
-            padding: 30px 40px;
+            padding: 40px;
         }
 
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
+        .author-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
         }
 
-        .form-group {
+        .author-avatar {
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            overflow: hidden;
+        }
+
+        .author-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .author-details {
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            margin-bottom: 15px;
+            gap: 4px;
         }
 
-        .form-group.full {
-            grid-column: span 2;
-        }
-
-        .form-group label {
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: #b0b0b0;
-            text-transform: uppercase;
-        }
-
-        .form-group input, .form-group textarea {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 12px;
-            border-radius: 4px;
-            color: #fff;
-            font-family: 'Montserrat', sans-serif;
+        .author-top-line {
+            display: flex;
+            align-items: center;
+            gap: 10px;
             font-size: 0.95rem;
         }
 
-        .form-group textarea {
-            resize: vertical;
-            min-height: 100px;
+        .author-name {
+            font-weight: 700;
+            color: #fff;
         }
 
-        .form-group input:focus, .form-group textarea:focus {
-            outline: none;
-            border-color: #d91414;
+        .post-time {
+            color: #888;
+            font-size: 0.85rem;
         }
 
-        @media (max-width: 768px) {
-            .form-grid { grid-template-columns: 1fr; }
-            .form-group.full { grid-column: span 1; }
-            .modal-body, .modal-hero { padding: 20px; }
+        .article-content-text {
+            color: #ccc;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .article-content-text a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+
+        .article-content-text a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background: #050505;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 40px 50px;
+            text-align: center;
+            color: #707070;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 900px) {
+            header {
+                padding: 15px 20px;
+            }
+            .nav-left {
+                gap: 20px;
+            }
+            .menu-toggle {
+                display: flex;
+            }
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(10, 10, 10, 0.98);
+                backdrop-filter: blur(15px);
+                -webkit-backdrop-filter: blur(15px);
+                flex-direction: column;
+                padding: 25px 0;
+                gap: 20px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+                box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+                text-align: center;
+            }
+            nav ul.active {
+                display: flex;
+            }
+            .nav-right .cta-btn {
+                display: none;
+            }
+            .page-header {
+                padding: 130px 20px 60px;
+            }
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+            .modal-body, .modal-hero {
+                padding: 25px 20px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- SEKCJA PANELU ADMINA -->
-    <section class="admin-panel-section">
-        <div class="admin-box">
-            <div class="admin-header-row">
-                <h2>Panel Zarządzania Artykułami</h2>
-                <button class="cta-btn" onclick="openArticleFormModal()">+ Dodaj nowy artykuł</button>
+    <!-- Nagłówek -->
+    <header>
+        <div class="nav-left">
+            <div class="logo-container">
+                <a href="index.html"><img src="image-removebg-preview.png" alt="KPN Logo"></a>
             </div>
-            
-            <div style="overflow-x: auto;">
-                <table class="admin-table">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Data</th>
-                            <th>Zdjęcie</th>
-                            <th>Tytuł (PL)</th>
-                            <th>Tag</th>
-                            <th>Akcje</th>
-                        </tr>
-                    </thead>
-                    <tbody id="adminTableBody">
-                        <!-- Wiersze generowane dynamicznie -->
-                    </tbody>
-                </table>
+            <nav>
+                <ul id="navMenu">
+                    <li><a href="o-nas.html" data-i18n="nav-about">O NAS</a></li>
+                    <li><a href="program.html" data-i18n="nav-program">PROGRAM</a></li>
+                    <li><a href="aktualnosci.html" class="active" data-i18n="nav-news">AKTUALNOŚCI</a></li>
+                    <li><a href="kontakt.html" data-i18n="nav-contact">KONTAKT</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="nav-right">
+            <div class="lang-dropdown" id="langDropdown" onmouseenter="openLangMenu()" onmouseleave="closeLangMenu()">
+                <button class="lang-btn" onclick="toggleLangMenu()">
+                    PL ▾
+                </button>
+                <div class="lang-content">
+                    <a href="#" onclick="changeLang('PL'); return false;">Polski</a>
+                    <a href="#" onclick="changeLang('EN'); return false;">English</a>
+                    <a href="#" onclick="changeLang('DE'); return false;">Deutsch</a>
+                    <a href="#" onclick="changeLang('RU'); return false;">Русский</a>
+                </div>
             </div>
+            <a href="https://discord.gg/zBUDWjycWx" target="_blank" class="cta-btn" data-i18n="cta-join">DOŁĄCZ DO NAS</a>
+            <button class="menu-toggle" id="menuToggle" onclick="toggleMobileMenu()" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Nagłówek Podstrony -->
+    <section class="page-header">
+        <h1 data-i18n="news-header-title">Najnowsze <span>Aktualności</span></h1>
+        <p data-i18n="news-header-desc">Bądź na bieżąco z ogłoszeniami, komunikatami i wydarzeniami środowiska KPN.</p>
+    </section>
+
+    <!-- Główna Treść / Lista Artykułów -->
+    <section class="content-section">
+        <div class="news-grid" id="newsGrid">
+            <!-- Artykuły generowane dynamicznie przez JavaScript -->
         </div>
     </section>
 
-    <!-- Modal Formularza Dodawania / Edycji Artykułu -->
-    <div class="modal-overlay" id="articleFormModal" onclick="closeArticleFormModal(event)">
+    <!-- Modal Wyświetlania Artykułu -->
+    <div class="modal-overlay" id="articleModal" onclick="closeArticleModal(event)">
         <div class="modal-container" onclick="event.stopPropagation()">
-            <button class="modal-close" onclick="closeArticleFormModalBtn()">×</button>
+            <button class="modal-close" onclick="closeModalBtn()">×</button>
             <div class="modal-hero">
-                <h2 id="formModalTitle">Dodaj Artykuł</h2>
+                <h2 id="modalTitle">Tytuł Artykułu</h2>
+                <div class="modal-subinfo" id="modalSubinfo">
+                    Opublikowano w <a href="aktualnosci.html">aktualności</a>
+                </div>
             </div>
             <div class="modal-body">
-                <form id="articleForm" onsubmit="handleArticleFormSubmit(event)">
-                    <input type="hidden" id="editArticleId">
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label>Data</label>
-                            <input type="date" id="inputDate" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Godzina</label>
-                            <input type="text" id="inputTime" placeholder="12:00" required>
-                        </div>
-                        <div class="form-group full">
-                            <label>Link do zdjęcia (URL)</label>
-                            <input type="url" id="inputImage" placeholder="https://example.com/zdjecie.jpg">
-                        </div>
-                        
-                        <!-- Wersja PL -->
-                        <div class="form-group full" style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px;">
-                            <label style="color: #ff4d4d;">Polski (PL) - Główny</label>
-                        </div>
-                        <div class="form-group">
-                            <label>Tytuł (PL)</label>
-                            <input type="text" id="inputTitlePL" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Tag (PL)</label>
-                            <input type="text" id="inputTagPL" required>
-                        </div>
-                        <div class="form-group full">
-                            <label>Treść (PL) (każda linijka to nowy akapit)</label>
-                            <textarea id="inputContentPL" required></textarea>
-                        </div>
-
-                        <!-- Wersja EN -->
-                        <div class="form-group full" style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px;">
-                            <label style="color: #3b82f6;">English (EN)</label>
-                        </div>
-                        <div class="form-group">
-                            <label>Tytuł (EN)</label>
-                            <input type="text" id="inputTitleEN">
-                        </div>
-                        <div class="form-group">
-                            <label>Tag (EN)</label>
-                            <input type="text" id="inputTagEN">
-                        </div>
-                        <div class="form-group full">
-                            <label>Treść (EN)</label>
-                            <textarea id="inputContentEN"></textarea>
-                        </div>
-
-                        <!-- Wersja DE -->
-                        <div class="form-group full" style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px;">
-                            <label style="color: #eab308;">Deutsch (DE)</label>
-                        </div>
-                        <div class="form-group">
-                            <label>Tytuł (DE)</label>
-                            <input type="text" id="inputTitleDE">
-                        </div>
-                        <div class="form-group">
-                            <label>Tag (DE)</label>
-                            <input type="text" id="inputTagDE">
-                        </div>
-                        <div class="form-group full">
-                            <label>Treść (DE)</label>
-                            <textarea id="inputContentDE"></textarea>
-                        </div>
-
-                        <!-- Wersja RU -->
-                        <div class="form-group full" style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px;">
-                            <label style="color: #10b981;">Русский (RU)</label>
-                        </div>
-                        <div class="form-group">
-                            <label>Tytuł (RU)</label>
-                            <input type="text" id="inputTitleRU">
-                        </div>
-                        <div class="form-group">
-                            <label>Tag (RU)</label>
-                            <input type="text" id="inputTagRU">
-                        </div>
-                        <div class="form-group full">
-                            <label>Treść (RU)</label>
-                            <textarea id="inputContentRU"></textarea>
+                <div class="author-row">
+                    <div class="author-avatar">
+                        <img src="image-removebg-preview.png" alt="KPN Logo">
+                    </div>
+                    <div class="author-details">
+                        <div class="author-top-line">
+                            <span class="author-name">KPN</span>
+                            <span class="post-time" id="modalDateStr">data</span>
                         </div>
                     </div>
-                    <div style="margin-top: 25px; display: flex; justify-content: flex-end; gap: 15px;">
-                        <button type="button" class="admin-trigger-btn" onclick="closeArticleFormModalBtn()">Anuluj</button>
-                        <button type="submit" class="cta-btn">Zapisz artykuł</button>
-                    </div>
-                </form>
+                </div>
+                <div class="article-content-text" id="modalContent">
+                    <!-- Treść artykułu -->
+                </div>
             </div>
         </div>
     </div>
 
-    <script>
-        // Klucz używany w pamięci przeglądarki (localStorage) do synchronizacji z podstroną aktualności
-        const STORAGE_KEY = 'kpn_articles_data';
+    <!-- Stopka -->
+    <footer>
+        <p data-i18n="footer-rights">&copy; 2026 Konfederacja Polski Niepodległej (KPN). Wszelkie prawa zastrzeżone.</p>
+    </footer>
 
-        // Domyślne dane startowe, jeśli localStorage jest puste
-        const defaultArticles = [
+    <script>
+        let currentLang = 'PL';
+        let currentOpenArticleId = null;
+
+        let articlesData = [
             {
                 id: 1,
                 date: "2026-07-20",
                 time: "12:00",
-                imageURL: "https://via.placeholder.com/600x300",
                 translations: {
                     PL: {
                         title: "Witaj w Oficjalnej Społeczności KPN",
                         tag: "Ogłoszenie",
                         displayDate: "20 lipiec 2026",
-                        content: ["Witamy w oficjalnej społeczności Konfederacji Polski Niepodległej!"]
+                        content: [
+                            "Witamy w oficjalnej społeczności Konfederacji Polski Niepodległej!",
+                            "Będziemy publikować tutaj aktualizacje oraz ogłoszenia z każdego działu, oznaczane odpowiednimi tagami.",
+                            "Podczas dyskusji i komentowania, prosimy o przestrzeganie <a href='program.html'>zasad naszej społeczności</a> oraz zachowanie merytorycznego tonu.",
+                            "Znalazłeś błąd lub masz sugestię? Zgłoś ją w odpowiednim kanale, abyśmy mogli stale ulepszać nasz portal!",
+                            "Dziękujemy, że jesteś z nami – widzimy się w społeczności!"
+                        ]
+                    },
+                    EN: {
+                        title: "Welcome to the Official KPN Community",
+                        tag: "Announcement",
+                        displayDate: "July 20, 2026",
+                        content: [
+                            "Welcome to the official community of the Confederation of Independent Poland!",
+                            "We will publish updates and announcements from every department here, marked with appropriate tags.",
+                            "When discussing and commenting, please follow <a href='program.html'>our community rules</a> and maintain a constructive tone.",
+                            "Found a bug or have a suggestion? Report it in the dedicated channel so we can continuously improve our portal!",
+                            "Thank you for being with us – see you in the community!"
+                        ]
+                    },
+                    DE: {
+                        title: "Willkommen in der offiziellen KPN-Community",
+                        tag: "Ankündigung",
+                        displayDate: "20. Juli 2026",
+                        content: [
+                            "Willkommen in der offiziellen Community der Konföderation des Unabhängigen Polen!",
+                            "Wir werden hier Aktualisierungen und Ankündigungen aus allen Abteilungen veröffentlichen, gekennzeichnet mit den entsprechenden Tags.",
+                            "Bitte beachten Sie beim Diskutieren und Kommentieren <a href='program.html'>unsere Community-Regeln</a> und bewahren Sie einen sachlichen Ton.",
+                            "Haben Sie einen Fehler gefunden oder einen Vorschlag? Melden Sie ihn im entsprechenden Kanal, damit wir unser Portal ständig verbessern können!",
+                            "Danke, dass Sie bei uns sind – wir sehen uns in der Community!"
+                        ]
+                    },
+                    RU: {
+                        title: "Добро пожаловать в официальное сообщество KPN",
+                        tag: "Объявление",
+                        displayDate: "20 июля 2026",
+                        content: [
+                            "Добро пожаловать в официальное сообщество Конфедерации Польской Независимости!",
+                            "Мы будем публиковать здесь обновления и объявления из каждого отдела, отмеченные соответствующими тегами.",
+                            "При обсуждении и комментировании соблюдайте <a href='program.html'>правила нашего сообщества</a> и поддерживайте конструктивный тон.",
+                            "Нашли ошибку или есть предложение? Сообщите об этом в соответствующем канале, чтобы мы могли постоянно улучшать наш портал!",
+                            "Спасибо, что вы с нами – до встречи в сообществе!"
+                        ]
+                    }
+                }
+            },
+            {
+                id: 2,
+                date: "2026-07-25",
+                time: "15:30",
+                translations: {
+                    PL: {
+                        title: "Rozbudowa Struktur i Nowy Program Polityczny",
+                        tag: "Polityka",
+                        displayDate: "25 lipiec 2026",
+                        content: [
+                            "Rozpoczęliśmy wdrażanie kolejnego etapu rozwoju struktur regionalnych w całym kraju.",
+                            "Nasz program opiera się na absolutnej suwerenności, wolnym rynku oraz obronie interesów polskich obywateli.",
+                            "Zachęcamy do zapoznania się ze szczegółami w zakładce Program oraz do aktywnego włączania się w nasze inicjatywy społeczno-polityczne."
+                        ]
+                    },
+                    EN: {
+                        title: "Expansion of Structures and New Political Program",
+                        tag: "Politics",
+                        displayDate: "July 25, 2026",
+                        content: [
+                            "We have begun implementing the next stage of developing regional structures across the country.",
+                            "Our program is based on absolute sovereignty, a free market, and defending the interests of Polish citizens.",
+                            "We encourage you to read the details in the Program tab and to actively engage in our socio-political initiatives."
+                        ]
+                    },
+                    DE: {
+                        title: "Ausbau der Strukturen und neues politisches Programm",
+                        tag: "Politik",
+                        displayDate: "25. Juli 2026",
+                        content: [
+                            "Wir haben mit der Umsetzung der nächsten Phase des Ausbaus regionaler Strukturen im ganzen Land begonnen.",
+                            "Unser Programm basiert auf absoluter Souveränität, freier Marktwirtschaft und der Verteidigung der Interessen der polnischen Bürger.",
+                            "Wir laden Sie ein, die Details im Bereich Programm zu lesen und sich aktiv an unseren gesellschaftspolitischen Initiativen zu beteiligen."
+                        ]
+                    },
+                    RU: {
+                        title: "Расширение структур и новая политическая программа",
+                        tag: "Политика",
+                        displayDate: "25 июля 2026",
+                        content: [
+                            "Мы начали реализацию следующего этапа развития региональных структур по всей стране.",
+                            "Наша программа основана на абсолютном суверенитете, свободном рынке и защите интересов польских граждан.",
+                            "Приглашаем ознакомиться с подробностями во вкладке «Программа» и активно участвовать в наших социально-политических инициативах."
+                        ]
                     }
                 }
             }
         ];
 
-        // Pobieranie artykułów z localStorage (wspólnego dla panelu i podstrony)
-        function getArticles() {
-            const data = localStorage.getItem(STORAGE_KEY);
-            if (!data) {
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(defaultArticles));
-                return defaultArticles;
+        const translations = {
+            PL: {
+                "nav-about": "O NAS",
+                "nav-program": "PROGRAM",
+                "nav-news": "AKTUALNOŚCI",
+                "nav-contact": "KONTAKT",
+                "cta-join": "DOŁĄCZ DO NAS",
+                "news-header-title": "Najnowsze <span>Aktualności</span>",
+                "news-header-desc": "Bądź na bieżąco z ogłoszeniami, komunikatami i wydarzeniami środowiska KPN.",
+                "footer-rights": "&copy; 2026 Konfederacja Polski Niepodległej (KPN). Wszelkie prawa zastrzeżone.",
+                "card-read-more": "Kliknij, aby przeczytać w pełnym widoku",
+                "modal-pub": "Opublikowano w <a href='aktualnosci.html'>aktualności</a>"
+            },
+            EN: {
+                "nav-about": "ABOUT US",
+                "nav-program": "PROGRAM",
+                "nav-news": "NEWS",
+                "nav-contact": "CONTACT",
+                "cta-join": "JOIN US",
+                "news-header-title": "Latest <span>News</span>",
+                "news-header-desc": "Stay up to date with announcements, statements, and events from the KPN community.",
+                "footer-rights": "&copy; 2026 Confederation of Independent Poland (KPN). All rights reserved.",
+                "card-read-more": "Click to read full view",
+                "modal-pub": "Published in <a href='aktualnosci.html'>news</a>"
+            },
+            DE: {
+                "nav-about": "ÜBER UNS",
+                "nav-program": "PROGRAMM",
+                "nav-news": "NACHRICHTEN",
+                "nav-contact": "KONTAKT",
+                "cta-join": "MACH MIT",
+                "news-header-title": "Neueste <span>Nachrichten</span>",
+                "news-header-desc": "Bleiben Sie auf dem Laufenden mit Ankündigungen und Mitteilungen der KPN-Gemeinschaft.",
+                "footer-rights": "&copy; 2026 Konföderation des Unabhängigen Polen (KPN). Alle Rechte vorbehalten.",
+                "card-read-more": "Klicken, um die vollständige Ansicht zu lesen",
+                "modal-pub": "Veröffentlicht in <a href='aktualnosci.html'>Nachrichten</a>"
+            },
+            RU: {
+                "nav-about": "О НАС",
+                "nav-program": "ПРОГРАММА",
+                "nav-news": "НОВОСТИ",
+                "nav-contact": "КОНТАКТ",
+                "cta-join": "ПРИСОЕДИНИТЬСЯ",
+                "news-header-title": "Последние <span>Новости</span>",
+                "news-header-desc": "Будьте в курсе объявлений, заявлений и событий сообщества KPN.",
+                "footer-rights": "&copy; 2026 Конфедерация Польской Независимости (KPN). Все права защищены.",
+                "card-read-more": "Нажмите, чтобы прочитать полностью",
+                "modal-pub": "Опубликовано в <a href='aktualnosci.html'>новости</a>"
             }
-            try {
-                return JSON.parse(data);
-            } catch (e) {
-                return defaultArticles;
-            }
+        };
+
+        function sortArticles() {
+            articlesData.sort((a, b) => {
+                const dateTimeA = new Date(`${a.date}T${a.time || '00:00'}`);
+                const dateTimeB = new Date(`${b.date}T${b.time || '00:00'}`);
+                return dateTimeB - dateTimeA;
+            });
         }
 
-        // Zapisywanie artykułów do localStorage
-        function saveArticles(articles) {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(articles));
-        }
-
-        // Renderowanie tabeli w panelu
-        function renderAdminTable() {
-            const articlesData = getArticles();
-            const tbody = document.getElementById('adminTableBody');
-            tbody.innerHTML = '';
-
-            if (articlesData.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: #777;">Brak artykułów w bazie.</td></tr>`;
-                return;
-            }
+        function renderArticles() {
+            sortArticles();
+            const grid = document.getElementById('newsGrid');
+            grid.innerHTML = '';
 
             articlesData.forEach(article => {
-                const langData = article.translations['PL'] || {};
-                const tr = document.createElement('tr');
-                
-                let imgThumbnail = article.imageURL 
-                    ? `<img src="${article.imageURL}" style="width: 45px; height: 30px; object-fit: cover; border-radius: 3px;" alt="img">` 
-                    : '<span style="color: #555; font-size: 0.8rem;">Brak</span>';
+                const langData = article.translations[currentLang] || article.translations['PL'];
+                const readMoreText = translations[currentLang]["card-read-more"];
 
-                tr.innerHTML = `
-                    <td>#${article.id}</td>
-                    <td>${article.date}</td>
-                    <td>${imgThumbnail}</td>
-                    <td><strong>${langData.title || 'Bez tytułu'}</strong></td>
-                    <td><span class="news-tag">${langData.tag || 'Brak'}</span></td>
-                    <td>
-                        <button class="btn-action btn-edit" onclick="editArticleModal(${article.id})">Edytuj</button>
-                        <button class="btn-action btn-del" onclick="deleteArticle(${article.id})">Usuń</button>
-                    </td>
+                const card = document.createElement('div');
+                card.className = 'news-card';
+                card.onclick = () => openArticle(article.id);
+
+                const shortText = langData.content && langData.content.length > 0 ? langData.content[0] : "";
+
+                card.innerHTML = `
+                    <div>
+                        <div class="news-meta-top">
+                            <span class="news-tag">${langData.tag}</span>
+                            <span>${article.date} ${article.time || ''}</span>
+                        </div>
+                        <h3>${langData.title}</h3>
+                        <p>${shortText.substring(0, 120)}...</p>
+                    </div>
+                    <div class="news-footer-info">
+                        ${readMoreText}
+                    </div>
                 `;
-                tbody.appendChild(tr);
+                grid.appendChild(card);
             });
         }
 
-        // Otwieranie formularza do dodawania
-        function openArticleFormModal() {
-            document.getElementById('formModalTitle').innerText = "Dodaj nowy artykuł";
-            document.getElementById('editArticleId').value = "";
-            document.getElementById('articleForm').reset();
-            document.getElementById('inputDate').value = new Date().toISOString().split('T')[0];
-            document.getElementById('inputTime').value = "12:00";
-            document.getElementById('articleFormModal').classList.add('active');
-        }
-
-        // Otwieranie formularza do edycji
-        function editArticleModal(id) {
-            let articlesData = getArticles();
-            const article = articlesData.find(a => a.id === id);
+        function openArticle(id) {
+            const article = articlesData.find(item => item.id === id);
             if (!article) return;
 
-            document.getElementById('formModalTitle').innerText = "Edytuj artykuł #" + id;
-            document.getElementById('editArticleId').value = id;
-            document.getElementById('inputDate').value = article.date;
-            document.getElementById('inputTime').value = article.time || "12:00";
-            document.getElementById('inputImage').value = article.imageURL || "";
+            currentOpenArticleId = id;
+            const langData = article.translations[currentLang] || article.translations['PL'];
 
-            // Wypełnienie wersji PL
-            const pl = article.translations['PL'] || {};
-            document.getElementById('inputTitlePL').value = pl.title || "";
-            document.getElementById('inputTagPL').value = pl.tag || "";
-            document.getElementById('inputContentPL').value = pl.content ? pl.content.join('\n') : "";
-
-            // Wypełnienie wersji EN, DE, RU
-            ['EN', 'DE', 'RU'].forEach(lang => {
-                const lData = article.translations[lang] || {};
-                document.getElementById(`inputTitle${lang}`).value = lData.title || "";
-                document.getElementById(`inputTag${lang}`).value = lData.tag || "";
-                document.getElementById(`inputContent${lang}`).value = lData.content ? lData.content.join('\n') : "";
+            document.getElementById('modalTitle').innerText = langData.title;
+            document.getElementById('modalDateStr').innerText = langData.displayDate || article.date;
+            document.getElementById('modalSubinfo').innerHTML = translations[currentLang]["modal-pub"];
+            
+            const contentContainer = document.getElementById('modalContent');
+            contentContainer.innerHTML = '';
+            langData.content.forEach(paragraph => {
+                const p = document.createElement('p');
+                p.innerHTML = paragraph;
+                contentContainer.appendChild(p);
             });
 
-            document.getElementById('articleFormModal').classList.add('active');
+            document.getElementById('articleModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
         }
 
-        function closeArticleFormModal(event) {
-            if (event.target.id === 'articleFormModal') {
-                closeArticleFormModalBtn();
+        function closeArticleModal(event) {
+            if (event.target.id === 'articleModal') {
+                closeModalBtn();
             }
         }
 
-        function closeArticleFormModalBtn() {
-            document.getElementById('articleFormModal').classList.remove('active');
+        function closeModalBtn() {
+            document.getElementById('articleModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+            currentOpenArticleId = null;
         }
 
-        // Obsługa zapisu formularza (Dodawanie / Edycja)
-        function handleArticleFormSubmit(event) {
-            event.preventDefault();
-            let articlesData = getArticles();
-            
-            const editId = document.getElementById('editArticleId').value;
-            const date = document.getElementById('inputDate').value;
-            const time = document.getElementById('inputTime').value;
-            const imageURL = document.getElementById('inputImage').value.trim();
+        let hoverTimeout;
+        function openLangMenu() {
+            clearTimeout(hoverTimeout);
+            document.getElementById('langDropdown').classList.add('active');
+        }
 
-            const helperContentToArray = (text) => text ? text.split('\n').map(p => p.trim()).filter(p => p.length > 0) : [];
+        function closeLangMenu() {
+            hoverTimeout = setTimeout(() => {
+                document.getElementById('langDropdown').classList.remove('active');
+            }, 400);
+        }
 
-            const translationsObj = {
-                PL: {
-                    title: document.getElementById('inputTitlePL').value,
-                    tag: document.getElementById('inputTagPL').value,
-                    displayDate: date,
-                    content: helperContentToArray(document.getElementById('inputContentPL').value)
-                }
-            };
+        function toggleLangMenu() {
+            const dropdown = document.getElementById('langDropdown');
+            dropdown.classList.toggle('active');
+        }
 
-            ['EN', 'DE', 'RU'].forEach(lang => {
-                const tTitle = document.getElementById(`inputTitle${lang}`).value;
-                if (tTitle) {
-                    translationsObj[lang] = {
-                        title: tTitle,
-                        tag: document.getElementById(`inputTag${lang}`).value || translationsObj.PL.tag,
-                        displayDate: date,
-                        content: helperContentToArray(document.getElementById(`inputContent${lang}`).value)
-                    };
-                } else {
-                    translationsObj[lang] = { ...translationsObj.PL };
-                }
-            });
+        function toggleMobileMenu() {
+            const menu = document.getElementById('navMenu');
+            menu.classList.toggle('active');
+        }
 
-            if (editId) {
-                // Edycja
-                const index = articlesData.findIndex(a => a.id == editId);
-                if (index !== -1) {
-                    articlesData[index].date = date;
-                    articlesData[index].time = time;
-                    articlesData[index].imageURL = imageURL;
-                    articlesData[index].translations = translationsObj;
-                }
-            } else {
-                // Dodawanie nowego
-                const newId = articlesData.length > 0 ? Math.max(...articlesData.map(a => a.id)) + 1 : 1;
-                articlesData.push({
-                    id: newId,
-                    date: date,
-                    time: time,
-                    imageURL: imageURL,
-                    translations: translationsObj
+        function changeLang(lang) {
+            currentLang = lang;
+            const btn = document.querySelector('.lang-btn');
+            btn.innerHTML = lang + ' ▾';
+            document.getElementById('langDropdown').classList.remove('active');
+
+            const langData = translations[lang];
+            if (langData) {
+                document.querySelectorAll('[data-i18n]').forEach(el => {
+                    const key = el.getAttribute('data-i18n');
+                    if (langData[key]) {
+                        el.innerHTML = langData[key];
+                    }
                 });
             }
 
-            saveArticles(articlesData);
-            closeArticleFormModalBtn();
-            renderAdminTable();
-        }
+            // Odświeżenie kafelków artykułów
+            renderArticles();
 
-        // Usuwanie artykułu
-        function deleteArticle(id) {
-            if (confirm("Czy na pewno chcesz usunąć ten artykuł?")) {
-                let articlesData = getArticles();
-                articlesData = articlesData.filter(a => a.id !== id);
-                saveArticles(articlesData);
-                renderAdminTable();
+            // Jeśli modal jest aktualnie otwarty, odświeżamy jego treść w nowym języku
+            if (currentOpenArticleId !== null) {
+                openArticle(currentOpenArticleId);
             }
         }
 
-        // Inicjalizacja widoku panelu
+        window.onclick = function(event) {
+            if (!event.target.matches('.lang-btn') && !event.target.closest('.lang-btn') && !event.target.closest('.lang-content')) {
+                const dropdowns = document.getElementsByClassName('lang-dropdown');
+                for (let i = 0; i < dropdowns.length; i++) {
+                    let openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('active')) {
+                        openDropdown.classList.remove('active');
+                    }
+                }
+            }
+        }
+
         window.onload = function() {
-            renderAdminTable();
+            renderArticles();
         };
+
+        function adminAddArticle(newArticle) {
+            newArticle.id = articlesData.length > 0 ? Math.max(...articlesData.map(a => a.id)) + 1 : 1;
+            articlesData.push(newArticle);
+            renderArticles();
+        }
+
+        function adminEditArticle(id, updatedData) {
+            const index = articlesData.findIndex(a => a.id === id);
+            if (index !== -1) {
+                articlesData[index] = { ...articlesData[index], ...updatedData };
+                renderArticles();
+            }
+        }
+
+        function adminDeleteArticle(id) {
+            articlesData = articlesData.filter(a => a.id !== id);
+            renderArticles();
+        }
     </script>
+
 </body>
 </html>
