@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel Administratora | KPN</title>
+    <title>Aktualności | KPN</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <style>
         * {
@@ -17,98 +17,133 @@
             background-color: #080808;
             color: #f0f0f0;
             line-height: 1.6;
-            padding: 40px 20px;
+            padding-bottom: 60px;
         }
 
-        .admin-panel-section {
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .admin-box {
-            background: #121215;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            padding: 35px;
-        }
-
-        .admin-header-row {
+        /* Nawigacja (przykładowa, dopasowana do stylu ze screena) */
+        nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
+            padding: 20px 40px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            padding-bottom: 20px;
-            flex-wrap: wrap;
-            gap: 15px;
+            background: #080808;
         }
 
-        .admin-header-row h2 {
-            font-size: 1.8rem;
-            text-transform: uppercase;
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #fff;
+            font-weight: 700;
+            text-decoration: none;
         }
 
-        .cta-btn {
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: #fff;
+        }
+
+        .cta-nav-btn {
             background: #d91414;
-            color: #ffffff !important;
-            padding: 10px 22px;
+            color: #fff !important;
+            padding: 10px 20px;
             border-radius: 4px;
             text-transform: uppercase;
             font-size: 0.85rem;
-            text-decoration: none;
-            transition: background 0.3s ease;
-            border: none;
-            cursor: pointer;
-            font-family: 'Montserrat', sans-serif;
             font-weight: 600;
+            text-decoration: none;
+            transition: background 0.3s;
         }
 
-        .cta-btn:hover {
+        .cta-nav-btn:hover {
             background: #b51010;
         }
 
-        .admin-trigger-btn {
-            background: rgba(255, 255, 255, 0.1);
-            color: #fff;
-            padding: 10px 16px;
-            border-radius: 4px;
+        /* Sekcja nagłówka aktualności */
+        .news-hero-section {
+            text-align: center;
+            padding: 80px 20px 60px;
+        }
+
+        .news-hero-section h1 {
+            font-size: 3rem;
+            font-weight: 900;
             text-transform: uppercase;
-            font-size: 0.8rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            cursor: pointer;
-            font-weight: 600;
-            transition: background 0.3s;
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .admin-trigger-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .admin-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        .admin-table th, .admin-table td {
-            padding: 14px;
-            text-align: left;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-            font-size: 0.9rem;
-        }
-
-        .admin-table th {
-            color: #888;
-            text-transform: uppercase;
-            font-size: 0.75rem;
             letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .news-hero-section h1 span {
+            color: #d91414;
+        }
+
+        .news-hero-section p {
+            color: #aaa;
+            font-size: 1.05rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Siatka artykułów */
+        .news-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+            gap: 30px;
+        }
+
+        .news-card {
+            background: #121215;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .news-card:hover {
+            border-color: rgba(217, 20, 20, 0.4);
+            transform: translateY(-3px);
+        }
+
+        .news-card-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+
+        .news-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
         }
 
         .news-tag {
             background: rgba(217, 20, 20, 0.15);
             color: #ff4d4d;
-            padding: 4px 10px;
+            padding: 5px 12px;
             border-radius: 4px;
             font-weight: 600;
             text-transform: uppercase;
@@ -116,486 +151,173 @@
             border: 1px solid rgba(217, 20, 20, 0.3);
         }
 
-        .btn-action {
-            padding: 6px 12px;
-            border-radius: 4px;
-            border: none;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            margin-right: 5px;
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .btn-edit {
-            background: #3b82f6;
-            color: #fff;
-        }
-
-        .btn-edit:hover { background: #2563eb; }
-
-        .btn-del {
-            background: #d91414;
-            color: #fff;
-        }
-
-        .btn-del:hover { background: #b91c1c; }
-
-        /* Modal Formularza */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .modal-overlay.active {
-            display: flex;
-        }
-
-        .modal-container {
-            background: #121214;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            width: 100%;
-            max-width: 650px;
-            max-height: 90vh;
-            border-radius: 12px;
-            overflow-y: auto;
-            position: relative;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(0, 0, 0, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #fff;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            font-size: 1.2rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.2s;
-            z-index: 10;
-        }
-
-        .modal-close:hover {
-            background: rgba(217, 20, 20, 0.8);
-        }
-
-        .modal-hero {
-            padding: 30px 40px 20px;
-            background: linear-gradient(135deg, rgba(217, 20, 20, 0.2) 0%, rgba(18, 18, 20, 1) 80%);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        }
-
-        .modal-hero h2 {
-            font-size: 1.8rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            color: #fff;
-        }
-
-        .modal-body {
-            padding: 30px 40px;
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            margin-bottom: 15px;
-        }
-
-        .form-group.full {
-            grid-column: span 2;
-        }
-
-        .form-group label {
+        .news-date {
+            color: #777;
             font-size: 0.85rem;
-            font-weight: 600;
-            color: #b0b0b0;
-            text-transform: uppercase;
         }
 
-        .form-group input, .form-group textarea {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 12px;
-            border-radius: 4px;
+        .news-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
             color: #fff;
-            font-family: 'Montserrat', sans-serif;
+        }
+
+        .news-card p {
+            color: #aaa;
             font-size: 0.95rem;
+            margin-bottom: 20px;
         }
 
-        .form-group textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-
-        .form-group input:focus, .form-group textarea:focus {
-            outline: none;
-            border-color: #d91414;
+        .no-news {
+            grid-column: 1 / -1;
+            text-align: center;
+            color: #777;
+            padding: 40px;
+            font-size: 1.1rem;
         }
 
         @media (max-width: 768px) {
-            .form-grid { grid-template-columns: 1fr; }
-            .form-group.full { grid-column: span 1; }
-            .modal-body, .modal-hero { padding: 20px; }
+            .news-container {
+                grid-template-columns: 1fr;
+            }
+            .news-hero-section h1 {
+                font-size: 2.2rem;
+            }
+            nav {
+                padding: 15px 20px;
+            }
+            .nav-links {
+                display: none; /* Możesz dostosować menu mobilne według uznania */
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- SEKCJA PANELU ADMINA -->
-    <section class="admin-panel-section">
-        <div class="admin-box">
-            <div class="admin-header-row">
-                <h2>Panel Zarządzania Artykułami</h2>
-                <button class="cta-btn" onclick="openArticleFormModal()">+ Dodaj nowy artykuł</button>
-            </div>
-            
-            <div style="overflow-x: auto;">
-                <table class="admin-table">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Data</th>
-                            <th>Zdjęcie</th>
-                            <th>Tytuł (PL)</th>
-                            <th>Tag</th>
-                            <th>Akcje</th>
-                        </tr>
-                    </thead>
-                    <tbody id="adminTableBody">
-                        <!-- Wiersze generowane dynamicznie -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
+    <!-- Nawigacja -->
+    <nav>
+        <a href="#" class="nav-logo">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            KPN
+        </a>
+        <ul class="nav-links">
+            <li><a href="#">O NAS</a></li>
+            <li><a href="#">PROGRAM</a></li>
+            <li><a href="#" class="active">AKTUALNOŚCI</a></li>
+            <li><a href="#">KONTAKT</a></li>
+        </ul>
+        <a href="#" class="cta-nav-btn">DOŁĄCZ DO NAS</a>
+    </nav>
+
+    <!-- Sekcja Nagłówka -->
+    <section class="news-hero-section">
+        <h1>Najnowsze <span>Aktualności</span></h1>
+        <p>Bądź na bieżąco z ogłoszeniami, komunikatami i wydarzeniami środowiska KPN.</p>
     </section>
 
-    <!-- Modal Formularza Dodawania / Edycji Artykułu -->
-    <div class="modal-overlay" id="articleFormModal" onclick="closeArticleFormModal(event)">
-        <div class="modal-container" onclick="event.stopPropagation()">
-            <button class="modal-close" onclick="closeArticleFormModalBtn()">×</button>
-            <div class="modal-hero">
-                <h2 id="formModalTitle">Dodaj Artykuł</h2>
-            </div>
-            <div class="modal-body">
-                <form id="articleForm" onsubmit="handleArticleFormSubmit(event)">
-                    <input type="hidden" id="editArticleId">
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label>Data</label>
-                            <input type="date" id="inputDate" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Godzina</label>
-                            <input type="text" id="inputTime" placeholder="12:00" required>
-                        </div>
-                        <div class="form-group full">
-                            <label>Link do zdjęcia (URL)</label>
-                            <input type="url" id="inputImage" placeholder="https://example.com/zdjecie.jpg">
-                        </div>
-                        
-                        <!-- Wersja PL -->
-                        <div class="form-group full" style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px;">
-                            <label style="color: #ff4d4d;">Polski (PL) - Główny</label>
-                        </div>
-                        <div class="form-group">
-                            <label>Tytuł (PL)</label>
-                            <input type="text" id="inputTitlePL" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Tag (PL)</label>
-                            <input type="text" id="inputTagPL" required>
-                        </div>
-                        <div class="form-group full">
-                            <label>Treść (PL) (każda linijka to nowy akapit)</label>
-                            <textarea id="inputContentPL" required></textarea>
-                        </div>
-
-                        <!-- Wersja EN -->
-                        <div class="form-group full" style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px;">
-                            <label style="color: #3b82f6;">English (EN)</label>
-                        </div>
-                        <div class="form-group">
-                            <label>Tytuł (EN)</label>
-                            <input type="text" id="inputTitleEN">
-                        </div>
-                        <div class="form-group">
-                            <label>Tag (EN)</label>
-                            <input type="text" id="inputTagEN">
-                        </div>
-                        <div class="form-group full">
-                            <label>Treść (EN)</label>
-                            <textarea id="inputContentEN"></textarea>
-                        </div>
-
-                        <!-- Wersja DE -->
-                        <div class="form-group full" style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px;">
-                            <label style="color: #eab308;">Deutsch (DE)</label>
-                        </div>
-                        <div class="form-group">
-                            <label>Tytuł (DE)</label>
-                            <input type="text" id="inputTitleDE">
-                        </div>
-                        <div class="form-group">
-                            <label>Tag (DE)</label>
-                            <input type="text" id="inputTagDE">
-                        </div>
-                        <div class="form-group full">
-                            <label>Treść (DE)</label>
-                            <textarea id="inputContentDE"></textarea>
-                        </div>
-
-                        <!-- Wersja RU -->
-                        <div class="form-group full" style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px;">
-                            <label style="color: #10b981;">Русский (RU)</label>
-                        </div>
-                        <div class="form-group">
-                            <label>Tytuł (RU)</label>
-                            <input type="text" id="inputTitleRU">
-                        </div>
-                        <div class="form-group">
-                            <label>Tag (RU)</label>
-                            <input type="text" id="inputTagRU">
-                        </div>
-                        <div class="form-group full">
-                            <label>Treść (RU)</label>
-                            <textarea id="inputContentRU"></textarea>
-                        </div>
-                    </div>
-                    <div style="margin-top: 25px; display: flex; justify-content: flex-end; gap: 15px;">
-                        <button type="button" class="admin-trigger-btn" onclick="closeArticleFormModalBtn()">Anuluj</button>
-                        <button type="submit" class="cta-btn">Zapisz artykuł</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+    <!-- Kontener na artykuły pobierane dynamicznie -->
+    <section class="news-container" id="publicNewsContainer">
+        <!-- Generowane automatycznie przez JavaScript -->
+    </section>
 
     <script>
-        // Klucz używany w pamięci przeglądarki (localStorage) do synchronizacji z podstroną aktualności
         const STORAGE_KEY = 'kpn_articles_data';
 
-        // Domyślne dane startowe, jeśli localStorage jest puste
+        // Oryginalne domyślne artykuły przywrócone do stanu początkowego
         const defaultArticles = [
             {
                 id: 1,
+                date: "2026-07-25",
+                time: "15:30",
+                imageURL: "",
+                translations: {
+                    PL: {
+                        title: "Rozbudowa Struktur i Nowy Program Polityczny",
+                        tag: "Polityka",
+                        displayDate: "2026-07-25 15:30",
+                        content: [
+                            "Rozpoczęliśmy wdrażanie kolejnego etapu rozwoju struktur regionalnych w całym kraju."
+                        ]
+                    }
+                }
+            },
+            {
+                id: 2,
                 date: "2026-07-20",
                 time: "12:00",
-                imageURL: "https://via.placeholder.com/600x300",
+                imageURL: "",
                 translations: {
                     PL: {
                         title: "Witaj w Oficjalnej Społeczności KPN",
                         tag: "Ogłoszenie",
-                        displayDate: "20 lipiec 2026",
-                        content: ["Witamy w oficjalnej społeczności Konfederacji Polski Niepodległej!"]
+                        displayDate: "2026-07-20 12:00",
+                        content: [
+                            "Witamy w oficjalnej społeczności Konfederacji Polski Niepodległej!..."
+                        ]
                     }
                 }
             }
         ];
 
-        // Pobieranie artykułów z localStorage (wspólnego dla panelu i podstrony)
-        function getArticles() {
-            const data = localStorage.getItem(STORAGE_KEY);
+        function loadPublicArticles() {
+            let data = localStorage.getItem(STORAGE_KEY);
+            
+            // Jeśli brak danych w pamięci przeglądarki, załaduj domyślne i je zapisz
             if (!data) {
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(defaultArticles));
-                return defaultArticles;
+                data = JSON.stringify(defaultArticles);
             }
-            try {
-                return JSON.parse(data);
-            } catch (e) {
-                return defaultArticles;
-            }
-        }
 
-        // Zapisywanie artykułów do localStorage
-        function saveArticles(articles) {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(articles));
-        }
+            const articles = JSON.parse(data);
+            const container = document.getElementById('publicNewsContainer');
+            container.innerHTML = '';
 
-        // Renderowanie tabeli w panelu
-        function renderAdminTable() {
-            const articlesData = getArticles();
-            const tbody = document.getElementById('adminTableBody');
-            tbody.innerHTML = '';
-
-            if (articlesData.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: #777;">Brak artykułów w bazie.</td></tr>`;
+            if (articles.length === 0) {
+                container.innerHTML = `<div class="no-news">Brak aktualności do wyświetlenia.</div>`;
                 return;
             }
 
-            articlesData.forEach(article => {
+            // Wyświetlanie artykułów (od najnowszego / po ID)
+            articles.forEach(article => {
                 const langData = article.translations['PL'] || {};
-                const tr = document.createElement('tr');
+                const displayDate = article.time ? `${article.date} ${article.time}` : article.date;
                 
-                let imgThumbnail = article.imageURL 
-                    ? `<img src="${article.imageURL}" style="width: 45px; height: 30px; object-fit: cover; border-radius: 3px;" alt="img">` 
-                    : '<span style="color: #555; font-size: 0.8rem;">Brak</span>';
+                // Obsługa wielu akapitów lub pierwszej linii treści
+                const contentText = Array.isArray(langData.content) 
+                    ? langData.content.join(' ') 
+                    : (langData.content || '');
 
-                tr.innerHTML = `
-                    <td>#${article.id}</td>
-                    <td>${article.date}</td>
-                    <td>${imgThumbnail}</td>
-                    <td><strong>${langData.title || 'Bez tytułu'}</strong></td>
-                    <td><span class="news-tag">${langData.tag || 'Brak'}</span></td>
-                    <td>
-                        <button class="btn-action btn-edit" onclick="editArticleModal(${article.id})">Edytuj</button>
-                        <button class="btn-action btn-del" onclick="deleteArticle(${article.id})">Usuń</button>
-                    </td>
+                let imgHTML = article.imageURL 
+                    ? `<img src="${article.imageURL}" class="news-card-img" alt="Zdjęcie artykułu">` 
+                    : '';
+
+                const card = document.createElement('div');
+                card.className = 'news-card';
+                card.innerHTML = `
+                    <div>
+                        ${imgHTML}
+                        <div class="news-card-header">
+                            <span class="news-tag">${langData.tag || 'Ogłoszenie'}</span>
+                            <span class="news-date">${displayDate}</span>
+                        </div>
+                        <h3>${langData.title || ''}</h3>
+                        <p>${contentText}</p>
+                    </div>
                 `;
-                tbody.appendChild(tr);
+                container.appendChild(card);
             });
         }
 
-        // Otwieranie formularza do dodawania
-        function openArticleFormModal() {
-            document.getElementById('formModalTitle').innerText = "Dodaj nowy artykuł";
-            document.getElementById('editArticleId').value = "";
-            document.getElementById('articleForm').reset();
-            document.getElementById('inputDate').value = new Date().toISOString().split('T')[0];
-            document.getElementById('inputTime').value = "12:00";
-            document.getElementById('articleFormModal').classList.add('active');
-        }
+        // Automatyczne odświeżanie po uruchomieniu strony
+        window.onload = loadPublicArticles;
 
-        // Otwieranie formularza do edycji
-        function editArticleModal(id) {
-            let articlesData = getArticles();
-            const article = articlesData.find(a => a.id === id);
-            if (!article) return;
-
-            document.getElementById('formModalTitle').innerText = "Edytuj artykuł #" + id;
-            document.getElementById('editArticleId').value = id;
-            document.getElementById('inputDate').value = article.date;
-            document.getElementById('inputTime').value = article.time || "12:00";
-            document.getElementById('inputImage').value = article.imageURL || "";
-
-            // Wypełnienie wersji PL
-            const pl = article.translations['PL'] || {};
-            document.getElementById('inputTitlePL').value = pl.title || "";
-            document.getElementById('inputTagPL').value = pl.tag || "";
-            document.getElementById('inputContentPL').value = pl.content ? pl.content.join('\n') : "";
-
-            // Wypełnienie wersji EN, DE, RU
-            ['EN', 'DE', 'RU'].forEach(lang => {
-                const lData = article.translations[lang] || {};
-                document.getElementById(`inputTitle${lang}`).value = lData.title || "";
-                document.getElementById(`inputTag${lang}`).value = lData.tag || "";
-                document.getElementById(`inputContent${lang}`).value = lData.content ? lData.content.join('\n') : "";
-            });
-
-            document.getElementById('articleFormModal').classList.add('active');
-        }
-
-        function closeArticleFormModal(event) {
-            if (event.target.id === 'articleFormModal') {
-                closeArticleFormModalBtn();
+        // Opcjonalnie: Nasłuchiwanie zmian w localStorage, jeśli panel jest otwarty w innej karcie
+        window.addEventListener('storage', (event) => {
+            if (event.key === STORAGE_KEY) {
+                loadPublicArticles();
             }
-        }
-
-        function closeArticleFormModalBtn() {
-            document.getElementById('articleFormModal').classList.remove('active');
-        }
-
-        // Obsługa zapisu formularza (Dodawanie / Edycja)
-        function handleArticleFormSubmit(event) {
-            event.preventDefault();
-            let articlesData = getArticles();
-            
-            const editId = document.getElementById('editArticleId').value;
-            const date = document.getElementById('inputDate').value;
-            const time = document.getElementById('inputTime').value;
-            const imageURL = document.getElementById('inputImage').value.trim();
-
-            const helperContentToArray = (text) => text ? text.split('\n').map(p => p.trim()).filter(p => p.length > 0) : [];
-
-            const translationsObj = {
-                PL: {
-                    title: document.getElementById('inputTitlePL').value,
-                    tag: document.getElementById('inputTagPL').value,
-                    displayDate: date,
-                    content: helperContentToArray(document.getElementById('inputContentPL').value)
-                }
-            };
-
-            ['EN', 'DE', 'RU'].forEach(lang => {
-                const tTitle = document.getElementById(`inputTitle${lang}`).value;
-                if (tTitle) {
-                    translationsObj[lang] = {
-                        title: tTitle,
-                        tag: document.getElementById(`inputTag${lang}`).value || translationsObj.PL.tag,
-                        displayDate: date,
-                        content: helperContentToArray(document.getElementById(`inputContent${lang}`).value)
-                    };
-                } else {
-                    translationsObj[lang] = { ...translationsObj.PL };
-                }
-            });
-
-            if (editId) {
-                // Edycja
-                const index = articlesData.findIndex(a => a.id == editId);
-                if (index !== -1) {
-                    articlesData[index].date = date;
-                    articlesData[index].time = time;
-                    articlesData[index].imageURL = imageURL;
-                    articlesData[index].translations = translationsObj;
-                }
-            } else {
-                // Dodawanie nowego
-                const newId = articlesData.length > 0 ? Math.max(...articlesData.map(a => a.id)) + 1 : 1;
-                articlesData.push({
-                    id: newId,
-                    date: date,
-                    time: time,
-                    imageURL: imageURL,
-                    translations: translationsObj
-                });
-            }
-
-            saveArticles(articlesData);
-            closeArticleFormModalBtn();
-            renderAdminTable();
-        }
-
-        // Usuwanie artykułu
-        function deleteArticle(id) {
-            if (confirm("Czy na pewno chcesz usunąć ten artykuł?")) {
-                let articlesData = getArticles();
-                articlesData = articlesData.filter(a => a.id !== id);
-                saveArticles(articlesData);
-                renderAdminTable();
-            }
-        }
-
-        // Inicjalizacja widoku panelu
-        window.onload = function() {
-            renderAdminTable();
-        };
+        });
     </script>
 </body>
 </html>
