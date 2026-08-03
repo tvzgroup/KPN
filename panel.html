@@ -506,8 +506,8 @@
     <script>
         let currentLang = 'PL';
 
-        // Symulacja bazy danych / pamięci artykułów (w pełni kompatybilna ze skryptem aktualności)
-        let articlesData = [
+        // Domyślne artykuły w razie braku danych w localStorage
+        let defaultArticles = [
             {
                 id: 1,
                 date: "2026-07-20",
@@ -542,6 +542,14 @@
                 }
             }
         ];
+
+        // Pobieranie danych z localStorage lub ustawienie domyślnych
+        let articlesData = JSON.parse(localStorage.getItem('kpn_articles')) || defaultArticles;
+
+        // Funkcja pomocnicza do zapisu w localStorage
+        function saveArticlesToStorage() {
+            localStorage.setItem('kpn_articles', JSON.stringify(articlesData));
+        }
 
         const translations = {
             PL: {
@@ -578,7 +586,7 @@
             }
         };
 
-        // Automatyczne ustawienie dzisiejszej daty w formularzu
+        // Automatyczne ustawienie dzisiejszej daty w formularzu i renderowanie listy
         window.onload = function() {
             const today = new Date().toISOString().split('T')[0];
             const nowTime = new Date().toTimeString().substring(0, 5);
@@ -626,7 +634,6 @@
             // Dzielimy treść po nowych liniach na akapity
             const contentParagraphs = rawContent.split('\n').filter(p => p.trim() !== '');
 
-            // Formatowanie wyświetlanej daty (opcjonalnie proste)
             const newId = articlesData.length > 0 ? Math.max(...articlesData.map(a => a.id)) + 1 : 1;
 
             const newArticle = {
@@ -644,6 +651,7 @@
             };
 
             articlesData.push(newArticle);
+            saveArticlesToStorage(); // Zapis do pamięci przeglądarki
             renderManageList();
 
             // Reset formularza
@@ -659,6 +667,7 @@
         function deleteArticle(id) {
             if (confirm('Czy na pewno chcesz usunąć ten artykuł?')) {
                 articlesData = articlesData.filter(item => item.id !== id);
+                saveArticlesToStorage(); // Zapis zaktualizowanej listy po usunięciu
                 renderManageList();
             }
         }
