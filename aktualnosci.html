@@ -14,30 +14,27 @@
 
         body {
             font-family: 'Montserrat', sans-serif;
-            background-color: #080808;
+            background-color: #0b0b0b;
             color: #f0f0f0;
             line-height: 1.6;
             padding-bottom: 60px;
         }
 
+        /* Górna nawigacja z Twojego screena */
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 25px 50px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            background: #080808;
+            background: #0b0b0b;
         }
 
         .nav-logo {
             display: flex;
             align-items: center;
-            gap: 12px;
             color: #fff;
-            font-weight: 700;
             text-decoration: none;
-            font-size: 1.2rem;
-            letter-spacing: 1px;
         }
 
         .nav-links {
@@ -48,11 +45,11 @@
         }
 
         .nav-links a {
-            color: #aaa;
+            color: #ccc;
             text-decoration: none;
             font-size: 0.85rem;
             font-weight: 600;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             transition: color 0.3s;
         }
 
@@ -60,26 +57,44 @@
             color: #fff;
         }
 
+        .lang-select {
+            background: #161618;
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            cursor: pointer;
+            margin-right: 15px;
+        }
+
         .cta-nav-btn {
-            background: #d91414;
+            background: #e61c1c;
             color: #fff !important;
             padding: 10px 22px;
             border-radius: 4px;
             text-transform: uppercase;
             font-size: 0.8rem;
             font-weight: 700;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             text-decoration: none;
             transition: background 0.3s;
         }
 
         .cta-nav-btn:hover {
-            background: #b51010;
+            background: #c51414;
         }
 
+        .nav-right-group {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Sekcja nagłówka aktualności */
         .news-hero-section {
             text-align: center;
-            padding: 90px 20px 60px;
+            padding: 70px 20px 50px;
         }
 
         .news-hero-section h1 {
@@ -87,90 +102,90 @@
             font-weight: 900;
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
         .news-hero-section h1 span {
-            color: #d91414;
+            color: #e61c1c;
         }
 
         .news-hero-section p {
             color: #888;
-            font-size: 1rem;
+            font-size: 0.95rem;
             max-width: 600px;
             margin: 0 auto;
         }
 
+        /* Siatka artykułów dokładnie taka jak na screenie */
         .news-container {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 25px;
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
+            gap: 25px;
         }
 
         .news-card {
-            background: #121215;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 8px;
-            padding: 35px;
+            background: #111113;
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 10px;
+            padding: 30px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            transition: border-color 0.3s ease;
             cursor: pointer;
+            transition: border-color 0.2s;
         }
 
         .news-card:hover {
-            border-color: rgba(217, 20, 20, 0.4);
+            border-color: rgba(230, 28, 28, 0.4);
         }
 
         .news-card-img {
             width: 100%;
-            height: 220px;
+            height: 200px;
             object-fit: cover;
             border-radius: 6px;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         .news-card-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
         .news-tag {
-            background: rgba(217, 20, 20, 0.15);
+            background: rgba(230, 28, 28, 0.12);
             color: #ff4d4d;
-            padding: 5px 12px;
+            padding: 4px 10px;
             border-radius: 4px;
             font-weight: 600;
             text-transform: uppercase;
-            font-size: 0.75rem;
-            border: 1px solid rgba(217, 20, 20, 0.3);
+            font-size: 0.7rem;
+            border: 1px solid rgba(230, 28, 28, 0.25);
             letter-spacing: 0.5px;
         }
 
         .news-date {
-            color: #666;
-            font-size: 0.85rem;
+            color: #777;
+            font-size: 0.8rem;
         }
 
         .news-card h3 {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 700;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             color: #fff;
-            line-height: 1.3;
+            line-height: 1.35;
         }
 
         .news-card p {
-            color: #999;
-            font-size: 0.95rem;
-            margin-bottom: 20px;
-            line-height: 1.6;
+            color: #888;
+            font-size: 0.9rem;
+            line-height: 1.5;
         }
 
         .no-news {
@@ -178,10 +193,9 @@
             text-align: center;
             color: #777;
             padding: 40px;
-            font-size: 1.1rem;
         }
 
-        /* Modal pełnego artykułu */
+        /* MODAL (OKNO) ARTYKUŁU - Wiernie odwzorowany ze screena z gradientem */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -190,9 +204,8 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            z-index: 2000;
+            backdrop-filter: blur(5px);
+            z-index: 9999;
             justify-content: center;
             align-items: center;
             padding: 20px;
@@ -202,24 +215,52 @@
             display: flex;
         }
 
-        .modal-container {
+        .modal-box {
             background: #121214;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            width: 100%;
-            max-width: 750px;
-            max-height: 90vh;
             border-radius: 12px;
+            width: 100%;
+            max-width: 800px;
+            max-height: 90vh;
             overflow-y: auto;
             position: relative;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.9);
         }
 
-        .modal-close {
+        .modal-header-bg {
+            background: radial-gradient(circle at top left, rgba(140, 20, 20, 0.7) 0%, rgba(18, 18, 20, 0.95) 60%);
+            padding: 45px 40px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            position: relative;
+        }
+
+        .modal-title {
+            font-size: 2.2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: #fff;
+            line-height: 1.15;
+            letter-spacing: 0.5px;
+            max-width: 90%;
+            margin-bottom: 15px;
+        }
+
+        .modal-meta-top {
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        .modal-meta-top a, .modal-meta-top span {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+
+        .modal-close-btn {
             position: absolute;
             top: 25px;
             right: 25px;
             background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: none;
             color: #fff;
             width: 36px;
             height: 36px;
@@ -230,38 +271,13 @@
             align-items: center;
             justify-content: center;
             transition: background 0.2s;
-            z-index: 10;
         }
 
-        .modal-close:hover {
-            background: rgba(217, 20, 20, 0.8);
+        .modal-close-btn:hover {
+            background: rgba(230, 28, 28, 0.8);
         }
 
-        .modal-hero {
-            padding: 40px;
-            background: linear-gradient(135deg, rgba(217, 20, 20, 0.25) 0%, rgba(18, 18, 20, 1) 80%);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        }
-
-        .modal-hero h2 {
-            font-size: 2rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            color: #fff;
-            margin-bottom: 15px;
-            line-height: 1.2;
-        }
-
-        .modal-hero-sub {
-            color: #888;
-            font-size: 0.9rem;
-        }
-
-        .modal-hero-sub span {
-            color: #3b82f6;
-        }
-
-        .modal-body {
+        .modal-body-content {
             padding: 40px;
         }
 
@@ -274,25 +290,25 @@
             font-size: 0.9rem;
         }
 
-        .modal-author-logo {
+        .modal-author-icon {
             width: 36px;
             height: 36px;
-            background: #222;
+            background: #1a1a1c;
+            border: 1px solid rgba(255,255,255,0.1);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid rgba(255,255,255,0.1);
         }
 
-        .modal-content-text p {
-            color: #ccc;
+        .modal-text-block p {
+            color: #d0d0d0;
             font-size: 1rem;
-            margin-bottom: 20px;
             line-height: 1.8;
+            margin-bottom: 20px;
         }
 
-        @media (max-width: 900px) {
+        @media (max-width: 768px) {
             .news-container {
                 grid-template-columns: 1fr;
             }
@@ -305,18 +321,21 @@
             .nav-links {
                 display: none;
             }
-            .modal-hero, .modal-body {
+            .modal-header-bg, .modal-body-content {
                 padding: 25px;
+            }
+            .modal-title {
+                font-size: 1.6rem;
             }
         }
     </style>
 </head>
 <body>
 
+    <!-- Nawigacja -->
     <nav>
         <a href="#" class="nav-logo">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-            KPN
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
         </a>
         <ul class="nav-links">
             <li><a href="#">O NAS</a></li>
@@ -324,34 +343,41 @@
             <li><a href="#" class="active">AKTUALNOŚCI</a></li>
             <li><a href="#">KONTAKT</a></li>
         </ul>
-        <a href="#" class="cta-nav-btn">DOŁĄCZ DO NAS</a>
+        <div class="nav-right-group">
+            <select class="lang-select">
+                <option>PL</option>
+            </select>
+            <a href="#" class="cta-nav-btn">DOŁĄCZ DO NAS</a>
+        </div>
     </nav>
 
+    <!-- Nagłówek -->
     <section class="news-hero-section">
         <h1>Najnowsze <span>Aktualności</span></h1>
         <p>Bądź na bieżąco z ogłoszeniami, komunikatami i wydarzeniami środowiska KPN.</p>
     </section>
 
+    <!-- Lista artykułów -->
     <section class="news-container" id="publicNewsContainer">
         <!-- Generowane dynamicznie -->
     </section>
 
-    <!-- Modal podglądu artykułu -->
-    <div class="modal-overlay" id="articleModal" onclick="closeArticleModal(event)">
-        <div class="modal-container" onclick="event.stopPropagation()">
-            <button class="modal-close" onclick="closeArticleModalBtn()">×</button>
-            <div class="modal-hero">
-                <h2 id="modalTitle">Tytuł artykułu</h2>
-                <div class="modal-hero-sub">Opublikowano w <span style="color: #3b82f6;">aktualności</span></div>
+    <!-- Okno modalne szczegółów artykułu -->
+    <div class="modal-overlay" id="articleModal" onclick="closeModalOnOutside(event)">
+        <div class="modal-box">
+            <button class="modal-close-btn" onclick="closeModal()">×</button>
+            <div class="modal-header-bg">
+                <h2 class="modal-title" id="modalTitle">Tytuł artykułu</h2>
+                <div class="modal-meta-top">Opublikowano w <a href="#">aktualności</a></div>
             </div>
-            <div class="modal-body">
+            <div class="modal-body-content">
                 <div class="modal-author-row">
-                    <div class="modal-author-logo">
+                    <div class="modal-author-icon">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
                     </div>
-                    <div><strong>KPN</strong> &nbsp; <span id="modalDate" style="color: #666;">25 lipiec 2026</span></div>
+                    <div><strong>KPN</strong> &nbsp; <span id="modalDate" style="color: #777;">25 lipiec 2026</span></div>
                 </div>
-                <div class="modal-content-text" id="modalContent">
+                <div class="modal-text-block" id="modalContent">
                     <!-- Treść akapitów -->
                 </div>
             </div>
@@ -361,7 +387,7 @@
     <script>
         const STORAGE_KEY = 'kpn_articles_data';
 
-        // Oryginalne artykuły zgodne z Twoim widokiem
+        // Oryginalne domyślne artykuły
         const defaultArticles = [
             {
                 id: 1,
@@ -402,9 +428,8 @@
 
         let currentArticles = [];
 
-        function loadPublicArticles() {
+        function renderArticles() {
             let data = localStorage.getItem(STORAGE_KEY);
-            
             if (!data) {
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(defaultArticles));
                 data = JSON.stringify(defaultArticles);
@@ -420,70 +445,70 @@
             }
 
             currentArticles.forEach(article => {
-                const langData = article.translations['PL'] || {};
+                const lang = article.translations['PL'] || {};
                 const displayDate = article.time ? `${article.date} ${article.time}` : article.date;
-                
-                const contentArray = Array.isArray(langData.content) ? langData.content : [langData.content || ''];
-                const shortText = contentArray[0] + (contentArray.length > 1 ? '...' : '');
+                const paragraphs = Array.isArray(lang.content) ? lang.content : [lang.content || ''];
+                const snippet = paragraphs[0] + (paragraphs.length > 1 ? '...' : '');
 
                 let imgHTML = article.imageURL 
-                    ? `<img src="${article.imageURL}" class="news-card-img" alt="Zdjęcie artykułu">` 
+                    ? `<img src="${article.imageURL}" class="news-card-img" alt="Grafika">` 
                     : '';
 
                 const card = document.createElement('div');
                 card.className = 'news-card';
-                card.onclick = () => openArticleModal(article.id);
+                card.onclick = () => openModal(article.id);
                 card.innerHTML = `
                     <div>
                         ${imgHTML}
                         <div class="news-card-header">
-                            <span class="news-tag">${langData.tag || 'Ogłoszenie'}</span>
+                            <span class="news-tag">${lang.tag || 'Ogłoszenie'}</span>
                             <span class="news-date">${displayDate}</span>
                         </div>
-                        <h3>${langData.title || ''}</h3>
-                        <p>${shortText}</p>
+                        <h3>${lang.title || ''}</h3>
+                        <p>${snippet}</p>
                     </div>
                 `;
                 container.appendChild(card);
             });
         }
 
-        function openArticleModal(id) {
+        function openModal(id) {
             const article = currentArticles.find(a => a.id === id);
             if (!article) return;
 
-            const langData = article.translations['PL'] || {};
-            document.getElementById('modalTitle').innerText = langData.title || '';
-            document.getElementById('modalDate').innerText = article.date || '';
+            const lang = article.translations['PL'] || {};
+            document.getElementById('modalTitle').innerText = lang.title || '';
+            document.getElementById('modalDate').innerText = lang.displayDate || article.date || '';
 
-            const contentContainer = document.getElementById('modalContent');
-            contentContainer.innerHTML = '';
+            const contentDiv = document.getElementById('modalContent');
+            contentDiv.innerHTML = '';
 
-            const paragraphs = Array.isArray(langData.content) ? langData.content : [langData.content || ''];
-            paragraphs.forEach(pText => {
+            const paragraphs = Array.isArray(lang.content) ? lang.content : [lang.content || ''];
+            paragraphs.forEach(text => {
                 const p = document.createElement('p');
-                p.innerText = pText;
-                contentContainer.appendChild(p);
+                p.innerText = text;
+                contentDiv.appendChild(p);
             });
 
             document.getElementById('articleModal').classList.add('active');
         }
 
-        function closeArticleModal(event) {
-            if (event.target.id === 'articleModal') {
-                closeArticleModalBtn();
-            }
-        }
-
-        function closeArticleModalBtn() {
+        function closeModal() {
             document.getElementById('articleModal').classList.remove('active');
         }
 
-        window.onload = loadPublicArticles;
+        function closeModalOnOutside(event) {
+            if (event.target.id === 'articleModal') {
+                closeModal();
+            }
+        }
 
-        window.addEventListener('storage', (event) => {
-            if (event.key === STORAGE_KEY) {
-                loadPublicArticles();
+        window.onload = renderArticles;
+
+        // Automatyczne odświeżanie, jeśli w panelu admina zmieniono dane w localStorage
+        window.addEventListener('storage', (e) => {
+            if (e.key === STORAGE_KEY) {
+                renderArticles();
             }
         });
     </script>
