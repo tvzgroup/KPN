@@ -548,7 +548,7 @@
             <button class="modal-close" onclick="closeModalBtn()">×</button>
             <div class="modal-hero">
                 <h2 id="modalTitle">Tytuł Artykułu</h2>
-                <div class="modal-subinfo">
+                <div class="modal-subinfo" id="modalSubinfo">
                     Opublikowano w <a href="aktualnosci.html">aktualności</a>
                 </div>
             </div>
@@ -577,36 +577,164 @@
     </footer>
 
     <script>
+        let currentLang = 'PL';
+        let currentOpenArticleId = null;
+
         let articlesData = [
             {
                 id: 1,
-                title: "Witaj w Oficjalnej Społeczności KPN",
-                tag: "Ogłoszenie",
                 date: "2026-07-20",
                 time: "12:00",
-                displayDate: "20 lipiec 2026",
-                content: [
-                    "Witamy w oficjalnej społeczności Konfederacji Polski Niepodległej!",
-                    "Będziemy publikować tutaj aktualizacje oraz ogłoszenia z każdego działu, oznaczane odpowiednimi tagami.",
-                    "Podczas dyskusji i komentowania, prosimy o przestrzeganie <a href='program.html'>zasad naszej społeczności</a> oraz zachowanie merytorycznego tonu.",
-                    "Znalazłeś błąd lub masz sugestię? Zgłoś ją w odpowiednim kanale, abyśmy mogli stale ulepszać nasz portal!",
-                    "Dziękujemy, że jesteś z nami – widzimy się w społeczności!"
-                ]
+                translations: {
+                    PL: {
+                        title: "Witaj w Oficjalnej Społeczności KPN",
+                        tag: "Ogłoszenie",
+                        displayDate: "20 lipiec 2026",
+                        content: [
+                            "Witamy w oficjalnej społeczności Konfederacji Polski Niepodległej!",
+                            "Będziemy publikować tutaj aktualizacje oraz ogłoszenia z każdego działu, oznaczane odpowiednimi tagami.",
+                            "Podczas dyskusji i komentowania, prosimy o przestrzeganie <a href='program.html'>zasad naszej społeczności</a> oraz zachowanie merytorycznego tonu.",
+                            "Znalazłeś błąd lub masz sugestię? Zgłoś ją w odpowiednim kanale, abyśmy mogli stale ulepszać nasz portal!",
+                            "Dziękujemy, że jesteś z nami – widzimy się w społeczności!"
+                        ]
+                    },
+                    EN: {
+                        title: "Welcome to the Official KPN Community",
+                        tag: "Announcement",
+                        displayDate: "July 20, 2026",
+                        content: [
+                            "Welcome to the official community of the Confederation of Independent Poland!",
+                            "We will publish updates and announcements from every department here, marked with appropriate tags.",
+                            "When discussing and commenting, please follow <a href='program.html'>our community rules</a> and maintain a constructive tone.",
+                            "Found a bug or have a suggestion? Report it in the dedicated channel so we can continuously improve our portal!",
+                            "Thank you for being with us – see you in the community!"
+                        ]
+                    },
+                    DE: {
+                        title: "Willkommen in der offiziellen KPN-Community",
+                        tag: "Ankündigung",
+                        displayDate: "20. Juli 2026",
+                        content: [
+                            "Willkommen in der offiziellen Community der Konföderation des Unabhängigen Polen!",
+                            "Wir werden hier Aktualisierungen und Ankündigungen aus allen Abteilungen veröffentlichen, gekennzeichnet mit den entsprechenden Tags.",
+                            "Bitte beachten Sie beim Diskutieren und Kommentieren <a href='program.html'>unsere Community-Regeln</a> und bewahren Sie einen sachlichen Ton.",
+                            "Haben Sie einen Fehler gefunden oder einen Vorschlag? Melden Sie ihn im entsprechenden Kanal, damit wir unser Portal ständig verbessern können!",
+                            "Danke, dass Sie bei uns sind – wir sehen uns in der Community!"
+                        ]
+                    },
+                    RU: {
+                        title: "Добро пожаловать в официальное сообщество KPN",
+                        tag: "Объявление",
+                        displayDate: "20 июля 2026",
+                        content: [
+                            "Добро пожаловать в официальное сообщество Конфедерации Польской Независимости!",
+                            "Мы будем публиковать здесь обновления и объявления из каждого отдела, отмеченные соответствующими тегами.",
+                            "При обсуждении и комментировании соблюдайте <a href='program.html'>правила нашего сообщества</a> и поддерживайте конструктивный тон.",
+                            "Нашли ошибку или есть предложение? Сообщите об этом в соответствующем канале, чтобы мы могли постоянно улучшать наш портал!",
+                            "Спасибо, что вы с нами – до встречи в сообществе!"
+                        ]
+                    }
+                }
             },
             {
                 id: 2,
-                title: "Rozbudowa Struktur i Nowy Program Polityczny",
-                tag: "Polityka",
                 date: "2026-07-25",
                 time: "15:30",
-                displayDate: "25 lipiec 2026",
-                content: [
-                    "Rozpoczęliśmy wdrażanie kolejnego etapu rozwoju struktur regionalnych w całym kraju.",
-                    "Nasz program opiera się na absolutnej suwerenności, wolnym rynku oraz obronie interesów polskich obywateli.",
-                    "Zachęcamy do zapoznania się ze szczegółami w zakładce Program oraz do aktywnego włączania się w nasze inicjatywy społeczno-polityczne."
-                ]
+                translations: {
+                    PL: {
+                        title: "Rozbudowa Struktur i Nowy Program Polityczny",
+                        tag: "Polityka",
+                        displayDate: "25 lipiec 2026",
+                        content: [
+                            "Rozpoczęliśmy wdrażanie kolejnego etapu rozwoju struktur regionalnych w całym kraju.",
+                            "Nasz program opiera się na absolutnej suwerenności, wolnym rynku oraz obronie interesów polskich obywateli.",
+                            "Zachęcamy do zapoznania się ze szczegółami w zakładce Program oraz do aktywnego włączania się w nasze inicjatywy społeczno-polityczne."
+                        ]
+                    },
+                    EN: {
+                        title: "Expansion of Structures and New Political Program",
+                        tag: "Politics",
+                        displayDate: "July 25, 2026",
+                        content: [
+                            "We have begun implementing the next stage of developing regional structures across the country.",
+                            "Our program is based on absolute sovereignty, a free market, and defending the interests of Polish citizens.",
+                            "We encourage you to read the details in the Program tab and to actively engage in our socio-political initiatives."
+                        ]
+                    },
+                    DE: {
+                        title: "Ausbau der Strukturen und neues politisches Programm",
+                        tag: "Politik",
+                        displayDate: "25. Juli 2026",
+                        content: [
+                            "Wir haben mit der Umsetzung der nächsten Phase des Ausbaus regionaler Strukturen im ganzen Land begonnen.",
+                            "Unser Programm basiert auf absoluter Souveränität, freier Marktwirtschaft und der Verteidigung der Interessen der polnischen Bürger.",
+                            "Wir laden Sie ein, die Details im Bereich Programm zu lesen und sich aktiv an unseren gesellschaftspolitischen Initiativen zu beteiligen."
+                        ]
+                    },
+                    RU: {
+                        title: "Расширение структур и новая политическая программа",
+                        tag: "Политика",
+                        displayDate: "25 июля 2026",
+                        content: [
+                            "Мы начали реализацию следующего этапа развития региональных структур по всей стране.",
+                            "Наша программа основана на абсолютном суверенитете, свободном рынке и защите интересов польских граждан.",
+                            "Приглашаем ознакомиться с подробностями во вкладке «Программа» и активно участвовать в наших социально-политических инициативах."
+                        ]
+                    }
+                }
             }
         ];
+
+        const translations = {
+            PL: {
+                "nav-about": "O NAS",
+                "nav-program": "PROGRAM",
+                "nav-news": "AKTUALNOŚCI",
+                "nav-contact": "KONTAKT",
+                "cta-join": "DOŁĄCZ DO NAS",
+                "news-header-title": "Najnowsze <span>Aktualności</span>",
+                "news-header-desc": "Bądź na bieżąco z ogłoszeniami, komunikatami i wydarzeniami środowiska KPN.",
+                "footer-rights": "&copy; 2026 Konfederacja Polski Niepodległej (KPN). Wszelkie prawa zastrzeżone.",
+                "card-read-more": "Kliknij, aby przeczytać w pełnym widoku",
+                "modal-pub": "Opublikowano w <a href='aktualnosci.html'>aktualności</a>"
+            },
+            EN: {
+                "nav-about": "ABOUT US",
+                "nav-program": "PROGRAM",
+                "nav-news": "NEWS",
+                "nav-contact": "CONTACT",
+                "cta-join": "JOIN US",
+                "news-header-title": "Latest <span>News</span>",
+                "news-header-desc": "Stay up to date with announcements, statements, and events from the KPN community.",
+                "footer-rights": "&copy; 2026 Confederation of Independent Poland (KPN). All rights reserved.",
+                "card-read-more": "Click to read full view",
+                "modal-pub": "Published in <a href='aktualnosci.html'>news</a>"
+            },
+            DE: {
+                "nav-about": "ÜBER UNS",
+                "nav-program": "PROGRAMM",
+                "nav-news": "NACHRICHTEN",
+                "nav-contact": "KONTAKT",
+                "cta-join": "MACH MIT",
+                "news-header-title": "Neueste <span>Nachrichten</span>",
+                "news-header-desc": "Bleiben Sie auf dem Laufenden mit Ankündigungen und Mitteilungen der KPN-Gemeinschaft.",
+                "footer-rights": "&copy; 2026 Konföderation des Unabhängigen Polen (KPN). Alle Rechte vorbehalten.",
+                "card-read-more": "Klicken, um die vollständige Ansicht zu lesen",
+                "modal-pub": "Veröffentlicht in <a href='aktualnosci.html'>Nachrichten</a>"
+            },
+            RU: {
+                "nav-about": "О НАС",
+                "nav-program": "ПРОГРАММА",
+                "nav-news": "НОВОСТИ",
+                "nav-contact": "КОНТАКТ",
+                "cta-join": "ПРИСОЕДИНИТЬСЯ",
+                "news-header-title": "Последние <span>Новости</span>",
+                "news-header-desc": "Будьте в курсе объявлений, заявлений и событий сообщества KPN.",
+                "footer-rights": "&copy; 2026 Конфедерация Польской Независимости (KPN). Все права защищены.",
+                "card-read-more": "Нажмите, чтобы прочитать полностью",
+                "modal-pub": "Опубликовано в <a href='aktualnosci.html'>новости</a>"
+            }
+        };
 
         function sortArticles() {
             articlesData.sort((a, b) => {
@@ -622,23 +750,26 @@
             grid.innerHTML = '';
 
             articlesData.forEach(article => {
+                const langData = article.translations[currentLang] || article.translations['PL'];
+                const readMoreText = translations[currentLang]["card-read-more"];
+
                 const card = document.createElement('div');
                 card.className = 'news-card';
                 card.onclick = () => openArticle(article.id);
 
-                const shortText = article.content && article.content.length > 0 ? article.content[0] : "";
+                const shortText = langData.content && langData.content.length > 0 ? langData.content[0] : "";
 
                 card.innerHTML = `
                     <div>
                         <div class="news-meta-top">
-                            <span class="news-tag">${article.tag}</span>
+                            <span class="news-tag">${langData.tag}</span>
                             <span>${article.date} ${article.time || ''}</span>
                         </div>
-                        <h3>${article.title}</h3>
+                        <h3>${langData.title}</h3>
                         <p>${shortText.substring(0, 120)}...</p>
                     </div>
                     <div class="news-footer-info">
-                        Kliknij, aby przeczytać w pełnym widoku
+                        ${readMoreText}
                     </div>
                 `;
                 grid.appendChild(card);
@@ -649,12 +780,16 @@
             const article = articlesData.find(item => item.id === id);
             if (!article) return;
 
-            document.getElementById('modalTitle').innerText = article.title;
-            document.getElementById('modalDateStr').innerText = article.displayDate || article.date;
+            currentOpenArticleId = id;
+            const langData = article.translations[currentLang] || article.translations['PL'];
+
+            document.getElementById('modalTitle').innerText = langData.title;
+            document.getElementById('modalDateStr').innerText = langData.displayDate || article.date;
+            document.getElementById('modalSubinfo').innerHTML = translations[currentLang]["modal-pub"];
             
             const contentContainer = document.getElementById('modalContent');
             contentContainer.innerHTML = '';
-            article.content.forEach(paragraph => {
+            langData.content.forEach(paragraph => {
                 const p = document.createElement('p');
                 p.innerHTML = paragraph;
                 contentContainer.appendChild(p);
@@ -673,50 +808,8 @@
         function closeModalBtn() {
             document.getElementById('articleModal').classList.remove('active');
             document.body.style.overflow = 'auto';
+            currentOpenArticleId = null;
         }
-
-        const translations = {
-            PL: {
-                "nav-about": "O NAS",
-                "nav-program": "PROGRAM",
-                "nav-news": "AKTUALNOŚCI",
-                "nav-contact": "KONTAKT",
-                "cta-join": "DOŁĄCZ DO NAS",
-                "news-header-title": "Najnowsze <span>Aktualności</span>",
-                "news-header-desc": "Bądź na bieżąco z ogłoszeniami, komunikatami i wydarzeniami środowiska KPN.",
-                "footer-rights": "&copy; 2026 Konfederacja Polski Niepodległej (KPN). Wszelkie prawa zastrzeżone."
-            },
-            EN: {
-                "nav-about": "ABOUT US",
-                "nav-program": "PROGRAM",
-                "nav-news": "NEWS",
-                "nav-contact": "CONTACT",
-                "cta-join": "JOIN US",
-                "news-header-title": "Latest <span>News</span>",
-                "news-header-desc": "Stay up to date with announcements, statements, and events from the KPN community.",
-                "footer-rights": "&copy; 2026 Confederation of Independent Poland (KPN). All rights reserved."
-            },
-            DE: {
-                "nav-about": "ÜBER UNS",
-                "nav-program": "PROGRAMM",
-                "nav-news": "NACHRICHTEN",
-                "nav-contact": "KONTAKT",
-                "cta-join": "MACH MIT",
-                "news-header-title": "Neueste <span>Nachrichten</span>",
-                "news-header-desc": "Bleiben Sie auf dem Laufenden mit Ankündigungen und Mitteilungen der KPN-Gemeinschaft.",
-                "footer-rights": "&copy; 2026 Konföderation des Unabhängigen Polen (KPN). Alle Rechte vorbehalten."
-            },
-            RU: {
-                "nav-about": "О НАС",
-                "nav-program": "ПРОГРАММА",
-                "nav-news": "НОВОСТИ",
-                "nav-contact": "КОНТАКТ",
-                "cta-join": "ПРИСОЕДИНИТЬСЯ",
-                "news-header-title": "Последние <span>Новости</span>",
-                "news-header-desc": "Будьте в курсе объявлений, заявлений и событий сообщества KPN.",
-                "footer-rights": "&copy; 2026 Конфедерация Польской Независимости (KPN). Все права защищены."
-            }
-        };
 
         let hoverTimeout;
         function openLangMenu() {
@@ -741,6 +834,7 @@
         }
 
         function changeLang(lang) {
+            currentLang = lang;
             const btn = document.querySelector('.lang-btn');
             btn.innerHTML = lang + ' ▾';
             document.getElementById('langDropdown').classList.remove('active');
@@ -753,6 +847,14 @@
                         el.innerHTML = langData[key];
                     }
                 });
+            }
+
+            // Odświeżenie kafelków artykułów
+            renderArticles();
+
+            // Jeśli modal jest aktualnie otwarty, odświeżamy jego treść w nowym języku
+            if (currentOpenArticleId !== null) {
+                openArticle(currentOpenArticleId);
             }
         }
 
