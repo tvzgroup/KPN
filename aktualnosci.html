@@ -580,7 +580,8 @@
         let currentLang = 'PL';
         let currentOpenArticleId = null;
 
-        let articlesData = [
+        // Domyślna baza artykułów
+        const defaultArticles = [
             {
                 id: 1,
                 date: "2026-07-20",
@@ -684,6 +685,14 @@
                 }
             }
         ];
+
+        // Pobieranie artykułów z localStorage lub inicjalizacja domyślnymi
+        let articlesData = JSON.parse(localStorage.getItem('kpn_articles')) || defaultArticles;
+
+        // Funkcja zapisująca stan do localStorage
+        function saveArticles() {
+            localStorage.setItem('kpn_articles', JSON.stringify(articlesData));
+        }
 
         const translations = {
             PL: {
@@ -872,9 +881,17 @@
             renderArticles();
         };
 
+        // Funkcje administracyjne zintegrowane z localStorage
         function adminAddArticle(newArticle) {
             newArticle.id = articlesData.length > 0 ? Math.max(...articlesData.map(a => a.id)) + 1 : 1;
             articlesData.push(newArticle);
+            saveArticles();
+            renderArticles();
+        }
+
+        function adminDeleteArticle(id) {
+            articlesData = articlesData.filter(item => item.id !== id);
+            saveArticles();
             renderArticles();
         }
     </script>
