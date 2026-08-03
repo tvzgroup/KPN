@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontakt | Konfederacja Polski Niepodległej | KPN</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #080808;
+            color: #f0f0f0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navbar */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background: rgba(10, 10, 10, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            z-index: 1000;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-container img {
+            height: 40px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #b0b0b0;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover, nav a.active {
+            color: #ffffff;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 6px;
+            z-index: 1001;
+            padding: 5px;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 28px;
+            height: 2px;
+            background-color: #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        .lang-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #b0b0b0;
+            padding: 8px 14px;
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+
+        .lang-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background: rgba(15, 15, 15, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            min-width: 120px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 4px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.4);
+            z-index: 1;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+
+        .lang-content a {
+            color: #b0b0b0;
+            padding: 10px 15px;
+            text-decoration: none;
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .lang-content a:hover {
+            background: rgba(217, 20, 20, 0.2);
+            color: #ffffff;
+        }
+
+        .lang-dropdown.active .lang-content {
+            display: block;
+        }
+
+        .cta-btn {
+            background: #d91414;
+            color: #ffffff !important;
+            padding: 10px 22px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            background: #b51010;
+        }
+
+        /* Page Header / Hero */
+        .page-header {
+            padding: 160px 20px 80px;
+            text-align: center;
+            background: radial-gradient(circle at center, rgba(217, 20, 20, 0.12) 0%, rgba(8, 8, 8, 1) 75%);
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            margin-bottom: 15px;
+        }
+
+        .page-header h1 span {
+            color: #d91414;
+        }
+
+        .page-header p {
+            font-size: 1.1rem;
+            color: #a0a0a0;
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        /* Content Section / Contact Layout */
+        .content-section {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px 100px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .contact-info-box, .contact-form-box {
+            background: rgba(20, 20, 20, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 8px;
+        }
+
+        .contact-info-box h3, .contact-form-box h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            color: #ffffff;
+        }
+
+        .contact-info-box h3 span, .contact-form-box h3 span {
+            color: #d91414;
+        }
+
+        .contact-info-box p {
+            color: #a0a0a0;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        .contact-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-method-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: #fff;
+            font-size: 0.95rem;
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 15px 20px;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: background 0.3s, border-color 0.3s;
+        }
+
+        .contact-method-item:hover {
+            background: rgba(217, 20, 20, 0.1);
+            border-color: rgba(217, 20, 20, 0.3);
+        }
+
+        /* Formularz */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: #b0b0b0;
+            margin-bottom: 8px;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            background: rgba(10, 10, 10, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            padding: 12px 15px;
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #d91414;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            height: 130px;
+        }
+
+        .submit-btn {
+            background: #d91414;
+            color: #ffffff;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: #b51010;
+        }
+
+        /* Footer */
+        footer {
+            background: #050505;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 40px 50px;
+            text-align: center;
+            color: #707070;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 900px) {
+            header {
+                padding: 15px 20px;
+            }
+            .nav-left {
+                gap: 20px;
+            }
+            .menu-toggle {
+                display: flex;
+            }
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(10, 10, 10, 0.98);
+                backdrop-filter: blur(15px);
+                -webkit-backdrop-filter: blur(15px);
+                flex-direction: column;
+                padding: 25px 0;
+                gap: 20px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+                box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+                text-align: center;
+            }
+            nav ul.active {
+                display: flex;
+            }
+            .nav-right .cta-btn {
+                display: none;
+            }
+            .page-header {
+                padding: 130px 20px 60px;
+            }
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+            .content-section {
+                grid-template-columns: 1fr;
+                padding: 20px 20px 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Nagłówek -->
+    <header>
+        <div class="nav-left">
+            <div class="logo-container">
+                <a href="index.html"><img src="image-removebg-preview.png" alt="KPN Logo"></a>
+            </div>
+            <nav>
+                <ul id="navMenu">
+                    <li><a href="o-nas.html" data-i18n="nav-about">O NAS</a></li>
+                    <li><a href="program.html" data-i18n="nav-program">PROGRAM</a></li>
+                    <li><a href="aktualnosci.html" data-i18n="nav-news">AKTUALNOŚCI</a></li>
+                    <li><a href="kontakt.html" class="active" data-i18n="nav-contact">KONTAKT</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="nav-right">
+            <div class="lang-dropdown" id="langDropdown" onmouseenter="openLangMenu()" onmouseleave="closeLangMenu()">
+                <button class="lang-btn" onclick="toggleLangMenu()">
+                    PL ▾
+                </button>
+                <div class="lang-content">
+                    <a href="#" onclick="changeLang('PL'); return false;">Polski</a>
+                    <a href="#" onclick="changeLang('EN'); return false;">English</a>
+                    <a href="#" onclick="changeLang('DE'); return false;">Deutsch</a>
+                    <a href="#" onclick="changeLang('RU'); return false;">Русский</a>
+                </div>
+            </div>
+            <a href="https://discord.gg/zBUDWjycWx" target="_blank" class="cta-btn" data-i18n="cta-join">DOŁĄCZ DO NAS</a>
+            <button class="menu-toggle" id="menuToggle" onclick="toggleMobileMenu()" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Nagłówek Podstrony -->
+    <section class="page-header">
+        <h1 data-i18n="contact-header-title">Skontaktuj się <span>z Nami</span></h1>
+        <p data-i18n="contact-header-desc">Masz pytania, chcesz dołączyć do struktur lub podjąć współpracę? Jesteśmy do Twojej dyspozycji.</p>
+    </section>
+
+    <!-- Główna Treść / Sekcja Kontaktu -->
+    <section class="content-section">
+        <!-- Informacje kontaktowe -->
+        <div class="contact-info-box">
+            <h3 data-i18n="info-box-title">Kanały <span>Łączności</span></h3>
+            <p data-i18n="info-box-desc">Możesz skontaktować się z nami bezpośrednio przez oficjalne kanały społecznościowe lub platformę Discord.</p>
+            
+            <div class="contact-methods">
+                <a href="https://discord.gg/zBUDWjycWx" target="_blank" class="contact-method-item">
+                    <span>💬</span>
+                    <div>
+                        <strong data-i18n="method-discord-title">Oficjalny Discord KPN</strong><br>
+                        <span style="font-size: 0.8rem; color: #888;">discord.gg/zBUDWjycWx</span>
+                    </div>
+                </a>
+                <a href="mailto:kontakt@kpn.org.pl" class="contact-method-item">
+                    <span>✉️</span>
+                    <div>
+                        <strong data-i18n="method-email-title">Adres E-mail</strong><br>
+                        <span style="font-size: 0.8rem; color: #888;">kontakt@kpn.org.pl</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Formularz kontaktowy -->
+        <div class="contact-form-box">
+            <h3 data-i18n="form-box-title">Napisz do <span>Nas</span></h3>
+            <form onsubmit="handleFormSubmit(event)">
+                <div class="form-group">
+                    <label for="name" data-i18n="form-label-name">Twoje Imię</label>
+                    <input type="text" id="name" required placeholder="Wpisz swoje imię...">
+                </div>
+                <div class="form-group">
+                    <label for="email" data-i18n="form-label-email">Adres E-mail</label>
+                    <input type="email" id="email" required placeholder="Wpisz swój e-mail...">
+                </div>
+                <div class="form-group">
+                    <label for="message" data-i18n="form-label-msg">Treść Wiadomości</label>
+                    <textarea id="message" required placeholder="Wpisz treść wiadomości..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn" data-i18n="form-btn-submit">Wyślij Wiadomość</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Stopka -->
+    <footer>
+        <p data-i18n="footer-rights">&copy; 2026 Konfederacja Polski Niepodległej (KPN). Wszelkie prawa zastrzeżone.</p>
+    </footer>
+
+    <script>
+        const translations = {
+            PL: {
+                "nav-about": "O NAS",
+                "nav-program": "PROGRAM",
+                "nav-news": "AKTUALNOŚCI",
+                "nav-contact": "KONTAKT",
+                "cta-join": "DOŁĄCZ DO NAS",
+                "contact-header-title": "Skontaktuj się <span>z Nami</span>",
+                "contact-header-desc": "Masz pytania, chcesz dołączyć do struktur lub podjąć współpracę? Jesteśmy do Twojej dyspozycji.",
+                "info-box-title": "Kanały <span>Łączności</span>",
+                "info-box-desc": "Możesz skontaktować się z nami bezpośrednio przez oficjalne kanały społecznościowe lub platformę Discord.",
+                "method-discord-title": "Oficjalny Discord KPN",
+                "method-email-title": "Adres E-mail",
+                "form-box-title": "Napisz do <span>Nas</span>",
+                "form-label-name": "Twoje Imię",
+                "form-label-email": "Adres E-mail",
+                "form-label-msg": "Treść Wiadomości",
+                "form-btn-submit": "Wyślij Wiadomość",
+                "footer-rights": "&copy; 2026 Konfederacja Polski Niepodległej (KPN). Wszelkie prawa zastrzeżone."
+            },
+            EN: {
+                "nav-about": "ABOUT US",
+                "nav-program": "PROGRAM",
+                "nav-news": "NEWS",
+                "nav-contact": "CONTACT",
+                "cta-join": "JOIN US",
+                "contact-header-title": "Get in Touch <span>with Us</span>",
+                "contact-header-desc": "Have questions, want to join the structures or cooperate? We are at your disposal.",
+                "info-box-title": "Communication <span>Channels</span>",
+                "info-box-desc": "You can contact us directly through our official social channels or the Discord platform.",
+                "method-discord-title": "Official KPN Discord",
+                "method-email-title": "E-mail Address",
+                "form-box-title": "Write to <span>Us</span>",
+                "form-label-name": "Your Name",
+                "form-label-email": "E-mail Address",
+                "form-label-msg": "Message",
+                "form-btn-submit": "Send Message",
+                "footer-rights": "&copy; 2026 Confederation of Independent Poland (KPN). All rights reserved."
+            },
+            DE: {
+                "nav-about": "ÜBER UNS",
+                "nav-program": "PROGRAMM",
+                "nav-news": "NACHRICHTEN",
+                "nav-contact": "KONTAKT",
+                "cta-join": "MACH MIT",
+                "contact-header-title": "Kontaktieren Sie <span>Uns</span>",
+                "contact-header-desc": "Haben Sie Fragen, möchten Sie den Strukturen beitreten oder kooperieren? Wir stehen Ihnen zur Verfügung.",
+                "info-box-title": "Kommunikations-<span>Kanäle</span>",
+                "info-box-desc": "Sie können uns direkt über unsere offiziellen Social-Kanäle oder die Discord-Plattform kontaktieren.",
+                "method-discord-title": "Offizieller KPN Discord",
+                "method-email-title": "E-Mail-Adresse",
+                "form-box-title": "Schreiben Sie <span>Uns</span>",
+                "form-label-name": "Ihr Name",
+                "form-label-email": "E-Mail-Adresse",
+                "form-label-msg": "Nachricht",
+                "form-btn-submit": "Nachricht Senden",
+                "footer-rights": "&copy; 2026 Konföderation des Unabhängigen Polen (KPN). Alle Rechte vorbehalten."
+            },
+            RU: {
+                "nav-about": "О НАС",
+                "nav-program": "ПРОГРАММА",
+                "nav-news": "НОВОСТИ",
+                "nav-contact": "КОНТАКТ",
+                "cta-join": "ПРИСОЕДИНИТЬСЯ",
+                "contact-header-title": "Свяжитесь <span>с Нами</span>",
+                "contact-header-desc": "У вас есть вопросы, вы хотите присоединиться к структурам или сотрудничать? Мы к вашим услугам.",
+                "info-box-title": "Каналы <span>Связи</span>",
+                "info-box-desc": "Вы можете связаться с нами напрямую через официальные социальные каналы или платформу Discord.",
+                "method-discord-title": "Официальный Discord KPN",
+                "method-email-title": "Электронная почта",
+                "form-box-title": "Напишите <span>Нам</span>",
+                "form-label-name": "Ваше Имя",
+                "form-label-email": "Электронная почта",
+                "form-label-msg": "Текст Сообщения",
+                "form-btn-submit": "Отправить Сообщение",
+                "footer-rights": "&copy; 2026 Конфедерация Польской Независимости (KPN). Все права защищены."
+            }
+        };
+
+        let hoverTimeout;
+        function openLangMenu() {
+            clearTimeout(hoverTimeout);
+            document.getElementById('langDropdown').classList.add('active');
+        }
+
+        function closeLangMenu() {
+            hoverTimeout = setTimeout(() => {
+                document.getElementById('langDropdown').classList.remove('active');
+            }, 400);
+        }
+
+        function toggleLangMenu() {
+            const dropdown = document.getElementById('langDropdown');
+            dropdown.classList.toggle('active');
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('navMenu');
+            menu.classList.toggle('active');
+        }
+
+        function changeLang(lang) {
+            const btn = document.querySelector('.lang-btn');
+            btn.innerHTML = lang + ' ▾';
+            document.getElementById('langDropdown').classList.remove('active');
+
+            const langData = translations[lang];
+            if (langData) {
+                document.querySelectorAll('[data-i18n]').forEach(el => {
+                    const key = el.getAttribute('data-i18n');
+                    if (langData[key]) {
+                        el.innerHTML = langData[key];
+                    }
+                });
+            }
+        }
+
+        window.onclick = function(event) {
+            if (!event.target.matches('.lang-btn') && !event.target.closest('.lang-btn') && !event.target.closest('.lang-content')) {
+                const dropdowns = document.getElementsByClassName('lang-dropdown');
+                for (let i = 0; i < dropdowns.length; i++) {
+                    let openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('active')) {
+                        openDropdown.classList.remove('active');
+                    }
+                }
+            }
+        }
+
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            alert('Wiadomość została wysłana pomyślnie!');
+            event.target.reset();
+        }
+    </script>
+
+</body>
+</html>
