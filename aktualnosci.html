@@ -849,10 +849,8 @@
                 });
             }
 
-            // Odświeżenie kafelków artykułów
             renderArticles();
 
-            // Jeśli modal jest aktualnie otwarty, odświeżamy jego treść w nowym języku
             if (currentOpenArticleId !== null) {
                 openArticle(currentOpenArticleId);
             }
@@ -879,20 +877,6 @@
             articlesData.push(newArticle);
             renderArticles();
         }
-
-        function adminEditArticle(id, updatedData) {
-            const index = articlesData.findIndex(a => a.id === id);
-            if (index !== -1) {
-                articlesData[index] = { ...articlesData[index], ...updatedData };
-                renderArticles();
-            }
-        }
-
-        function adminDeleteArticle(id) {
-            articlesData = articlesData.filter(a => a.id !== id);
-            renderArticles();
-        }
     </script>
-
 </body>
 </html>
