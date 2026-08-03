@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aktualności | Konfederacja Polski Niepodległej | KPN</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #080808;
+            color: #f0f0f0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navbar */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background: rgba(10, 10, 10, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            z-index: 1000;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-container img {
+            height: 40px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #b0b0b0;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover, nav a.active {
+            color: #ffffff;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 6px;
+            z-index: 1001;
+            padding: 5px;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 28px;
+            height: 2px;
+            background-color: #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        .lang-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #b0b0b0;
+            padding: 8px 14px;
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+
+        .lang-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background: rgba(15, 15, 15, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            min-width: 120px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 4px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.4);
+            z-index: 1;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+
+        .lang-content a {
+            color: #b0b0b0;
+            padding: 10px 15px;
+            text-decoration: none;
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .lang-content a:hover {
+            background: rgba(217, 20, 20, 0.2);
+            color: #ffffff;
+        }
+
+        .lang-dropdown.active .lang-content {
+            display: block;
+        }
+
+        .cta-btn {
+            background: #d91414;
+            color: #ffffff !important;
+            padding: 10px 22px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            background: #b51010;
+        }
+
+        /* Page Header / Hero */
+        .page-header {
+            padding: 160px 20px 80px;
+            text-align: center;
+            background: radial-gradient(circle at center, rgba(217, 20, 20, 0.12) 0%, rgba(8, 8, 8, 1) 75%);
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            margin-bottom: 15px;
+        }
+
+        .page-header h1 span {
+            color: #d91414;
+        }
+
+        .page-header p {
+            font-size: 1.1rem;
+            color: #a0a0a0;
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        /* Content Section / News Grid */
+        .content-section {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px 100px;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .news-card {
+            background: rgba(20, 20, 20, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(217, 20, 20, 0.4);
+        }
+
+        .news-meta-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        .news-tag {
+            background: rgba(217, 20, 20, 0.15);
+            color: #ff4d4d;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            border: 1px solid rgba(217, 20, 20, 0.3);
+        }
+
+        .news-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #ffffff;
+            line-height: 1.4;
+        }
+
+        .news-card p {
+            color: #a0a0a0;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .news-footer-info {
+            font-size: 0.85rem;
+            color: #777;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 15px;
+        }
+
+        /* Modal / Article View Style (Discord / Epic Style matching screenshot) */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-container {
+            background: #121214;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            width: 100%;
+            max-width: 800px;
+            max-height: 90vh;
+            border-radius: 12px;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: #fff;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+            z-index: 10;
+        }
+
+        .modal-close:hover {
+            background: rgba(217, 20, 20, 0.8);
+        }
+
+        .modal-hero {
+            padding: 50px 40px 30px;
+            background: linear-gradient(135deg, rgba(217, 20, 20, 0.2) 0%, rgba(18, 18, 20, 1) 80%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .modal-hero h2 {
+            font-size: 2.2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: #fff;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+
+        .modal-subinfo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: #aaa;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .modal-subinfo a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+
+        .modal-subinfo a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumb-tag {
+            background: rgba(255, 255, 255, 0.08);
+            color: #e2e8f0;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .modal-body {
+            padding: 40px;
+        }
+
+        .author-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .author-avatar {
+            width: 45px;
+            height: 45px;
+            background: #d91414;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #fff;
+            font-size: 1.1rem;
+            border: 2px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .author-details {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .author-top-line {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+        }
+
+        .author-name {
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .post-time {
+            color: #888;
+            font-size: 0.85rem;
+        }
+
+        .badge-owner {
+            background: #5865f2;
+            color: #fff;
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .badge-dev {
+            background: #f1c40f;
+            color: #111;
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .article-content-text {
+            color: #ccc;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .article-content-text a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+
+        .article-content-text a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background: #050505;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 40px 50px;
+            text-align: center;
+            color: #707070;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 900px) {
+            header {
+                padding: 15px 20px;
+            }
+            .nav-left {
+                gap: 20px;
+            }
+            .menu-toggle {
+                display: flex;
+            }
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(10, 10, 10, 0.98);
+                backdrop-filter: blur(15px);
+                -webkit-backdrop-filter: blur(15px);
+                flex-direction: column;
+                padding: 25px 0;
+                gap: 20px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+                box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+                text-align: center;
+            }
+            nav ul.active {
+                display: flex;
+            }
+            .nav-right .cta-btn {
+                display: none;
+            }
+            .page-header {
+                padding: 130px 20px 60px;
+            }
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+            .modal-body, .modal-hero {
+                padding: 25px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Nagłówek -->
+    <header>
+        <div class="nav-left">
+            <div class="logo-container">
+                <a href="index.html"><img src="image-removebg-preview.png" alt="KPN Logo"></a>
+            </div>
+            <nav>
+                <ul id="navMenu">
+                    <li><a href="o-nas.html" data-i18n="nav-about">O NAS</a></li>
+                    <li><a href="program.html" data-i18n="nav-program">PROGRAM</a></li>
+                    <li><a href="aktualnosci.html" class="active" data-i18n="nav-news">AKTUALNOŚCI</a></li>
+                    <li><a href="kontakt.html" data-i18n="nav-contact">KONTAKT</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="nav-right">
+            <div class="lang-dropdown" id="langDropdown" onmouseenter="openLangMenu()" onmouseleave="closeLangMenu()">
+                <button class="lang-btn" onclick="toggleLangMenu()">
+                    PL ▾
+                </button>
+                <div class="lang-content">
+                    <a href="#" onclick="changeLang('PL'); return false;">Polski</a>
+                    <a href="#" onclick="changeLang('EN'); return false;">English</a>
+                    <a href="#" onclick="changeLang('DE'); return false;">Deutsch</a>
+                    <a href="#" onclick="changeLang('RU'); return false;">Русский</a>
+                </div>
+            </div>
+            <a href="https://discord.gg/zBUDWjycWx" target="_blank" class="cta-btn" data-i18n="cta-join">DOŁĄCZ DO NAS</a>
+            <button class="menu-toggle" id="menuToggle" onclick="toggleMobileMenu()" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Nagłówek Podstrony -->
+    <section class="page-header">
+        <h1 data-i18n="news-header-title">Najnowsze <span>Aktualności</span></h1>
+        <p data-i18n="news-header-desc">Bądź na bieżąco z ogłoszeniami, komunikatami i wydarzeniami środowiska KPN.</p>
+    </section>
+
+    <!-- Główna Treść / Lista Artykułów -->
+    <section class="content-section">
+        <div class="news-grid" id="newsGrid">
+            <!-- Artykuły generowane dynamicznie przez JavaScript ze stałą sortowalnością wg daty i godziny -->
+        </div>
+    </section>
+
+    <!-- Modal Wyświetlania Artykułu (Styl Discord / Szablon z żądania) -->
+    <div class="modal-overlay" id="articleModal" onclick="closeArticleModal(event)">
+        <div class="modal-container" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModalBtn()">×</button>
+            <div class="modal-hero">
+                <h2 id="modalTitle">Tytuł Artykułu</h2>
+                <div class="modal-subinfo">
+                    Opublikowano w <a href="aktualnosci.html" onclick="closeArticleModalDirect()">Aktualności</a> w <span class="breadcrumb-tag">✔ Community Rules</span>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="author-row">
+                    <div class="author-avatar">K</div>
+                    <div class="author-details">
+                        <div class="author-top-line">
+                            <span class="author-name">KPN</span>
+                            <span class="post-time" id="modalDateStr">data</span>
+                            <span class="badge-dev">Deweloper</span>
+                            <span class="badge-owner">Właściciel społeczności</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="article-content-text" id="modalContent">
+                    <!-- Treść artykułu -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stopka -->
+    <footer>
+        <p data-i18n="footer-rights">&copy; 2026 Konfederacja Polski Niepodległej (KPN). Wszelkie prawa zastrzeżone.</p>
+    </footer>
+
+    <script>
+        /* ==========================================================================
+           BAZA DANYCH / STRUKTURA POD PRZYSZŁY PANEL ADMINISTRATORA
+           Format daty: YYYY-MM-DD, format godziny: HH:MM
+           Sortowanie automatyczne: starsze dalej, najnowsze pierwsze.
+           ========================================================================== */
+        let articlesData = [
+            {
+                id: 1,
+                title: "Witaj w Oficjalnej Społeczności KPN",
+                tag: "Ogłoszenie",
+                date: "2026-07-20",
+                time: "12:00",
+                displayDate: "20 lipiec 2026",
+                content: [
+                    "Witamy w oficjalnej społeczności Konfederacji Polski Niepodległej!",
+                    "Będziemy publikować tutaj aktualizacje oraz ogłoszenia z każdego działu, oznaczane odpowiednimi tagami.",
+                    "Podczas dyskusji i komentowania, prosimy o przestrzeganie <a href='program.html'>zasad naszej społeczności</a> oraz zachowanie merytorycznego tonu.",
+                    "Znalazłeś błąd lub masz sugestię? Zgłoś ją w odpowiednim kanale, abyśmy mogli stale ulepszać nasz portal!",
+                    "Dziękujemy, że jesteś z nami – widzimy się w społeczności!"
+                ]
+            },
+            {
+                id: 2,
+                title: "Rozbudowa Struktur i Nowy Program Polityczny",
+                tag: "Polityka",
+                date: "2026-07-25",
+                time: "15:30",
+                displayDate: "25 lipiec 2026",
+                content: [
+                    "Rozpoczęliśmy wdrażanie kolejnego etapu rozwoju struktur regionalnych w całym kraju.",
+                    "Nasz program opiera się na absolutnej suwerenności, wolnym rynku oraz obronie interesów polskich obywateli.",
+                    "Zachęcamy do zapoznania się ze szczegółami w zakładce Program oraz do aktywnego włączania się w nasze inicjatywy społeczno-polityczne."
+                ]
+            }
+        ];
+
+        /* Funkcja sortująca artykuły: najnowsze (data + godzina) na górze */
+        function sortArticles() {
+            articlesData.sort((a, b) => {
+                const dateTimeA = new Date(`${a.date}T${a.time || '00:00'}`);
+                const dateTimeB = new Date(`${b.date}T${b.time || '00:00'}`);
+                return dateTimeB - dateTimeA; // Najnowsze pierwsze, starsze dalej
+            });
+        }
+
+        /* Renderowanie listy artykułów na stronie */
+        function renderArticles() {
+            sortArticles();
+            const grid = document.getElementById('newsGrid');
+            grid.innerHTML = '';
+
+            articlesData.forEach(article => {
+                const card = document.createElement('div');
+                card.className = 'news-card';
+                card.onclick = () => openArticle(article.id);
+
+                card.innerHTML = `
+                    <div>
+                        <div class="news-meta-top">
+                            <span class="news-tag">${article.tag}</span>
+                            <span>${article.date} ${article.time || ''}</span>
+                        </div>
+                        <h3>${article.title}</h3>
+                        <p>${article.content[0].substring(0, 120)}...</p>
+                    </div>
+                    <div class="news-footer-info">
+                        Kliknij, aby przeczytać w pełnym widoku
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        /* Obsługa Modala Artykułu */
+        function openArticle(id) {
+            const article = articlesData.find(item => item.id === id);
+            if (!article) return;
+
+            document.getElementById('modalTitle').innerText = article.title;
+            document.getElementById('modalDateStr').innerText = article.displayDate || article.date;
+            
+            const contentContainer = document.getElementById('modalContent');
+            contentContainer.innerHTML = '';
+            article.content.forEach(paragraph => {
+                const p = document.createElement('p');
+                p.innerHTML = paragraph;
+                contentContainer.appendChild(p);
+            });
+
+            document.getElementById('articleModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeArticleModal(event) {
+            if (event.target.id === 'articleModal') {
+                closeModalBtn();
+            }
+        }
+
+        function closeArticleModalDirect() {
+            // Przekierowanie lub zamknięcie modalu do strony aktualności
+            closeModalBtn();
+        }
+
+        function closeModalBtn() {
+            document.getElementById('articleModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        /* Tłumaczenia wielojęzyczne */
+        const translations = {
+            PL: {
+                "nav-about": "O NAS",
+                "nav-program": "PROGRAM",
+                "nav-news": "AKTUALNOŚCI",
+                "nav-kontakt": "KONTAKT",
+                "cta-join": "DOŁĄCZ DO NAS",
+                "news-header-title": "Najnowsze <span>Aktualności</span>",
+                "news-header-desc": "Bądź na bieżąco z ogłoszeniami, komunikatami i wydarzeniami środowiska KPN.",
+                "footer-rights": "&copy; 2026 Konfederacja Polski Niepodległej (KPN). Wszelkie prawa zastrzeżone."
+            },
+            EN: {
+                "nav-about": "ABOUT US",
+                "nav-program": "PROGRAM",
+                "nav-news": "NEWS",
+                "nav-kontakt": "CONTACT",
+                "cta-join": "JOIN US",
+                "news-header-title": "Latest <span>News</span>",
+                "news-header-desc": "Stay up to date with announcements, statements, and events from the KPN community.",
+                "footer-rights": "&copy; 2026 Confederation of Independent Poland (KPN). All rights reserved."
+            },
+            DE: {
+                "nav-about": "ÜBER UNS",
+                "nav-program": "PROGRAMM",
+                "nav-news": "NACHRICHTEN",
+                "nav-kontakt": "KONTAKT",
+                "cta-join": "MACH MIT",
+                "news-header-title": "Neueste <span>Nachrichten</span>",
+                "news-header-desc": "Bleiben Sie auf dem Laufenden mit Ankündigungen und Mitteilungen der KPN-Gemeinschaft.",
+                "footer-rights": "&copy; 2026 Konföderation des Unabhängigen Polen (KPN). Alle Rechte vorbehalten."
+            },
+            RU: {
+                "nav-about": "О НАС",
+                "nav-program": "ПРОГРАММА",
+                "nav-news": "НОВОСТИ",
+                "nav-kontakt": "КОНТАКТ",
+                "cta-join": "ПРИСОЕДИНИТЬСЯ",
+                "news-header-title": "Последние <span>Новости</span>",
+                "news-header-desc": "Будьте в курсе объявлений, заявлений и событий сообщества KPN.",
+                "footer-rights": "&copy; 2026 Конфедерация Польской Независимости (KPN). Все права защищены."
+            }
+        };
+
+        let hoverTimeout;
+        function openLangMenu() {
+            clearTimeout(hoverTimeout);
+            document.getElementById('langDropdown').classList.add('active');
+        }
+
+        function closeLangMenu() {
+            hoverTimeout = setTimeout(() => {
+                document.getElementById('langDropdown').classList.remove('active');
+            }, 400);
+        }
+
+        function toggleLangMenu() {
+            const dropdown = document.getElementById('langDropdown');
+            dropdown.classList.toggle('active');
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('navMenu');
+            menu.classList.toggle('active');
+        }
+
+        function changeLang(lang) {
+            const btn = document.querySelector('.lang-btn');
+            btn.innerHTML = lang + ' ▾';
+            document.getElementById('langDropdown').classList.remove('active');
+
+            const langData = translations[lang];
+            if (langData) {
+                document.querySelectorAll('[data-i18n]').forEach(el => {
+                    const key = el.getAttribute('data-i18n');
+                    if (langData[key]) {
+                        el.innerHTML = langData[key];
+                    }
+                });
+            }
+        }
+
+        window.onclick = function(event) {
+            if (!event.target.matches('.lang-btn') && !event.target.closest('.lang-btn') && !event.target.closest('.lang-content')) {
+                const dropdowns = document.getElementsByClassName('lang-dropdown');
+                for (let i = 0; i < dropdowns.length; i++) {
+                    let openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('active')) {
+                        openDropdown.classList.remove('active');
+                    }
+                }
+            }
+        }
+
+        /* Inicjalizacja przy ładowaniu strony */
+        window.onload = function() {
+            renderArticles();
+        };
+
+        /* ==========================================================================
+           API / FUNKCJE PRZYGOTOWANE POD PÓŹNIEJSZY PANEL ADMINISTRATORA:
+           - addArticle({title, tag, date, time, displayDate, content})
+           - editArticle(id, updatedData)
+           - deleteArticle(id)
+           Po każdej zmianie wywołaj `renderArticles();`, a widok automatycznie
+           się zaktualizuje, posortuje oraz dostosuje w czasie rzeczywistym.
+           ========================================================================== */
+        function adminAddArticle(newArticle) {
+            newArticle.id = articlesData.length > 0 ? Math.max(...articlesData.map(a => a.id)) + 1 : 1;
+            articlesData.push(newArticle);
+            renderArticles();
+        }
+
+        function adminEditArticle(id, updatedData) {
+            const index = articlesData.findIndex(a => a.id === id);
+            if (index !== -1) {
+                articlesData[index] = { ...articlesData[index], ...updatedData };
+                renderArticles();
+            }
+        }
+
+        function adminDeleteArticle(id) {
+            articlesData = articlesData.filter(a => a.id !== id);
+            renderArticles();
+        }
+    </script>
+
+</body>
+</html>
