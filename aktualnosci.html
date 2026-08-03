@@ -277,7 +277,7 @@
             padding-top: 15px;
         }
 
-        /* Modal / Article View Style (Discord / Epic Style matching screenshot) */
+        /* Modal / Article View Style */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -351,7 +351,7 @@
         .modal-subinfo {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             font-size: 0.9rem;
             color: #aaa;
             margin-top: 15px;
@@ -365,18 +365,6 @@
 
         .modal-subinfo a:hover {
             text-decoration: underline;
-        }
-
-        .breadcrumb-tag {
-            background: rgba(255, 255, 255, 0.08);
-            color: #e2e8f0;
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .modal-body {
@@ -393,15 +381,19 @@
         .author-avatar {
             width: 45px;
             height: 45px;
-            background: #d91414;
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
-            color: #fff;
-            font-size: 1.1rem;
             border: 2px solid rgba(255, 255, 255, 0.15);
+            overflow: hidden;
+        }
+
+        .author-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
 
         .author-details {
@@ -425,26 +417,6 @@
         .post-time {
             color: #888;
             font-size: 0.85rem;
-        }
-
-        .badge-owner {
-            background: #5865f2;
-            color: #fff;
-            font-size: 0.7rem;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        .badge-dev {
-            background: #f1c40f;
-            color: #111;
-            font-size: 0.7rem;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-weight: 700;
-            text-transform: uppercase;
         }
 
         .article-content-text {
@@ -566,29 +538,29 @@
     <!-- Główna Treść / Lista Artykułów -->
     <section class="content-section">
         <div class="news-grid" id="newsGrid">
-            <!-- Artykuły generowane dynamicznie przez JavaScript ze stałą sortowalnością wg daty i godziny -->
+            <!-- Artykuły generowane dynamicznie przez JavaScript -->
         </div>
     </section>
 
-    <!-- Modal Wyświetlania Artykułu (Styl Discord / Szablon z żądania) -->
+    <!-- Modal Wyświetlania Artykułu -->
     <div class="modal-overlay" id="articleModal" onclick="closeArticleModal(event)">
         <div class="modal-container" onclick="event.stopPropagation()">
             <button class="modal-close" onclick="closeModalBtn()">×</button>
             <div class="modal-hero">
                 <h2 id="modalTitle">Tytuł Artykułu</h2>
                 <div class="modal-subinfo">
-                    Opublikowano w <a href="aktualnosci.html" onclick="closeArticleModalDirect()">Aktualności</a> w <span class="breadcrumb-tag">✔ Community Rules</span>
+                    Opublikowano w <a href="aktualnosci.html">aktualności</a>
                 </div>
             </div>
             <div class="modal-body">
                 <div class="author-row">
-                    <div class="author-avatar">K</div>
+                    <div class="author-avatar">
+                        <img src="image-removebg-preview.png" alt="KPN Logo">
+                    </div>
                     <div class="author-details">
                         <div class="author-top-line">
                             <span class="author-name">KPN</span>
                             <span class="post-time" id="modalDateStr">data</span>
-                            <span class="badge-dev">Deweloper</span>
-                            <span class="badge-owner">Właściciel społeczności</span>
                         </div>
                     </div>
                 </div>
@@ -605,11 +577,6 @@
     </footer>
 
     <script>
-        /* ==========================================================================
-           BAZA DANYCH / STRUKTURA POD PRZYSZŁY PANEL ADMINISTRATORA
-           Format daty: YYYY-MM-DD, format godziny: HH:MM
-           Sortowanie automatyczne: starsze dalej, najnowsze pierwsze.
-           ========================================================================== */
         let articlesData = [
             {
                 id: 1,
@@ -641,16 +608,14 @@
             }
         ];
 
-        /* Funkcja sortująca artykuły: najnowsze (data + godzina) na górze */
         function sortArticles() {
             articlesData.sort((a, b) => {
                 const dateTimeA = new Date(`${a.date}T${a.time || '00:00'}`);
                 const dateTimeB = new Date(`${b.date}T${b.time || '00:00'}`);
-                return dateTimeB - dateTimeA; // Najnowsze pierwsze, starsze dalej
+                return dateTimeB - dateTimeA;
             });
         }
 
-        /* Renderowanie listy artykułów na stronie */
         function renderArticles() {
             sortArticles();
             const grid = document.getElementById('newsGrid');
@@ -678,7 +643,6 @@
             });
         }
 
-        /* Obsługa Modala Artykułu */
         function openArticle(id) {
             const article = articlesData.find(item => item.id === id);
             if (!article) return;
@@ -704,17 +668,11 @@
             }
         }
 
-        function closeArticleModalDirect() {
-            // Przekierowanie lub zamknięcie modalu do strony aktualności
-            closeModalBtn();
-        }
-
         function closeModalBtn() {
             document.getElementById('articleModal').classList.remove('active');
             document.body.style.overflow = 'auto';
         }
 
-        /* Tłumaczenia wielojęzyczne */
         const translations = {
             PL: {
                 "nav-about": "O NAS",
@@ -808,19 +766,10 @@
             }
         }
 
-        /* Inicjalizacja przy ładowaniu strony */
         window.onload = function() {
             renderArticles();
         };
 
-        /* ==========================================================================
-           API / FUNKCJE PRZYGOTOWANE POD PÓŹNIEJSZY PANEL ADMINISTRATORA:
-           - addArticle({title, tag, date, time, displayDate, content})
-           - editArticle(id, updatedData)
-           - deleteArticle(id)
-           Po każdej zmianie wywołaj `renderArticles();`, a widok automatycznie
-           się zaktualizuje, posortuje oraz dostosuje w czasie rzeczywistym.
-           ========================================================================== */
         function adminAddArticle(newArticle) {
             newArticle.id = articlesData.length > 0 ? Math.max(...articlesData.map(a => a.id)) + 1 : 1;
             articlesData.push(newArticle);
