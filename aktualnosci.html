@@ -626,6 +626,8 @@
                 card.className = 'news-card';
                 card.onclick = () => openArticle(article.id);
 
+                const shortText = article.content && article.content.length > 0 ? article.content[0] : "";
+
                 card.innerHTML = `
                     <div>
                         <div class="news-meta-top">
@@ -633,7 +635,7 @@
                             <span>${article.date} ${article.time || ''}</span>
                         </div>
                         <h3>${article.title}</h3>
-                        <p>${article.content[0].substring(0, 120)}...</p>
+                        <p>${shortText.substring(0, 120)}...</p>
                     </div>
                     <div class="news-footer-info">
                         Kliknij, aby przeczytać w pełnym widoku
@@ -678,7 +680,7 @@
                 "nav-about": "O NAS",
                 "nav-program": "PROGRAM",
                 "nav-news": "AKTUALNOŚCI",
-                "nav-kontakt": "KONTAKT",
+                "nav-contact": "KONTAKT",
                 "cta-join": "DOŁĄCZ DO NAS",
                 "news-header-title": "Najnowsze <span>Aktualności</span>",
                 "news-header-desc": "Bądź na bieżąco z ogłoszeniami, komunikatami i wydarzeniami środowiska KPN.",
@@ -688,7 +690,7 @@
                 "nav-about": "ABOUT US",
                 "nav-program": "PROGRAM",
                 "nav-news": "NEWS",
-                "nav-kontakt": "CONTACT",
+                "nav-contact": "CONTACT",
                 "cta-join": "JOIN US",
                 "news-header-title": "Latest <span>News</span>",
                 "news-header-desc": "Stay up to date with announcements, statements, and events from the KPN community.",
@@ -698,7 +700,7 @@
                 "nav-about": "ÜBER UNS",
                 "nav-program": "PROGRAMM",
                 "nav-news": "NACHRICHTEN",
-                "nav-kontakt": "KONTAKT",
+                "nav-contact": "KONTAKT",
                 "cta-join": "MACH MIT",
                 "news-header-title": "Neueste <span>Nachrichten</span>",
                 "news-header-desc": "Bleiben Sie auf dem Laufenden mit Ankündigungen und Mitteilungen der KPN-Gemeinschaft.",
@@ -708,7 +710,7 @@
                 "nav-about": "О НАС",
                 "nav-program": "ПРОГРАММА",
                 "nav-news": "НОВОСТИ",
-                "nav-kontakt": "КОНТАКТ",
+                "nav-contact": "КОНТАКТ",
                 "cta-join": "ПРИСОЕДИНИТЬСЯ",
                 "news-header-title": "Последние <span>Новости</span>",
                 "news-header-desc": "Будьте в курсе объявлений, заявлений и событий сообщества KPN.",
