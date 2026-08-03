@@ -20,12 +20,11 @@
             padding-bottom: 60px;
         }
 
-        /* Nawigacja (przykładowa, dopasowana do stylu ze screena) */
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 40px;
+            padding: 25px 50px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
             background: #080808;
         }
@@ -33,24 +32,27 @@
         .nav-logo {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             color: #fff;
             font-weight: 700;
             text-decoration: none;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
         }
 
         .nav-links {
             display: flex;
-            gap: 30px;
+            gap: 35px;
             list-style: none;
             align-items: center;
         }
 
         .nav-links a {
-            color: #ccc;
+            color: #aaa;
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 600;
+            letter-spacing: 1px;
             transition: color 0.3s;
         }
 
@@ -61,11 +63,12 @@
         .cta-nav-btn {
             background: #d91414;
             color: #fff !important;
-            padding: 10px 20px;
+            padding: 10px 22px;
             border-radius: 4px;
             text-transform: uppercase;
-            font-size: 0.85rem;
-            font-weight: 600;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
             text-decoration: none;
             transition: background 0.3s;
         }
@@ -74,10 +77,9 @@
             background: #b51010;
         }
 
-        /* Sekcja nagłówka aktualności */
         .news-hero-section {
             text-align: center;
-            padding: 80px 20px 60px;
+            padding: 90px 20px 60px;
         }
 
         .news-hero-section h1 {
@@ -93,36 +95,34 @@
         }
 
         .news-hero-section p {
-            color: #aaa;
-            font-size: 1.05rem;
+            color: #888;
+            font-size: 1rem;
             max-width: 600px;
             margin: 0 auto;
         }
 
-        /* Siatka artykułów */
         .news-container {
             max-width: 1100px;
             margin: 0 auto;
             padding: 0 20px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 30px;
         }
 
         .news-card {
             background: #121215;
             border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 10px;
-            padding: 30px;
+            border-radius: 8px;
+            padding: 35px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            transition: transform 0.3s ease, border-color 0.3s ease;
+            transition: border-color 0.3s ease;
         }
 
         .news-card:hover {
             border-color: rgba(217, 20, 20, 0.4);
-            transform: translateY(-3px);
         }
 
         .news-card-img {
@@ -130,14 +130,14 @@
             height: 220px;
             object-fit: cover;
             border-radius: 6px;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .news-card-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .news-tag {
@@ -149,10 +149,11 @@
             text-transform: uppercase;
             font-size: 0.75rem;
             border: 1px solid rgba(217, 20, 20, 0.3);
+            letter-spacing: 0.5px;
         }
 
         .news-date {
-            color: #777;
+            color: #666;
             font-size: 0.85rem;
         }
 
@@ -161,12 +162,14 @@
             font-weight: 700;
             margin-bottom: 15px;
             color: #fff;
+            line-height: 1.3;
         }
 
         .news-card p {
-            color: #aaa;
+            color: #999;
             font-size: 0.95rem;
             margin-bottom: 20px;
+            line-height: 1.6;
         }
 
         .no-news {
@@ -177,7 +180,7 @@
             font-size: 1.1rem;
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
             .news-container {
                 grid-template-columns: 1fr;
             }
@@ -185,17 +188,16 @@
                 font-size: 2.2rem;
             }
             nav {
-                padding: 15px 20px;
+                padding: 20px;
             }
             .nav-links {
-                display: none; /* Możesz dostosować menu mobilne według uznania */
+                display: none;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- Nawigacja -->
     <nav>
         <a href="#" class="nav-logo">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
@@ -210,21 +212,18 @@
         <a href="#" class="cta-nav-btn">DOŁĄCZ DO NAS</a>
     </nav>
 
-    <!-- Sekcja Nagłówka -->
     <section class="news-hero-section">
         <h1>Najnowsze <span>Aktualności</span></h1>
         <p>Bądź na bieżąco z ogłoszeniami, komunikatami i wydarzeniami środowiska KPN.</p>
     </section>
 
-    <!-- Kontener na artykuły pobierane dynamicznie -->
     <section class="news-container" id="publicNewsContainer">
-        <!-- Generowane automatycznie przez JavaScript -->
+        <!-- Generowane dynamicznie z localStorage, z zachowaniem oryginalnego wyglądu -->
     </section>
 
     <script>
         const STORAGE_KEY = 'kpn_articles_data';
 
-        // Oryginalne domyślne artykuły przywrócone do stanu początkowego
         const defaultArticles = [
             {
                 id: 1,
@@ -263,7 +262,6 @@
         function loadPublicArticles() {
             let data = localStorage.getItem(STORAGE_KEY);
             
-            // Jeśli brak danych w pamięci przeglądarki, załaduj domyślne i je zapisz
             if (!data) {
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(defaultArticles));
                 data = JSON.stringify(defaultArticles);
@@ -278,12 +276,10 @@
                 return;
             }
 
-            // Wyświetlanie artykułów (od najnowszego / po ID)
             articles.forEach(article => {
                 const langData = article.translations['PL'] || {};
                 const displayDate = article.time ? `${article.date} ${article.time}` : article.date;
                 
-                // Obsługa wielu akapitów lub pierwszej linii treści
                 const contentText = Array.isArray(langData.content) 
                     ? langData.content.join(' ') 
                     : (langData.content || '');
@@ -309,10 +305,8 @@
             });
         }
 
-        // Automatyczne odświeżanie po uruchomieniu strony
         window.onload = loadPublicArticles;
 
-        // Opcjonalnie: Nasłuchiwanie zmian w localStorage, jeśli panel jest otwarty w innej karcie
         window.addEventListener('storage', (event) => {
             if (event.key === STORAGE_KEY) {
                 loadPublicArticles();
